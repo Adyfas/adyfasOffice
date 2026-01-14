@@ -1,6 +1,6 @@
 "use client"
 
-import { dataIconSidebar } from "~/data/Sidebar-data"
+import { dataIconSidebar } from "~/data/SidebarData"
 import * as icons from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 import { motion } from "framer-motion"
