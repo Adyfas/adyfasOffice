@@ -30,7 +30,7 @@ importers:
         specifier: ^0.562.0
         version: 0.562.0(react@19.2.3)
       motion:
-        specifier: ^12.23.12
+        specifier: ^12.26.2
         version: 12.26.2(@emotion/is-prop-valid@0.8.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react:
         specifier: ^19.2.3

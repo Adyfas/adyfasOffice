@@ -89,42 +89,44 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onComplete }) => {
 
       <div className="relative h-screen flex items-center justify-center w-full">
         <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            initial={{
-              y: 40,
-              opacity: 0,
-              filter: "blur(10px)",
-              scale: 0.9,
-            }}
-            animate={{
-              y: 0,
-              opacity: 1,
-              filter: "blur(0px)",
-              scale: 1,
-              transition: {
-                type: "spring",
-                stiffness: 400,
-                damping: 18,
-              },
-            }}
-            exit={{
-              y: -30,
-              opacity: 0,
-              filter: "blur(8px)",
-              scale: 0.95,
-              transition: { duration: 0.25 },
-            }}
-            style={{
-              position: "absolute",
-              fontSize: "3rem",
-              fontWeight: "700",
-              color: "#111827",
-            }}
-            className="max-w-3xl"
-          >
-            {greetings[currentIndex]}
-          </motion.div>
+          {currentIndex < greetings.length && (
+            <motion.div
+              key={currentIndex}
+              initial={{
+                y: 40,
+                opacity: 0,
+                filter: "blur(10px)",
+                scale: 0.9,
+              }}
+              animate={{
+                y: 0,
+                opacity: 1,
+                filter: "blur(0px)",
+                scale: 1,
+                transition: {
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 18,
+                },
+              }}
+              exit={{
+                y: -30,
+                opacity: 0,
+                filter: "blur(8px)",
+                scale: 0.95,
+                transition: { duration: 0.25 },
+              }}
+              style={{
+                position: "absolute",
+                fontSize: "3rem",
+                fontWeight: "700",
+                color: "#111827",
+              }}
+              className="max-w-3xl"
+            >
+              {greetings[currentIndex]}
+            </motion.div>
+          )}
         </AnimatePresence>
       </div>
 
