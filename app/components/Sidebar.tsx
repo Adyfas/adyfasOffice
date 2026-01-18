@@ -1,5 +1,3 @@
-"use client";
-
 import { dataIconSidebar } from "~/data/SidebarData";
 import * as icons from "lucide-react";
 import type { LucideIcon } from "lucide-react";

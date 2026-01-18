@@ -6,9 +6,13 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
-   resolve: {
+  resolve: {
     alias: {
       '@': path.resolve(__dirname, './app'),
     },
+  },
+  build: {
+    sourcemap: false, // Disable sourcemap untuk menghindari error saat build
+    chunkSizeWarningLimit: 1000, // Increase limit untuk menghindari warning
   },
 });
