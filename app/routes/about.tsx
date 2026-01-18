@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import BlurText from "~/components/BlurText";
 import type { Route } from "./+types/about";
 import Image from "~/components/Image";
+import ClientOnly from "~/components/ClientOnly";
 import AnimatedContent from "~/components/AnimatedContent";
 
 // Helper: dapatkan ucapan berdasarkan jam
@@ -109,45 +110,53 @@ export default function AboutPage() {
     <>
       {/* intro */}
       <section>
-        <AnimatePresence mode="wait">
-          {showBlurText ? (
-            <motion.div
-              key="blur-text"
-              initial={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <BlurText
-                direction="bottom"
-                className="text-3xl font-bold text-right sm:text-5xl mb-8"
-                text={greetingText}
-              />
-            </motion.div>
-          ) : (
-            <motion.h1
-              key="h1-greeting"
-              initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.5 }}
-              className="text-3xl font-bold text-left sm:text-5xl mb-8"
-              style={{ display: "block" }}
-            >
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={currentGreetingIndex}
-                  initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
-                  transition={{ duration: 0.5 }}
-                  style={{ display: "inline-block" }}
-                >
-                  {greetings[currentGreetingIndex]}
-                </motion.span>
-              </AnimatePresence>{" "}
-              🙌, I am Ferdi Iskandar or commonly known as Adyfas
-            </motion.h1>
-          )}
-        </AnimatePresence>
+        <ClientOnly
+          fallback={
+            <h1 className="text-3xl font-bold text-left sm:text-5xl mb-8">
+              {greetingText}
+            </h1>
+          }
+        >
+          <AnimatePresence mode="wait">
+            {showBlurText ? (
+              <motion.div
+                key="blur-text"
+                initial={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <BlurText
+                  direction="bottom"
+                  className="text-3xl font-bold text-right sm:text-5xl mb-8"
+                  text={greetingText}
+                />
+              </motion.div>
+            ) : (
+              <motion.h1
+                key="h1-greeting"
+                initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.5 }}
+                className="text-3xl font-bold text-left sm:text-5xl mb-8"
+                style={{ display: "block" }}
+              >
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={currentGreetingIndex}
+                    initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
+                    transition={{ duration: 0.5 }}
+                    style={{ display: "inline-block" }}
+                  >
+                    {greetings[currentGreetingIndex]}
+                  </motion.span>
+                </AnimatePresence>{" "}
+                🙌, I am Ferdi Iskandar or commonly known as Adyfas
+              </motion.h1>
+            )}
+          </AnimatePresence>
+        </ClientOnly>
       </section>
 
       {/* Cirebon */}

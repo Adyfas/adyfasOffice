@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import Lenis from "@studio-freight/lenis";
 import type { JSX } from "react/jsx-runtime";
 import LoadingPage from "~/components/LoadingPage";
+import ClientOnly from "~/components/ClientOnly";
 
 type LenisInstance = InstanceType<typeof Lenis> | null;
 
@@ -64,8 +65,12 @@ export default function LayoutPage(): JSX.Element {
             <div className="flex flex-col items-center justify-center">
               <div className="flex flex-col items-start justify-start py-12 sm:py-24">
                 <div className="w-full sm:w-full">
-                  <Sidebar />
-                  <BottomNav />
+                  <ClientOnly>
+                    <Sidebar />
+                  </ClientOnly>
+                  <ClientOnly>
+                    <BottomNav />
+                  </ClientOnly>
                   <Outlet />
                   <Footer />
 
