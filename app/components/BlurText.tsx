@@ -21,7 +21,8 @@ const BlurText: React.FC<BlurTextProps> = ({
   const ref = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
-    if (!ref.current) return;
+    // Hanya jalankan di client-side
+    if (typeof window === 'undefined' || !ref.current) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

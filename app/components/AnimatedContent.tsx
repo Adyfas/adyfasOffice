@@ -2,7 +2,10 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+// Register plugin hanya di client-side
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -48,6 +51,9 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Hanya jalankan di client-side
+    if (typeof window === 'undefined') return;
+    
     const el = ref.current;
     if (!el) return;
 
