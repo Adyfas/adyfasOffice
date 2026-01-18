@@ -1,17 +1,21 @@
-"use client"
+"use client";
 
-import { dataIconSidebar } from "~/data/SidebarData"
-import * as icons from "lucide-react"
-import type { LucideIcon } from "lucide-react"
-import { motion } from "framer-motion"
-import { Link, useLocation } from "react-router"
+import { dataIconSidebar } from "~/data/SidebarData";
+import * as icons from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+import { motion } from "framer-motion";
+import { Link, useLocation } from "react-router";
 
 export default function Sidebar() {
-
-  const route = useLocation()
+  const route = useLocation();
 
   return (
-    <div className="fixed left-4 top-1/2 -translate-y-1/2 z-50">
+    <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 70, damping: 20, duration: 0.8 }}
+      className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden md:block"
+    >
       <motion.div
         initial={{ width: 56 }}
         whileHover={{ width: 180 }}
@@ -26,10 +30,11 @@ export default function Sidebar() {
         "
       >
         {dataIconSidebar?.map((item, idx) => {
-          const Icon = icons[item.icon as keyof typeof icons] as LucideIcon
-          if (!Icon) return null
+          const Icon = icons[item.icon as keyof typeof icons] as LucideIcon;
+          if (!Icon) return null;
 
-          const activeRoute = route.pathname === item.route ? 'bg-black/10' : ''
+          const activeRoute =
+            route.pathname === item.route ? "bg-black/10" : "";
 
           return (
             <Link to={item.route} key={idx}>
@@ -44,9 +49,7 @@ export default function Sidebar() {
               `}
                 whileHover={{ scale: 1.05 }}
               >
-
                 <Icon size={24} className="min-w-6" />
-
 
                 <motion.span
                   initial={{ opacity: 1, x: -10 }}
@@ -58,9 +61,9 @@ export default function Sidebar() {
                 </motion.span>
               </motion.div>
             </Link>
-          )
+          );
         })}
       </motion.div>
-    </div>
-  )
+    </motion.div>
+  );
 }
