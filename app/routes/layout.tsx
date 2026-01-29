@@ -12,20 +12,21 @@ type LenisInstance = InstanceType<typeof Lenis> | null;
 
 export default function LayoutPage(): JSX.Element {
   const lenis = useRef<LenisInstance>(null);
-  // Jangan tampilkan loading saat SSR
+
   const [showInitialLoading, setShowInitialLoading] = useState(false);
   const handleLoadingComplete = () => setShowInitialLoading(false);
-  
-  // Hanya tampilkan loading di client-side setelah mount
+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setShowInitialLoading(true);
+    if (typeof window !== "undefined") {
+      if (!sessionStorage.getItem("loading")) {
+        sessionStorage.setItem("loading", "true");
+        setShowInitialLoading(true);
+      } else return;
     }
   }, []);
 
   useEffect(() => {
-    // Hanya jalankan di client-side
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
 
     lenis.current = new Lenis({
       duration: 0.6,
@@ -48,7 +49,7 @@ export default function LayoutPage(): JSX.Element {
   }, []);
 
   const scrollToSection = (id: string) => {
-    if (typeof window === 'undefined') return;
+    if (typeof window === "undefined") return;
     const element = document.getElementById(id);
     if (element) {
       lenis.current?.scrollTo(element);

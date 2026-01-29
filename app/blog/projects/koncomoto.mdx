@@ -1,0 +1,137 @@
+import Heading from "@/components/MD/Heading"
+import Section from "@/components/MD/Section"
+import SubHeading from "@/components/MD/SubHeading"
+import Hyperlink from "@/components/MD/Hyperlink"
+import Img from "@/components/MD/Image"
+
+
+export const meta = {
+  title: "Koncomoto Dashboard",
+  slug: "koncomoto",
+  date: "Oct 21, 2024",
+  role: "Full Stack",
+  link: undefined,
+  git: undefined,
+  tech: [
+    "Next JS",
+    "FramerMotin",
+    "Lucide",
+    "Xendit",
+    "Google Date",
+    "Node Email",
+    "Whatsaap API",
+    "Express JS",
+    "DAte Picker",
+    "Prisma",
+    "PostgreSQL",
+    "Neon",
+  ],
+  description:
+    "Koncomoto is a client management dashboard with automated invoice sending via WhatsApp and email, integrated with payment gateway.",
+};
+
+
+<Section>
+<Img alt="website" img="/images/project/koncomoto.png"/>
+  <Heading>Koncomoto Dashboard</Heading>
+
+  <p>
+    Koncomoto adalah sebuah <strong>website pengelola invoice otomatis</strong> yang
+    saya bangun sebagai <strong>dashboard manajemen klien</strong> dengan arsitektur
+    web yang cukup kompleks dan modern. Melalui sistem ini, owner cukup{" "}
+    <strong>menginput data klien dan detail layanan</strong>, lalu ketika klien{" "}
+    <strong>melakukan booking</strong>, sistem akan secara otomatis{" "}
+    <strong>membuat dan mengirimkan invoice</strong> kepada klien melalui{" "}
+    <strong>email</strong> dan <strong>WhatsApp</strong>, tanpa perlu proses manual.
+  </p>
+
+  <p>
+    Alur mulai dari <strong>pencatatan klien</strong>,{" "}
+    <strong>pencatatan booking</strong>, <strong>pembuatan invoice</strong>,
+    <strong>pengiriman notifikasi pembayaran</strong>, hingga{" "}
+    <strong>konfirmasi pembayaran</strong> dibuat se-otomatis mungkin. Dengan
+    pendekatan ini, <strong>owner cukup menerima pesan dan notifikasi</strong> dari
+    klien, sementara proses administratif dan penagihan dikerjakan sepenuhnya oleh
+    sistem.
+  </p>
+
+  <SubHeading>Alur Kerja Sistem</SubHeading>
+  <ul>
+    <li>Owner menambahkan atau mengelola data klien di dashboard Koncomoto.</li>
+    <li>Ketika ada booking atau pesanan baru, sistem membuat invoice secara otomatis.</li>
+    <li>Invoice tersebut dikirimkan ke klien melalui email dan WhatsApp.</li>
+    <li>Klien dapat langsung melakukan pembayaran melalui tautan pembayaran yang terintegrasi.</li>
+    <li>Status pembayaran dan aktivitas klien tercatat rapi di dalam dashboard.</li>
+  </ul>
+
+  <SubHeading>Teknologi yang Digunakan</SubHeading>
+
+  <p>
+    Untuk membangun Koncomoto, saya menggunakan kombinasi berbagai teknologi
+    modern yang saling terintegrasi:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Next.js</strong> — Framework React modern untuk membuat{" "}
+      <em>full-stack web application</em> dengan dukungan routing, API routes, dan
+      optimasi performa bawaan.
+    </li>
+    <li>
+      <strong>Framer Motion</strong> — Library animasi untuk React yang digunakan
+      untuk membuat <em>transition</em> dan interaksi UI yang halus sehingga
+      pengalaman pengguna terasa lebih modern dan dinamis.
+    </li>
+    <li>
+      <strong>Lucide</strong> — Kumpulan ikon <em>open-source</em> yang ringan dan
+      konsisten, digunakan untuk memperjelas navigasi dan tampilan di dalam
+      dashboard.
+    </li>
+    <li>
+      <strong>Xendit</strong> — Payment gateway yang menangani proses{" "}
+      <em>payment link</em>, <em>virtual account</em>, dan metode pembayaran lain
+      sehingga proses pembayaran dapat dilakukan secara otomatis dan aman.
+    </li>
+    <li>
+      <strong>Google Date / Date Picker</strong> — Digunakan untuk pemilihan
+      tanggal booking dan jatuh tempo invoice dengan antarmuka kalender yang
+      intuitif, meminimalkan kesalahan input tanggal.
+    </li>
+    <li>
+      <strong>Node Email</strong> — Modul pengiriman email berbasis Node.js untuk
+      mengirimkan invoice dan notifikasi pembayaran secara otomatis ke alamat email
+      klien.
+    </li>
+    <li>
+      <strong>WhatsApp API</strong> — Digunakan untuk mengirimkan pesan invoice,
+      pengingat pembayaran, dan notifikasi lain langsung ke WhatsApp klien,
+      sehingga komunikasi terasa lebih pribadi dan cepat.
+    </li>
+    <li>
+      <strong>Express.js</strong> — Framework backend Node.js yang menangani{" "}
+      <em>API endpoint</em>, logika bisnis, dan integrasi dengan layanan eksternal
+      seperti Xendit dan WhatsApp API.
+    </li>
+    <li>
+      <strong>Prisma</strong> — ORM modern yang digunakan untuk mengelola akses
+      database secara aman dan terstruktur, memudahkan penulisan query dan migrasi
+      skema data.
+    </li>
+    <li>
+      <strong>PostgreSQL</strong> — Relational database utama untuk menyimpan data
+      klien, booking, invoice, dan histori pembayaran dengan konsistensi dan
+      keandalan tinggi.
+    </li>
+    <li>
+      <strong>Neon</strong> — Layanan hosting PostgreSQL berbasis cloud yang
+      memberikan skalabilitas dan kemudahan pengelolaan database, sekaligus
+      integrasi yang baik dengan aplikasi modern seperti Koncomoto.
+    </li>
+  </ul>
+
+  <p>
+    Kombinasi teknologi di atas membuat Koncomoto mampu berjalan sebagai{" "}
+    <strong>platform otomasi invoice dan pembayaran</strong> yang stabil,
+    terukur, dan nyaman digunakan baik oleh pemilik usaha maupun klien.
+  </p>
+</Section>

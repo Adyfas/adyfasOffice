@@ -1,5 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register plugin hanya di client-side
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface AnimatedContentProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -47,82 +53,65 @@ const AnimatedContent: React.FC<AnimatedContentProps> = ({
   useEffect(() => {
     // Hanya jalankan di client-side
     if (typeof window === 'undefined') return;
-
+    
     const el = ref.current;
     if (!el) return;
 
-    let isCancelled = false;
-    let st: any;
-    let tl: gsap.core.Timeline;
+    let scrollerTarget: Element | string | null = container || document.getElementById('snap-main-container') || null;
 
-    const setupAnimation = async () => {
-      const mod = await import('gsap/ScrollTrigger');
-      const ScrollTrigger = (mod as any).ScrollTrigger || (mod as any).default;
+    if (typeof scrollerTarget === 'string') {
+      scrollerTarget = document.querySelector(scrollerTarget);
+    }
 
-      if (!ScrollTrigger || isCancelled) return;
+    const axis = direction === 'horizontal' ? 'x' : 'y';
+    const offset = reverse ? -distance : distance;
+    const startPct = (1 - threshold) * 100;
 
-      gsap.registerPlugin(ScrollTrigger);
+    gsap.set(el, {
+      [axis]: offset,
+      scale,
+      opacity: animateOpacity ? initialOpacity : 1,
+      visibility: 'visible'
+    });
 
-      let scrollerTarget: Element | string | null =
-        container || document.getElementById('snap-main-container') || null;
-
-      if (typeof scrollerTarget === 'string') {
-        scrollerTarget = document.querySelector(scrollerTarget);
-      }
-
-      const axis = direction === 'horizontal' ? 'x' : 'y';
-      const offset = reverse ? -distance : distance;
-      const startPct = (1 - threshold) * 100;
-
-      gsap.set(el, {
-        [axis]: offset,
-        scale,
-        opacity: animateOpacity ? initialOpacity : 1,
-        visibility: 'visible'
-      });
-
-      tl = gsap.timeline({
-        paused: true,
-        delay,
-        onComplete: () => {
-          if (onComplete) onComplete();
-          if (disappearAfter > 0) {
-            gsap.to(el, {
-              [axis]: reverse ? distance : -distance,
-              scale: 0.8,
-              opacity: animateOpacity ? initialOpacity : 0,
-              delay: disappearAfter,
-              duration: disappearDuration,
-              ease: disappearEase,
-              onComplete: () => onDisappearanceComplete?.()
-            });
-          }
+    const tl = gsap.timeline({
+      paused: true,
+      delay,
+      onComplete: () => {
+        if (onComplete) onComplete();
+        if (disappearAfter > 0) {
+          gsap.to(el, {
+            [axis]: reverse ? distance : -distance,
+            scale: 0.8,
+            opacity: animateOpacity ? initialOpacity : 0,
+            delay: disappearAfter,
+            duration: disappearDuration,
+            ease: disappearEase,
+            onComplete: () => onDisappearanceComplete?.()
+          });
         }
-      });
+      }
+    });
 
-      tl.to(el, {
-        [axis]: 0,
-        scale: 1,
-        opacity: 1,
-        duration,
-        ease
-      });
+    tl.to(el, {
+      [axis]: 0,
+      scale: 1,
+      opacity: 1,
+      duration,
+      ease
+    });
 
-      st = ScrollTrigger.create({
-        trigger: el,
-        scroller: scrollerTarget || window,
-        start: `top ${startPct}%`,
-        once: true,
-        onEnter: () => tl.play()
-      });
-    };
-
-    void setupAnimation();
+    const st = ScrollTrigger.create({
+      trigger: el,
+      scroller: scrollerTarget || window,
+      start: `top ${startPct}%`,
+      once: true,
+      onEnter: () => tl.play()
+    });
 
     return () => {
-      isCancelled = true;
-      if (st) st.kill();
-      if (tl) tl.kill();
+      st.kill();
+      tl.kill();
     };
   }, [
     container,

@@ -1,0 +1,138 @@
+import Heading from "@/components/MD/Heading"
+import Section from "@/components/MD/Section"
+import SubHeading from "@/components/MD/SubHeading"
+import Hyperlink from "@/components/MD/Hyperlink"
+import Img from "@/components/MD/Image"
+
+export const meta = {
+  title: "API E-Commerce (SipBos)",
+  slug: "sipbos",
+  date: "Sep 28, 2025",
+  role: "Backend",
+  link: undefined,
+  git: undefined,
+  tech: [
+    "Prisma",
+    "Express js",
+    "PostgreSQL",
+    "Bcryptjs",
+    "Google-auth-library",
+    "Jsonwebtoken",
+    "Multer",
+    "Node-appwrite",
+    "Passport",
+    "Passport-google-oauth20",
+    "Passport-oauth",
+    "Serverless-http",
+    "Neon",
+    "Appwrite",
+  ],
+  description:
+    "SipBos API is a large-scale backend project for managing e-commerce operations, including transactions and database workflows.",
+};
+
+<Section>
+  <Img alt="SipBos API" img="/images/project/sipbos.png" />
+
+  <Heading>SipBos API</Heading>
+
+  <p>
+    SipBos API is the biggest project for my backend part, in this project I am the
+    front guard of everything because I am the one who manages, updates, deletes
+    data and so on including transactions and also the database and it is done solo
+    or alone. This project runs smoothly and the API can be used safely and the
+    application runs normally and as desired.
+  </p>
+
+  <p>
+    Dalam proyek ini, saya bertanggung jawab penuh sebagai <strong>backend
+    engineer</strong> yang mengelola seluruh alur data untuk kebutuhan e-commerce.
+    Mulai dari <strong>manajemen user</strong>, <strong>produk</strong>,{" "}
+    <strong>keranjang belanja</strong>, <strong>transaksi</strong>, hingga{" "}
+    <strong>penyimpanan data yang konsisten di database</strong>, semuanya saya
+    rancang dan implementasikan sendiri. Fokus utamanya adalah membuat API yang{" "}
+    <strong>aman, dapat diandalkan, dan mudah diintegrasikan</strong> dengan
+    berbagai layanan frontend maupun sistem lain.
+  </p>
+
+  <SubHeading>Peran dan Tanggung Jawab</SubHeading>
+  <ul>
+    <li>Mendesain struktur database untuk kebutuhan e-commerce dalam skala besar.</li>
+    <li>Membangun endpoint REST API untuk autentikasi, produk, transaksi, dan lain-lain.</li>
+    <li>Mengimplementasikan keamanan seperti hashing password, JWT, dan OAuth.</li>
+    <li>Mengelola media upload seperti gambar produk secara aman dan terstruktur.</li>
+    <li>Menjamin API berjalan stabil, dapat diskalakan, dan mudah di-deploy.</li>
+  </ul>
+
+  <SubHeading>Penjelasan Teknologi</SubHeading>
+  <ul>
+    <li>
+      <strong>Prisma</strong> — ORM modern untuk Node.js yang saya gunakan untuk{" "}
+      <em>mapping</em> antara kode dan database. Prisma memudahkan penulisan query,
+      validasi data, dan migrasi skema secara aman dan terstruktur.
+    </li>
+    <li>
+      <strong>Express.js</strong> — Framework backend berbasis Node.js yang menjadi
+      tulang punggung pembuatan <em>REST API</em>. Semua endpoint untuk produk,
+      user, transaksi, dan lain-lain dibangun di atas Express.
+    </li>
+    <li>
+      <strong>PostgreSQL</strong> — Database relasional utama untuk menyimpan semua
+      data e-commerce: user, produk, stok, transaksi, histori pembayaran, dan
+      sebagainya dengan konsistensi tinggi.
+    </li>
+    <li>
+      <strong>Bcryptjs</strong> — Library untuk <em>hashing</em> password sehingga
+      data kredensial user tersimpan dengan aman dan tidak dalam bentuk teks asli.
+    </li>
+    <li>
+      <strong>Google-auth-library</strong> — Digunakan untuk integrasi dengan
+      layanan Google, terutama dalam proses autentikasi atau verifikasi yang
+      terkait akun Google.
+    </li>
+    <li>
+      <strong>Jsonwebtoken (JWT)</strong> — Teknologi untuk membuat token
+      autentikasi yang aman, sehingga user yang sudah login dapat mengakses API
+      tertentu tanpa harus mengirim password terus-menerus.
+    </li>
+    <li>
+      <strong>Multer</strong> — Middleware untuk menangani <em>file upload</em>,
+      misalnya upload foto produk atau dokumen lain, dengan pengelolaan yang rapi
+      dan terkontrol.
+    </li>
+    <li>
+      <strong>Node-appwrite</strong> — SDK untuk berkomunikasi dengan layanan{" "}
+      <Hyperlink link="https://appwrite.io">Appwrite</Hyperlink>, biasanya untuk
+      kebutuhan seperti penyimpanan file, autentikasi tambahan, atau layanan
+      backend lain.
+    </li>
+    <li>
+      <strong>Passport</strong>, <strong>Passport-google-oauth20</strong>,{" "}
+      <strong>Passport-oauth</strong> — Kumpulan library untuk mengelola{" "}
+      <em>OAuth</em> dan <em>third-party login</em> (seperti login dengan Google),
+      sehingga sistem autentikasi menjadi lebih fleksibel dan modern.
+    </li>
+    <li>
+      <strong>Serverless-http</strong> — Digunakan untuk menjalankan aplikasi
+      Express di lingkungan <em>serverless</em>, sehingga API dapat di-deploy ke
+      platform seperti AWS Lambda atau layanan serupa dengan lebih efisien.
+    </li>
+    <li>
+      <strong>Neon</strong> — Layanan managed PostgreSQL berbasis cloud yang
+      memberikan kemudahan skalabilitas dan koneksi database untuk SipBos API.
+    </li>
+    <li>
+      <strong>Appwrite</strong> — Backend-as-a-service yang bisa digunakan untuk
+      kebutuhan tambahan seperti penyimpanan, fungsi serverless, atau autentikasi,
+      yang terintegrasi bersama API utama.
+    </li>
+  </ul>
+
+  <p>
+    Dengan kombinasi teknologi tersebut, SipBos API menjadi{" "}
+    <strong>fondasi backend</strong> yang kokoh untuk aplikasi e-commerce, baik
+    dari sisi keamanan, pengelolaan data, maupun kemudahan integrasi dengan
+    antarmuka pengguna di sisi frontend.
+  </p>
+</Section>
+

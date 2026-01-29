@@ -3,12 +3,15 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
+import mdx from '@mdx-js/rollup';
 
 export default defineConfig({
-  plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+  plugins: [tailwindcss(), reactRouter(), tsconfigPaths(), {
+    ...mdx(), enforce:'pre'
+  }],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './app'),
+      "@": path.resolve(__dirname, "./app"),
     },
   },
   build: {
