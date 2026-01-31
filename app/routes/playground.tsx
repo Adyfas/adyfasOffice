@@ -18,7 +18,7 @@ export function meta({}: Route.MetaArgs) {
 
 export default function PlaygroundPage() {
   return (
-    <>
+    <section className="relative">
       <AnimatedContent
         distance={50}
         direction="vertical"
@@ -39,7 +39,7 @@ export default function PlaygroundPage() {
           </p>
         </section>
       </AnimatedContent>
-      <div className="flex items-center justify-center mx-3">
+      <div className="flex items-center justify-center mx-2 flex-col">
         <AnimatedContent
           distance={50}
           direction="vertical"
@@ -52,7 +52,11 @@ export default function PlaygroundPage() {
         >
           <MinecraftTierCard />
         </AnimatedContent>
+
+        <div className="border-2 border-black/80 rounded-xl text-white p-3 my-2 bg-gray-900">
+          Just For Fun 😅
+        </div>
       </div>
-    </>
+    </section>
   );
 }

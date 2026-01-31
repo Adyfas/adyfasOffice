@@ -1,6 +1,3 @@
-// components/MinecraftTierCard.tsx
-import React from "react";
-
 interface TierIcon {
   icon: string;
   label: "HT1" | "LT1";
@@ -17,7 +14,6 @@ const MinecraftTierCard = () => {
     { icon: "/images/playground/axe.svg", label: "LT1" },
     { icon: "/images/playground/uhc.svg", label: "LT1" },
   ];
-
   return (
     <div className="w-full max-w-md bg-[#0f172a] rounded-xl p-5 shadow-lg border border-[#1e293b]">
       <div className="flex flex-col items-center mb-4">
@@ -36,8 +32,6 @@ const MinecraftTierCard = () => {
           Adyfas
         </h1>
       </div>
-
-      {/* Tier Badge */}
       <div className="flex justify-center mb-3">
         <div className="px-4 py-1.5 rounded-full bg-amber-900/70 flex items-center gap-2 border border-amber-700">
           <span className="text-amber-300 text-lg">🎖️</span>
@@ -46,11 +40,7 @@ const MinecraftTierCard = () => {
           </span>
         </div>
       </div>
-
-      {/* Region */}
       <p className="text-center text-gray-400 text-sm mb-4">Asia</p>
-
-      {/* NameMC Link */}
       <div className="flex justify-center mb-6">
         <a
           href="https://adyfas.com"
@@ -63,8 +53,6 @@ const MinecraftTierCard = () => {
           <span>↗</span>
         </a>
       </div>
-
-      {/* POSITION */}
       <div className="mb-6">
         <h3 className="text-gray-300 font-semibold uppercase text-sm mb-2">
           POSITION
@@ -84,8 +72,6 @@ const MinecraftTierCard = () => {
           </div>
         </div>
       </div>
-
-      {/* TIERS */}
       <div>
         <h3 className="text-gray-300 font-semibold uppercase text-sm mb-2">
           TIERS
@@ -93,11 +79,11 @@ const MinecraftTierCard = () => {
         <div className="grid grid-cols-8 gap-2 bg-[#1e293b] p-3 rounded-lg">
           {tierIcons.map((item, idx) => (
             <div key={idx} className="flex flex-col items-center">
-              <div className="w-10 h-10 rounded-lg bg-[#334155] border border-[#475569] flex items-center justify-center text-xl">
+              <div className="w-5 h-5 sm:w-10 sm:h-10 rounded-lg bg-[#334155] border border-[#475569] flex items-center justify-center text-xl">
                 <img
                   src={item.icon}
                   alt="Minecraft Tier Card"
-                  className="w-full scale-65"
+                  className="w-full scale-55 sm:scale-65"
                 />
               </div>
               <span
