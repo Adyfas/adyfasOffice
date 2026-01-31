@@ -262,7 +262,7 @@ export default function Home() {
                 initialOpacity={0}
                 animateOpacity
                 threshold={0.2}
-                delay={0.2 * idx}
+                delay={0.05 * idx}
                 key={idx}
               >
                 <div

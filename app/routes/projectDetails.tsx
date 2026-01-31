@@ -65,8 +65,9 @@ export default function ProjectDetail({ params }: Route.ComponentProps) {
 
   const Post = mod.default;
   const meta = mod.meta ?? {};
-
+  document.title = meta.title ?? "";
   return (
+    
     <MdxLayoutPage>
       <section className="relative">
         <header className="py-4 text-start">
