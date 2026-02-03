@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import type { Route } from "./+types/home";
 import { iDoSomething } from "~/data/Ido";
 import * as icons from "lucide-react";
@@ -6,6 +6,7 @@ import { ProjectList } from "~/data/DataProject";
 import { TechStack } from "~/data/TechStack";
 import { timelineData } from "~/data/Timeline";
 import AnimatedContent from "~/components/AnimatedContent";
+import { UsestateMessage } from "~/store/contact";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -19,6 +20,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const message = UsestateMessage((state) => state.message);
+  const setMessage = UsestateMessage((state) => state.setMessage);
+  const router = useNavigate();
+
   return (
     <>
       <AnimatedContent
@@ -44,12 +49,16 @@ export default function Home() {
           Hey, Adyfas Here!
         </h1>
         <p>Nice to meet you</p>
-        <p className="py-5 text-sm sm:text-base">
-          An IT enthusiast who enjoys building websites, automation systems, and
-          solving real-world problems through technology. I focus on developing
-          practical digital solutions — from responsive websites to simple
-          automation systems — with clean code and clear logic.
+        <p className="text-sm sm:text-base">
+          Web Developer & Automation Enthusiast, I help individuals and small
+          businesses build fast, modern websites and simple automation systems
+          that solve real problems.
         </p>
+        <div className="flex items-center justify-start gap-5">
+          <p className="pb-2 text-sm sm:text-base">
+            Open for freelance & collaboration
+          </p>
+        </div>
         <Link to="/contact">
           <button className="bg-gray-900 p-2 text-white font-bold rounded-xl px-5 cursor-pointer hover:bg-gray-800 transition-all duration-500 text-lg sm:text-xl hover:scale-101">
             Contact
@@ -70,6 +79,7 @@ export default function Home() {
           delay={0}
         >
           <h2 className="text-xl sm:text-2xl font-bold">What I Can Do?</h2>
+          <p>Web Development – Building responsive websites</p>
         </AnimatedContent>
         {iDoSomething?.map((item, idx) => {
           const Icon = icons[
@@ -142,9 +152,7 @@ export default function Home() {
                     delay={0.2 * idx}
                     key={idx}
                   >
-                    <div
-                      className="transition-shadow duration-300 hover:shadow-xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-md border border-gray-100 hover:border-gray-300 cursor-pointer flex flex-col sm:flex-row p-4 sm:p-6 gap-6"
-                    >
+                    <div className="transition-shadow duration-300 hover:shadow-xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-md border border-gray-100 hover:border-gray-300 cursor-pointer flex flex-col sm:flex-row p-4 sm:p-6 gap-6">
                       <div className="w-full sm:w-32 h-40 sm:h-32 rounded-xl overflow-hidden shrink-0 border border-gray-200 shadow-lg flex items-center justify-center bg-gray-50">
                         <img
                           src={project.img}
@@ -392,13 +400,16 @@ export default function Home() {
               <input
                 type="email"
                 placeholder="contact.adyfas@gmail.com"
+                value={message}
+                onChange={(e) => setMessage(e.currentTarget.value)}
                 className="flex-1 rounded-full border border-gray-300 px-4 py-2 text-sm focus:border-gray-900 focus:outline-none"
               />
               <button
-                type="submit"
+              onClick={()=> {message !== '' || message.length > 0 ? router('/contact') : ''}}
+                type="button"
                 className="rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white transition hover:bg-gray-800"
               >
-                Subscribe
+                Contact
               </button>
             </form>
           </section>

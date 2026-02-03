@@ -207,10 +207,9 @@ export default function AboutPage() {
         >
           <h2 className="text-xl font-bold">The Journey</h2>
           <p className="py-2">
-            This is a glimpse into my journey—from early curiosity and
-            experimentation to meaningful projects and competitive experiences.
-            Each phase reflects growth, challenges, and a constant desire to
-            learn and build better solutions.
+            I started with curiosity about computers and games, which led me to
+            web development. Over time, I focused on building real projects,
+            joining competitions, and solving practical problems.
           </p>
         </AnimatedContent>
       </section>
@@ -395,23 +394,23 @@ export default function AboutPage() {
           </AnimatedContent>
         </div>
         <AnimatedContent
-        distance={50}
-        direction="vertical"
-        reverse={false}
-        duration={1.2}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={0.7}
-      >
-        <p className="py-2">
-          The game has just begun. This is where I continue refining my skills,
-          learning from every challenge, and striving to become better than I
-          was before. Many may have tried and failed, but I choose to believe in
-          progress, consistency, and growth. This is my journey—and if you’ve
-          read this far, it’s a pleasure to meet you.
-        </p>
+          distance={50}
+          direction="vertical"
+          reverse={false}
+          duration={1.2}
+          ease="power3.out"
+          initialOpacity={0}
+          animateOpacity
+          threshold={0.2}
+          delay={0.7}
+        >
+          <p className="py-2">
+            The game has just begun. This is where I continue refining my
+            skills, learning from every challenge, and striving to become better
+            than I was before. Many may have tried and failed, but I choose to
+            believe in progress, consistency, and growth. This is my journey—and
+            if you’ve read this far, it’s a pleasure to meet you.
+          </p>
         </AnimatedContent>
       </section>
     </>

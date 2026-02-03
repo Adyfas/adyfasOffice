@@ -1,6 +1,12 @@
 import React from "react";
 import type { Route } from "./+types/contact";
 import AnimatedContent from "~/components/AnimatedContent";
+import {
+  setExpiredLocalstorage,
+  setRemoveLocalstorage,
+} from "@/lib/setLocalstorage";
+import { UsestateMessage } from "~/store/contact";
+
 export function meta({}: Route.MetaArgs) {
   return [
     { title: "Adyfas - Contact" },
@@ -14,9 +20,30 @@ export function meta({}: Route.MetaArgs) {
 export default function ContactPage() {
   const formRef = React.useRef<HTMLFormElement | null>(null);
   const [submitted, setSubmitted] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+  const [emailsend, setEmailsend] = React.useState(false);
+  const message = UsestateMessage((state) => state.message);
+  const setMessage = UsestateMessage((state) => state.setMessage);
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  React.useEffect(() => {
+    if (setRemoveLocalstorage({ key: "emailsend" })) {
+      setSubmitted(true);
+      setLoading(true);
+      setEmailsend(true);
+      return;
+    }
+  }, []);
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (setRemoveLocalstorage({ key: "emailsend" })) {
+      setSubmitted(true);
+      setLoading(true);
+      setEmailsend(true);
+      console.log("esekusi");
+      return;
+    }
+    setLoading(true);
     const form = formRef.current;
     if (!form) return;
 
@@ -25,14 +52,28 @@ export default function ContactPage() {
     const email = (formData.get("email") || "").toString();
     const message = (formData.get("message") || "").toString();
 
-    const subject = encodeURIComponent(`New message from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    );
-
-    setSubmitted(true);
-
-    window.location.href = `mailto:adyfasoffice@gmail.com?subject=${subject}&body=${body}`;
+    try {
+      const responses = await fetch(`${import.meta.env.VITE_API}/send/email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, name, message }),
+      });
+      if (!responses.ok) {
+        throw new Error("Failed to send email: " + responses.statusText);
+      }
+      setSubmitted(true);
+      setLoading(false);
+      setExpiredLocalstorage({ key: "emailsend", value: "true" });
+      setMessage("");
+      form.reset();
+    } catch (error) {
+      console.error("Unexpected Error: ", error);
+      setLoading(false);
+      setSubmitted(false);
+      return;
+    }
   }
 
   return (
@@ -49,26 +90,17 @@ export default function ContactPage() {
         delay={0.2}
       >
         <section className="min-h-[70vh] flex items-center justify-center">
-          <div className="w-full max-w-xl rounded-2xl bg-white px-6 py-8 sm:px-8 sm:py-10 shadow-lg border border-gray-200">
+          <div className="w-full max-w-xl rounded-2xl bg-white px-6 py-8 sm:px-8 sm:py-10">
             <div className="text-center mb-6">
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                Contact Me!
+                Have a project in mind?
               </h1>
               <p className="mt-2 text-sm text-gray-600">
-                The start of something magical. Tell me what you&apos;re building.
+                Tell me what you're building, and I’ll see how I can help.
               </p>
-              {submitted && (
-                <p className="mt-2 text-xs text-green-600">
-                  Thanks for submitting your message. Please confirm and send it from your email app.
-                </p>
-              )}
             </div>
 
-            <form
-              ref={formRef}
-              onSubmit={handleSubmit}
-              className="space-y-4"
-            >
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label
                   htmlFor="name"
@@ -77,6 +109,7 @@ export default function ContactPage() {
                   Name
                 </label>
                 <input
+                  readOnly={loading || submitted}
                   id="name"
                   name="name"
                   type="text"
@@ -94,9 +127,12 @@ export default function ContactPage() {
                   Email
                 </label>
                 <input
+                  readOnly={loading || submitted}
                   id="email"
                   name="email"
                   type="email"
+                  value={message !== "" || message.length > 0 ? message : ""}
+                  onChange={(e) => setMessage(e.currentTarget.value)}
                   required
                   className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-900 focus:outline-none"
                   placeholder="you@example.com"
@@ -111,6 +147,7 @@ export default function ContactPage() {
                   Your Message For Me?
                 </label>
                 <textarea
+                  readOnly={loading || submitted}
                   id="message"
                   name="message"
                   required
@@ -122,14 +159,22 @@ export default function ContactPage() {
 
               <button
                 type="submit"
-                className="mt-2 w-full rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 disabled:opacity-70 disabled:cursor-not-allowed transition-colors"
+                disabled={loading || submitted}
+                className={`mt-2 w-full rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 disabled:opacity-70 disabled:cursor-not-allowed transition-colors ${(loading && "cursor-wait") || (submitted && "cursor-wait")}`}
               >
-                {submitted ? "Thanks For Submit" : "Send Message"}
+                {submitted || emailsend
+                  ? "Thanks For Submit"
+                  : loading
+                    ? "Sending..."
+                    : "Send Message"}
               </button>
+              <p className="text-sm text-gray-600">
+                I usually reply within 24–48 hours.
+              </p>
             </form>
           </div>
         </section>
       </AnimatedContent>
-        </>
+    </>
   );
 }

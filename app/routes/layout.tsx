@@ -61,24 +61,27 @@ export default function LayoutPage(): JSX.Element {
       {showInitialLoading ? (
         <LoadingPage onComplete={handleLoadingComplete} />
       ) : (
-        <div className="w-full max-w-3xl mx-auto px-4 relative">
-          <div className="w-full max-w-3xl mx-auto px-4">
+        <div className="w-full max-w-3xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 relative">
+          <div className="w-full max-w-3xl mx-auto px-0 sm:px-4">
             <div className="flex flex-col items-center justify-center">
-              <div className="flex flex-col items-start justify-start py-12 sm:py-24">
-                <div className="w-full sm:w-full">
+              <div className="flex flex-col items-start justify-start py-8 sm:py-16 md:py-20 lg:py-24 w-full">
+                <div className="w-full">
                   <ClientOnly>
                     <Sidebar />
                   </ClientOnly>
                   <ClientOnly>
                     <BottomNav />
                   </ClientOnly>
-                  <Outlet />
-                  <Footer />
-
+                  <div className="w-full">
+                    <Outlet />
+                  </div>
+                  <div className="w-full">
+                    <Footer />
+                  </div>
                   {[1, 2, 3, 4, 5, 6].map((item) => (
                     <div
                       key={item}
-                      className="fixed left-0 w-full bottom-0 h-10 bg-white/60 rounded-t-3xl filter blur-3xl"
+                      className="fixed left-0 w-full bottom-0 h-10 bg-white/60 rounded-t-3xl filter blur-3xl pointer-events-none"
                     ></div>
                   ))}
                 </div>
