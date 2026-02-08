@@ -92,14 +92,14 @@ export default function Image({ text, src, className, alt, hover }: ImageProps) 
         )}
       </div>
 
-      {popup && (
+      {/* {popup && (
         <PopupImage
           src={src}
           alt={alt}
           text={text}
           onClose={() => setPopup(false)}
         />
-      )}
+      )} */}
     </>
   );
 }

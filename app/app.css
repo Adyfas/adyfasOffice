@@ -9,3 +9,7 @@ body{
   background: rgb(255, 255, 255);
   color:black;
 }
+
+button{
+  cursor: pointer;
+}

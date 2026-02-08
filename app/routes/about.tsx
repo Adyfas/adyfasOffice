@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import BlurText from "~/components/BlurText";
 import type { Route } from "./+types/about";
-import Image from "~/components/Image";
 import ClientOnly from "~/components/ClientOnly";
-import AnimatedContent from "~/components/AnimatedContent";
+import CalltoActionContact from "~/components/CalltoActionContact";
+import CareerSnapshot from "~/components/about/CareerSnapshot";
+import Snapshot from "~/components/about/Snapshot";
+import HighlightsAchievements from "~/components/about/HighlightsAchievements";
 
 // Helper: dapatkan ucapan berdasarkan jam
 const getGreetingByHour = (
@@ -64,7 +66,7 @@ export function meta({}: Route.MetaArgs) {
     {
       name: "description",
       content:
-        "Wellcome in my website adyfas and i'm a developer i'm have experience in web development",
+        "Adyfas (Ferdi Iskandar) — Web developer & problem solver. Full-stack, backend-focused. Builds web apps, automation systems, REST APIs. 1st Runner-Up national web competitions. Shipping real projects.",
     },
   ];
 }
@@ -104,12 +106,12 @@ export default function AboutPage() {
     return () => clearInterval(timer);
   }, [showBlurText, greetings.length]);
 
-  const greetingText = `${greetingsMap.en[timeKey]}🙌, I am Ferdi Iskandar or commonly known as Adyfas`;
+  const greetingText = `${greetingsMap.en[timeKey]}🙌, Hi, I’m Adyfas (Ferdi Iskandar)`;
 
   return (
-    <>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6">
       {/* intro */}
-      <section>
+      <section className="pt-8 pb-12">
         <ClientOnly
           fallback={
             <h1 className="text-3xl font-bold text-left sm:text-5xl mb-8">
@@ -152,267 +154,23 @@ export default function AboutPage() {
                     {greetings[currentGreetingIndex]}
                   </motion.span>
                 </AnimatePresence>{" "}
-                🙌, I am Ferdi Iskandar or commonly known as Adyfas
+                🙌, Hi, I’m Adyfas (Ferdi Iskandar)
               </motion.h1>
             )}
           </AnimatePresence>
+          {!showBlurText && (
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed mt-4">
+              Web developer & problem solver. I build web applications, automation systems, and APIs that streamline workflows. Full-stack capable, backend-focused—I deliver solutions that perform in production. 1st Runner-Up in national web competitions, shipping real projects for real clients.
+            </p>
+          )}
         </ClientOnly>
       </section>
 
-      {/* Cirebon */}
-      <section>
-        <div className="max-w-2xl grid place-content-center">
-          {/* <Image
-            alt="Cirebon"
-            className="rounded-2xl h-65 w-[500px]"
-            text="Cirebon, Indonesia"
-            src="/images/about/cirebon.webp"
-          /> */}
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            reverse={false}
-            duration={1.2}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
-            delay={0.3}
-          >
-            <div className="relative w-full rounded-2xl overflow-hidden shadow-md bg-gray-100 flex items-center justify-center">
-              <Image
-                alt="Cirebon"
-                className="rounded-2xl h-65 w-full"
-                src="/images/about/cirebon2.webp"
-                text="Cirebon, Indonesia"
-              />
-            </div>
-          </AnimatedContent>
-        </div>
-      </section>
+      <Snapshot />
+      <CareerSnapshot />
+      <HighlightsAchievements />
 
-      {/* Journey */}
-
-      <section className="my-32">
-        <AnimatedContent
-          distance={50}
-          direction="vertical"
-          reverse={false}
-          duration={1.2}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={0.3}
-        >
-          <h2 className="text-xl font-bold">The Journey</h2>
-          <p className="py-2">
-            I started with curiosity about computers and games, which led me to
-            web development. Over time, I focused on building real projects,
-            joining competitions, and solving practical problems.
-          </p>
-        </AnimatedContent>
-      </section>
-
-      <section>
-        <AnimatedContent
-          distance={50}
-          direction="vertical"
-          reverse={false}
-          duration={1.2}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={0.3}
-        >
-          <div className="flex items-start justify-start flex-col">
-            <h2 className="text-xl font-bold">
-              First Time Living on Earth Until Junior High School
-            </h2>
-            <span className="text-gray-300">2008 - 2023</span>
-          </div>
-          <p className="py-2">
-            Hi, I'm Ferdi or people on the internet call me Adyfas, I live in
-            Indonesia, more precisely in Cirebon City, since I was little I
-            really like playing computers, especially playing games, the first
-            game I played was the Angry Birds game, this is the first game I
-            played since I was very little, around 8 years old, when I was
-            around 10+ years old, my brother gave me a laptop and yes, I used it
-            to play games again... this time the game is Minecraft, here the
-            laptop is enough to play small games because the specifications are
-            not adequate haha ​​this is my year of playing
-          </p>
-        </AnimatedContent>
-      </section>
-
-      <section className="my-32">
-        <div className="flex items-start justify-start flex-col mb-5">
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            reverse={false}
-            duration={1.2}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
-            delay={0.3}
-          >
-            <h2 className="text-xl font-bold">Start Project And Skill Up</h2>
-            <span className="text-gray-300">2024 - 2025</span>
-          </AnimatedContent>
-        </div>
-        <div className="w-full flex flex-col sm:flex-row gap-6 items-stretch justify-center my-6">
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            reverse={false}
-            duration={1.2}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
-            delay={0.6}
-          >
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative w-full sm:w-[220px] aspect-4/5 rounded-2xl overflow-hidden shadow-md bg-gray-100 flex items-center justify-center">
-                <Image
-                  alt="1st RUNNER UP"
-                  src="/images/about/first-win.jpeg"
-                  className="object-cover w-full h-full"
-                  text="2024"
-                />
-              </div>
-            </div>
-          </AnimatedContent>
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            reverse={false}
-            duration={1.2}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
-            delay={0.7}
-          >
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative w-full sm:w-[220px] aspect-4/5 rounded-2xl overflow-hidden shadow-md bg-gray-100 flex items-center justify-center">
-                <Image
-                  alt="Ferdidifest"
-                  src="/images/ferdidifest1.webp"
-                  className="object-cover w-full h-full"
-                  text="2025"
-                />
-              </div>
-            </div>
-          </AnimatedContent>
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            reverse={false}
-            duration={1.2}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
-            delay={0.1}
-          >
-            <div className="flex-1 flex items-center justify-center">
-              <div className="relative w-full sm:w-[220px] aspect-4/5 rounded-2xl overflow-hidden shadow-md bg-gray-100 flex items-center justify-center">
-                <Image
-                  alt="2nd WIN"
-                  src="/images/about/2nd-win.jpeg"
-                  className="object-cover w-full h-full"
-                  text="2025"
-                />
-              </div>
-            </div>
-          </AnimatedContent>
-        </div>
-        <AnimatedContent
-          distance={50}
-          direction="vertical"
-          reverse={false}
-          duration={1.2}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={0.15}
-        >
-          <p className="py-2">
-            In the year when I was around 15+ years old I had achieved several
-            achievements in my school in the IT field, from there I learned a
-            lot about how to design a website, coding to the technology, I was
-            quite proud of myself to be able to get there from playing games to
-            playing real games. from there I also received a big project from
-            Koncomoto to make me a web application project to automate invoice
-            creation and client management, from there I also received another
-            project to create an ecommerce API
-          </p>
-        </AnimatedContent>
-      </section>
-      <section>
-        <AnimatedContent
-          distance={50}
-          direction="vertical"
-          reverse={false}
-          duration={1.2}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={0.3}
-        >
-          <div className="flex items-start justify-start flex-col mb-5">
-            <h2 className="text-xl font-bold">Skill Up </h2>
-            <span className="text-gray-300">2026</span>
-          </div>
-        </AnimatedContent>
-        {/* Responsive masonry & better image framing */}
-        <div className="w-full flex flex-col sm:flex-row gap-6 items-start justify-start my-6">
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            reverse={false}
-            duration={1.2}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
-            delay={0.3}
-          >
-            <div className="relative w-full sm:w-[220px] aspect-4/5 rounded-2xl overflow-hidden shadow-md bg-gray-100 flex items-start justify-start">
-              <Image
-                alt="Adyfas 2026"
-                src="/images/CEO.png"
-                className="object-cover w-full h-full"
-              />
-            </div>
-          </AnimatedContent>
-        </div>
-        <AnimatedContent
-          distance={50}
-          direction="vertical"
-          reverse={false}
-          duration={1.2}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={0.7}
-        >
-          <p className="py-2">
-            The game has just begun. This is where I continue refining my
-            skills, learning from every challenge, and striving to become better
-            than I was before. Many may have tried and failed, but I choose to
-            believe in progress, consistency, and growth. This is my journey—and
-            if you’ve read this far, it’s a pleasure to meet you.
-          </p>
-        </AnimatedContent>
-      </section>
-    </>
+      <CalltoActionContact />
+    </div>
   );
 }
