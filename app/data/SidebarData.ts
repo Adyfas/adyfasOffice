@@ -24,11 +24,6 @@ export const dataIconSidebar: routeSidebar[] = [
         icon: "Book",
     },
     {
-        name: "Blog",
-        route: '/blog',
-        icon: "BookOpen",
-    },
-    {
         name: "Contact",
         route: '/contact',
         icon: "Contact",

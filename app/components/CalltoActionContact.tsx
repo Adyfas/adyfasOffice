@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import AnimatedContent from "./AnimatedContent";
+import ScrollReveal from "./ScrollReveal";
 import { UsestateMessage } from "~/store/contact";
 
 export default function CalltoActionContact() {
@@ -8,15 +8,8 @@ export default function CalltoActionContact() {
   const router = useNavigate();
   return (
     <>
-      <AnimatedContent
-        distance={50}
-        direction="vertical"
-        reverse={false}
-        duration={1.5}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
+      <ScrollReveal
+        animation="fadeUp"
         delay={0.2}
       >
         <section className="mt-32 rounded-2xl bg-white px-8 py-10">
@@ -50,7 +43,7 @@ export default function CalltoActionContact() {
             </button>
           </form>
         </section>
-      </AnimatedContent>
+      </ScrollReveal>
     </>
   );
 }

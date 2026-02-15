@@ -10,12 +10,13 @@ export function BottomNav() {
   return (
     <div className="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 md:hidden">
       <motion.div
-        initial={{ opacity: 0, y: 80 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 80, scale: 0.9 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{
           type: "spring",
-          stiffness: 260,
-          damping: 20,
+          stiffness: 200,
+          damping: 18,
+          mass: 0.8,
         }}
         className="flex gap-2 rounded-2xl bg-white/70 px-3 py-2 shadow-xl backdrop-blur-xl"
       >
@@ -28,28 +29,30 @@ export function BottomNav() {
           return (
             <Link key={idx} to={item.route}>
               <motion.div
-                whileHover="hover"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 className={`
                   relative flex h-11 w-11 items-center justify-center
                   rounded-xl group
                   ${isActive ? "bg-black/10" : "hover:bg-black/10"}
                 `}
               >
-                <Icon size={22} />
+                <Icon size={22} className={isActive ? "text-black" : "text-gray-600"} />
 
                 <span
                   className="
                     pointer-events-none
                     absolute
                     hidden
-                    -top-8
-                    rounded-xl px-2 py-1
-                    text-xs text-white
+                    -top-10
+                    rounded-lg px-2 py-1
+                    text-[10px] text-white
                     whitespace-nowrap
                     group-hover:block
                     bg-gray-900
                     transition-all
-                    duration-700
+                    duration-300
                   "
                 >
                   {item.name}

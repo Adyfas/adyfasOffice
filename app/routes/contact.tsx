@@ -1,13 +1,13 @@
 import React from "react";
 import type { Route } from "./+types/contact";
-import AnimatedContent from "~/components/AnimatedContent";
+import ScrollReveal from "~/components/ScrollReveal";
 import {
   setExpiredLocalstorage,
   setRemoveLocalstorage,
 } from "@/lib/setLocalstorage";
 import { UsestateMessage } from "~/store/contact";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Adyfas - Contact" },
     {
@@ -78,15 +78,9 @@ export default function ContactPage() {
 
   return (
     <>
-      <AnimatedContent
-        distance={50}
-        direction="vertical"
-        reverse={false}
-        duration={1.2}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
+      <ScrollReveal
+        animation="fadeUp"
+        viewportAmount={0.2}
         delay={0.2}
       >
         <section className="min-h-[70vh] flex items-center justify-center">
@@ -174,7 +168,7 @@ export default function ContactPage() {
             </form>
           </div>
         </section>
-      </AnimatedContent>
+      </ScrollReveal>
     </>
   );
 }

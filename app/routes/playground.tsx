@@ -1,12 +1,12 @@
 import type { Route } from "./+types/playground";
-import AnimatedContent from "~/components/AnimatedContent";
+import ScrollReveal from "~/components/ScrollReveal";
 
 import { Link } from "react-router";
 import MinecraftSkinViewer from "~/components/playground/MinecraftSkinViewer";
 import MinecraftTierCard from "~/components/playground/MinecraftTierCard";
 import PopupPassword from "~/components/playground/PopupPassword";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Adyfas - Playground" },
     {
@@ -22,14 +22,8 @@ export default function PlaygroundPage() {
     <>
       <PopupPassword />
       <section className="relative">
-        <AnimatedContent
-          distance={50}
-          direction="vertical"
-          duration={1.2}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
+        <ScrollReveal
+          animation="fadeUp"
           delay={0.3}
         >
           <section className="mb-8">
@@ -41,20 +35,14 @@ export default function PlaygroundPage() {
               especially Minecraft.
             </p>
           </section>
-        </AnimatedContent>
+        </ScrollReveal>
         <div className="flex items-center justify-center mx-2 flex-col">
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            duration={1.2}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
+          <ScrollReveal
+            animation="fadeUp"
             delay={0.3}
           >
             <MinecraftTierCard />
-          </AnimatedContent>
+          </ScrollReveal>
 
           <div className="border-2 border-black/80 rounded-xl text-white p-3 my-2 bg-gray-900">
             Just For Fun 😅

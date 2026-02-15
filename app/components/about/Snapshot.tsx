@@ -1,6 +1,6 @@
 import { Code2, Database, Zap, Puzzle } from "lucide-react";
-import { motion, type Variants } from "framer-motion";
-import AnimatedContent from "../AnimatedContent";
+import { fadeUp } from "~/lib/framer-utils";
+import ScrollReveal from "../ScrollReveal";
 
 const skillsData = [
   {
@@ -29,50 +29,22 @@ const skillsData = [
   },
 ];
 
-const cardVariants: Variants = {
-  offscreen: { opacity: 0, scale: 0.96, y: 30 },
-  onscreen: (custom: number) => ({
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: {
-      type: "spring" as const,
-      bounce: 0.3,
-      duration: 0.7,
-      delay: 0.15 * custom,
-    },
-  }),
-};
-
 export default function Snapshot() {
   return (
     <section className="py-16">
-      <AnimatedContent
-        distance={50}
-        direction="vertical"
-        reverse={false}
-        duration={1.2}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={0}
-      >
+      <ScrollReveal animation="fadeUp">
         <h2 className="text-xl sm:text-2xl font-bold">What I Can Do</h2>
         <p className="mt-2 mb-10 text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl">
           Skills and expertise I bring to every project—focused on solving real problems and delivering measurable results.
         </p>
-      </AnimatedContent>
+      </ScrollReveal>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         {skillsData.map(({ Icon, title, description }, idx) => (
-          <motion.div
+          <ScrollReveal
             key={title}
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={cardVariants}
-            custom={idx}
+            animation="fadeUp"
+            delay={0.1 * idx}
             className="group relative rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 hover:border-gray-900 hover:shadow-md"
           >
             <Icon className="absolute bottom-4 right-4 h-7 w-7 text-gray-300 transition-colors duration-300 group-hover:text-gray-900" />
@@ -82,7 +54,7 @@ export default function Snapshot() {
             <p className="mt-3 text-sm text-gray-600 leading-relaxed">
               {description}
             </p>
-          </motion.div>
+          </ScrollReveal>
         ))}
       </div>
     </section>

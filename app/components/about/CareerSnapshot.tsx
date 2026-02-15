@@ -1,45 +1,25 @@
 import { Careers } from "~/data/Career";
-import AnimatedContent from "../AnimatedContent";
-
-const titleDelay = 0;
-const itemDelay = 0.12;
+import ScrollReveal from "../ScrollReveal";
 
 export default function CareerSnapshot() {
   return (
     <section className="py-16">
-      <AnimatedContent
-        distance={50}
-        direction="vertical"
-        reverse={false}
-        duration={1.2}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={titleDelay}
-      >
-        <h2 className="text-xl sm:text-2xl font-bold">Career Snapshot</h2>
+      <ScrollReveal animation="fadeUp">
+        <h2 className="text-xl sm:text-2xl font-bold">Career Highlights</h2>
         <p className="mt-2 mb-10 text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl">
-          Skill progression and milestones—from first code to shipping production systems.
+          Skill progression and milestones from first code to shipping production systems.
         </p>
-      </AnimatedContent>
+      </ScrollReveal>
 
       <div className="relative">
         <div className="absolute left-[11px] sm:left-[15px] top-2 bottom-2 w-px bg-gray-200" />
 
         <div className="space-y-4">
           {Careers.map((item, index) => (
-            <AnimatedContent
+            <ScrollReveal
               key={item.year}
-              distance={40}
-              direction="vertical"
-              reverse={false}
-              duration={1}
-              ease="power3.out"
-              initialOpacity={0}
-              animateOpacity
-              threshold={0.2}
-              delay={itemDelay * (index + 1)}
+              animation="fadeUp"
+              delay={0.1 * index}
             >
               <div className="relative flex gap-4 sm:gap-6 pl-8 sm:pl-10">
                 <div className="absolute left-0 top-1.5 h-6 w-6 rounded-full border-2 border-gray-900 bg-white shrink-0 ring-4 ring-white" />
@@ -58,7 +38,7 @@ export default function CareerSnapshot() {
                   </p>
                 </div>
               </div>
-            </AnimatedContent>
+            </ScrollReveal>
           ))}
         </div>
       </div>

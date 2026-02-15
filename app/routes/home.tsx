@@ -1,5 +1,5 @@
 import type { Route } from "./+types/home";
-import AnimatedContent from "~/components/AnimatedContent";
+import ScrollReveal from "~/components/ScrollReveal";
 import Introduction from "~/components/home/Introduction";
 import CanIdo from "~/components/home/CanIdo";
 import FeatureProject from "~/components/home/FeatureProject";
@@ -7,7 +7,7 @@ import TechStacks from "~/components/home/TechStack";
 import Learning from "~/components/home/Learning";
 import CalltoActionContact from "~/components/CalltoActionContact";
 import { UsetateHandsome } from "~/store/handsome";
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Adyfas" },
     {
@@ -24,19 +24,9 @@ export default function Home() {
 
   return (
     <>
-      <AnimatedContent
-        distance={50}
-        direction="vertical"
-        reverse={false}
-        duration={1.2}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={0.3}
-      >
+      <ScrollReveal animation="fadeUp" delay={0.2}>
         <Introduction />
-      </AnimatedContent>
+      </ScrollReveal>
 
       <div className="my-10 flex flex-col items-start justify-start gap-5">
         <CanIdo />

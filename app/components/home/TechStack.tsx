@@ -1,33 +1,16 @@
 import { TechStack } from "~/data/TechStack";
-import AnimatedContent from "../AnimatedContent";
+import ScrollReveal from "../ScrollReveal";
 
 export default function TechStacks() {
   return (
     <>
-      <AnimatedContent
-        distance={30}
-        direction="vertical"
-        reverse={false}
-        duration={0.5}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={0.2}
-      >
+      <ScrollReveal animation="fadeUp">
         <h2 className="font-bold text-xl sm:text-2xl">Tech Stack</h2>
-      </AnimatedContent>
+      </ScrollReveal>
       <div className="my-2 grid grid-cols-3 sm:grid-cols-5 justify-start gap-2">
         {TechStack.map((item, idx) => (
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            reverse={false}
-            duration={1.5}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
+          <ScrollReveal
+            animation="fadeUp"
             delay={0.05 * idx}
             key={idx}
           >
@@ -49,7 +32,7 @@ export default function TechStacks() {
                 {item.name}
               </span>
             </div>
-          </AnimatedContent>
+          </ScrollReveal>
         ))}
       </div>
     </>

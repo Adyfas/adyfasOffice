@@ -1,9 +1,9 @@
 import { ProjectList } from "~/data/DataProject";
 import type { Route } from "../+types/root";
-import AnimatedContent from "~/components/AnimatedContent";
+import ScrollReveal from "~/components/ScrollReveal";
 import { Link } from "react-router";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Adyfas - Project" },
     {
@@ -33,21 +33,14 @@ export default function ProjectPage() {
           );
           return (
             <>
-                <div className="my-4 grid gap-6 grid-cols-1 w-full max-w-4xl">
-                  {filter.map((project, idx) => (
-                      <AnimatedContent
-                      distance={50}
-                      direction="vertical"
-                      reverse={false}
-                      duration={1.5}
-                      ease="power3.out"
-                      initialOpacity={0}
-                      animateOpacity
-                      threshold={0.2}
-                      delay={0.2 * idx}
-                      key={idx}
-                    >
-              <Link to={project.projectLink}>
+              <div className="my-4 grid gap-6 grid-cols-1 w-full max-w-4xl">
+                {filter.map((project, idx) => (
+                  <ScrollReveal
+                    animation="fadeUp"
+                    delay={0.1 * idx}
+                    key={idx}
+                  >
+                    <Link to={project.projectLink}>
                       <div className="transition-shadow duration-300 hover:shadow-xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-md border border-gray-100 hover:border-gray-300 cursor-pointer flex flex-col sm:flex-row p-4 sm:p-6 gap-6">
                         <div className="w-full sm:w-32 h-40 sm:h-32 rounded-xl overflow-hidden shrink-0 border border-gray-200 shadow-lg flex items-center justify-center bg-gray-50">
                           <img
@@ -124,10 +117,10 @@ export default function ProjectPage() {
                           </div>
                         </div>
                       </div>
-                        </Link>
-                    </AnimatedContent>
-                  ))}
-                </div>
+                    </Link>
+                  </ScrollReveal>
+                ))}
+              </div>
             </>
           );
         })()}

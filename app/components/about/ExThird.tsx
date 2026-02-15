@@ -1,4 +1,4 @@
-import AnimatedContent from "../AnimatedContent";
+import ScrollReveal from "../ScrollReveal";
 import Image from "../Image";
 
 const titleDelay = 0;
@@ -8,16 +8,9 @@ const paragraphDelay = 0.6;
 export default function ExThird() {
   return (
     <section className="py-16">
-      <AnimatedContent
-        distance={50}
-        direction="vertical"
-        reverse={false}
-        duration={1.2}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={titleDelay}
+      <ScrollReveal
+        animation="fadeUp"
+        delay={0}
       >
         <h2 className="text-xl sm:text-2xl font-bold">Ongoing Growth</h2>
         <span className="inline-block mt-1 text-sm text-gray-500 font-medium">
@@ -26,19 +19,12 @@ export default function ExThird() {
         <p className="mt-2 mb-8 text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl">
           The journey continues—refining skills, embracing challenges, and building the next chapter.
         </p>
-      </AnimatedContent>
+      </ScrollReveal>
 
       <div className="flex flex-col sm:flex-row gap-6 mb-8">
-        <AnimatedContent
-          distance={40}
-          direction="vertical"
-          reverse={false}
-          duration={1}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={imageDelay}
+        <ScrollReveal
+          animation="fadeUp"
+          delay={0.2}
         >
           <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm w-full sm:w-56 aspect-4/5 bg-gray-100 shrink-0">
             <Image
@@ -47,24 +33,17 @@ export default function ExThird() {
               className="object-cover w-full h-full"
             />
           </div>
-        </AnimatedContent>
-        <AnimatedContent
-          distance={50}
-          direction="vertical"
-          reverse={false}
-          duration={1.2}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={paragraphDelay}
+        </ScrollReveal>
+        <ScrollReveal
+          animation="fadeUp"
+          delay={0.4}
         >
           <div className="rounded-xl border border-gray-200 bg-gray-50/50 p-6 flex-1">
             <p className="text-base text-gray-700 leading-relaxed">
               The game has just begun. I'm committed to refining my skills, learning from every challenge, and consistently improving. Many may have tried and failed, but I choose to believe in progress, consistency, and growth. This is my journey—and if you've read this far, it's a pleasure to meet you.
             </p>
           </div>
-        </AnimatedContent>
+        </ScrollReveal>
       </div>
     </section>
   );

@@ -158,11 +158,9 @@ export default function AboutPage() {
               </motion.h1>
             )}
           </AnimatePresence>
-          {!showBlurText && (
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed mt-4">
-              Web developer & problem solver. I build web applications, automation systems, and APIs that streamline workflows. Full-stack capable, backend-focused—I deliver solutions that perform in production. 1st Runner-Up in national web competitions, shipping real projects for real clients.
+              Web developer & problem solver. I build web applications, atomation systems, and APIs that streamline workflows. Full-stack capable, backend-focused, I deliver solutions that perform in production. 1st Runner-Up in national web competitions, shipping real projects for real clients.
             </p>
-          )}
         </ClientOnly>
       </section>
 
