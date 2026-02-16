@@ -7,6 +7,7 @@ import CalltoActionContact from "~/components/CalltoActionContact";
 import CareerSnapshot from "~/components/about/CareerSnapshot";
 import Snapshot from "~/components/about/Snapshot";
 import HighlightsAchievements from "~/components/about/HighlightsAchievements";
+import Reveal from "~/components/Reveal";
 
 // Helper: dapatkan ucapan berdasarkan jam
 const getGreetingByHour = (
@@ -58,7 +59,7 @@ const greetingsMap = {
   },
 };
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     {
       title: "Adyfas - About",
@@ -159,9 +160,17 @@ export default function AboutPage() {
             )}
           </AnimatePresence>
 
+
+          <Reveal
+            y={20}
+            blur={10}
+            duration={0.5}
+            width="100%"
+          >
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed mt-4">
               Web developer & problem solver. I build web applications, automation systems, and APIs that streamline workflows. Full-stack capable, backend focused I deliver solutions that perform in production. 1st Runner-Up in national web competitions, shipping real projects for real clients.
             </p>
+          </Reveal>
 
         </ClientOnly>
       </section>

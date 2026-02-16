@@ -2,6 +2,7 @@ import { ProjectList } from "~/data/DataProject";
 import type { Route } from "../+types/root";
 import Reveal from "~/components/Reveal";
 import { Link } from "react-router";
+import CalltoActionContact from "~/components/CalltoActionContact";
 
 export function meta({ }: Route.MetaArgs) {
   return [
@@ -135,6 +136,8 @@ export default function ProjectPage() {
             </>
           );
         })()}
+
+        <CalltoActionContact />
       </section>
     </>
   );

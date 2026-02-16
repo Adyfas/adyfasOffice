@@ -14,7 +14,7 @@ export default function CareerSnapshot() {
         delay={titleDelay}
         width="100%"
       >
-        <h2 className="text-xl sm:text-2xl font-bold">Career Snapshot</h2>
+        <h2 className="text-xl sm:text-2xl font-bold">Career Highlights </h2>
         <p className="mt-2 mb-10 text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl">
           Skill progression and milestones—from first code to shipping production systems.
         </p>

@@ -24,7 +24,7 @@ export default function Home() {
   const setHandsome = UsetateHandsome((state) => state.setHidden);
 
   return (
-    <>
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 itmes-start">
       <Reveal
         y={40}
         blur={15}
@@ -53,6 +53,6 @@ export default function Home() {
       </section>
 
       <CalltoActionContact />
-    </>
+    </div>
   );
 }

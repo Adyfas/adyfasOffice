@@ -26,7 +26,7 @@ export default function CanIdo() {
             key={idx}
             width="100%"
           >
-            <div className="flex items-center justify-center gap-5 py-2">
+            <div className="flex items-start justify-start gap-2 py-2">
               <Icon size={34} />
               <div className="flex items-start flex-col">
                 <span className="font-bold text-md sm:text-xl ">
