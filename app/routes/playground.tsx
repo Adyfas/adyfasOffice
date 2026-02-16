@@ -1,12 +1,10 @@
 import type { Route } from "./+types/playground";
-import AnimatedContent from "~/components/AnimatedContent";
+import Reveal from "~/components/Reveal";
 
-import { Link } from "react-router";
-import MinecraftSkinViewer from "~/components/playground/MinecraftSkinViewer";
 import MinecraftTierCard from "~/components/playground/MinecraftTierCard";
 import PopupPassword from "~/components/playground/PopupPassword";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Adyfas - Playground" },
     {
@@ -22,15 +20,12 @@ export default function PlaygroundPage() {
     <>
       <PopupPassword />
       <section className="relative">
-        <AnimatedContent
-          distance={50}
-          direction="vertical"
-          duration={1.2}
-          ease="power3.out"
-          initialOpacity={0}
-          animateOpacity
-          threshold={0.2}
-          delay={0.3}
+        <Reveal
+          y={20}
+          blur={10}
+          duration={0.8}
+          delay={0.1}
+          width="100%"
         >
           <section className="mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
@@ -41,20 +36,17 @@ export default function PlaygroundPage() {
               especially Minecraft.
             </p>
           </section>
-        </AnimatedContent>
+        </Reveal>
         <div className="flex items-center justify-center mx-2 flex-col">
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            duration={1.2}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
-            delay={0.3}
+          <Reveal
+            y={30}
+            blur={15}
+            duration={1}
+            delay={0.2}
+            width="100%"
           >
             <MinecraftTierCard />
-          </AnimatedContent>
+          </Reveal>
 
           <div className="border-2 border-black/80 rounded-xl text-white p-3 my-2 bg-gray-900">
             Just For Fun 😅

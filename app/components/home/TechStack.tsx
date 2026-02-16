@@ -1,35 +1,28 @@
 import { TechStack } from "~/data/TechStack";
-import AnimatedContent from "../AnimatedContent";
+import Reveal from "../Reveal";
+
 
 export default function TechStacks() {
   return (
     <>
-      <AnimatedContent
-        distance={30}
-        direction="vertical"
-        reverse={false}
-        duration={0.5}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={0.2}
+      <Reveal
+        y={20}
+        blur={8}
+        duration={0.6}
+        delay={0.1}
+        width="100%"
       >
         <h2 className="font-bold text-xl sm:text-2xl">Tech Stack</h2>
-      </AnimatedContent>
+      </Reveal>
       <div className="my-2 grid grid-cols-3 sm:grid-cols-5 justify-start gap-2">
         {TechStack.map((item, idx) => (
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            reverse={false}
-            duration={1.5}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
-            delay={0.05 * idx}
+          <Reveal
+            y={15}
+            blur={5}
+            duration={0.5}
+            delay={idx * 0.04}
             key={idx}
+            width="100%"
           >
             <div
               className="flex items-center gap-2 bg-white bg-opacity-80 rounded-lg shadow-sm border border-gray-200 px-2 py-1"
@@ -49,9 +42,10 @@ export default function TechStacks() {
                 {item.name}
               </span>
             </div>
-          </AnimatedContent>
+          </Reveal>
         ))}
       </div>
+
     </>
   );
 }

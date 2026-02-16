@@ -1,40 +1,30 @@
 import { iDoSomething } from "~/data/Ido";
-import AnimatedContent from "../AnimatedContent";
+import Reveal from "../Reveal";
 import * as icons from "lucide-react";
 
 export default function CanIdo() {
   return (
     <>
-      <AnimatedContent
-        distance={50}
-        direction="vertical"
-        reverse={false}
-        duration={0.5}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={0}
+      <Reveal
+        y={20}
+        blur={10}
+        duration={0.8}
+        width="100%"
       >
         <h2 className="text-xl sm:text-2xl font-bold">What I Can Do?</h2>
-        {/* <p>Web Development – Building responsive websites</p> */}
         <p>I help turn ideas and business needs into reliable, scalable web solutions.</p>
-      </AnimatedContent>
+      </Reveal>
       {iDoSomething?.map((item, idx) => {
         const Icon = icons[item.icon as keyof typeof icons] as icons.LucideIcon;
         if (!Icon) return null;
         return (
-          <AnimatedContent
-            distance={50}
-            direction="vertical"
-            reverse={false}
-            duration={1.5}
-            ease="power3.out"
-            initialOpacity={0}
-            animateOpacity
-            threshold={0.2}
-            delay={0.2 * idx}
+          <Reveal
+            y={20}
+            blur={8}
+            duration={0.8}
+            delay={0.1 * idx}
             key={idx}
+            width="100%"
           >
             <div className="flex items-center justify-center gap-5 py-2">
               <Icon size={34} />
@@ -45,9 +35,10 @@ export default function CanIdo() {
                 <span>{item.desc}</span>
               </div>
             </div>
-          </AnimatedContent>
+          </Reveal>
         );
       })}
+
     </>
   );
 }

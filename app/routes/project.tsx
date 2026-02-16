@@ -1,9 +1,9 @@
 import { ProjectList } from "~/data/DataProject";
 import type { Route } from "../+types/root";
-import AnimatedContent from "~/components/AnimatedContent";
+import Reveal from "~/components/Reveal";
 import { Link } from "react-router";
 
-export function meta({}: Route.MetaArgs) {
+export function meta({ }: Route.MetaArgs) {
   return [
     { title: "Adyfas - Project" },
     {
@@ -18,14 +18,21 @@ export default function ProjectPage() {
   return (
     <>
       <section>
-        <h1 className="text-xl sm:text-2xl font-bold text-start my-2">
-          Project
-        </h1>
-        <p>
-          Below are a selection of projects that showcase my process,
-          creativity, and work. These projects have been concisely selected to
-          keep the portfolio focused and easy to understand.
-        </p>
+        <Reveal
+          y={20}
+          blur={10}
+          duration={0.8}
+          width="100%"
+        >
+          <h1 className="text-xl sm:text-2xl font-bold text-start my-2">
+            Project
+          </h1>
+          <p>
+            Below are a selection of projects that showcase my process,
+            creativity, and work. These projects have been concisely selected to
+            keep the portfolio focused and easy to understand.
+          </p>
+        </Reveal>
 
         {(() => {
           const filter = [...ProjectList].sort(
@@ -33,21 +40,17 @@ export default function ProjectPage() {
           );
           return (
             <>
-                <div className="my-4 grid gap-6 grid-cols-1 w-full max-w-4xl">
-                  {filter.map((project, idx) => (
-                      <AnimatedContent
-                      distance={50}
-                      direction="vertical"
-                      reverse={false}
-                      duration={1.5}
-                      ease="power3.out"
-                      initialOpacity={0}
-                      animateOpacity
-                      threshold={0.2}
-                      delay={0.2 * idx}
-                      key={idx}
-                    >
-              <Link to={project.projectLink}>
+              <div className="my-4 grid gap-6 grid-cols-1 w-full max-w-4xl">
+                {filter.map((project, idx) => (
+                  <Reveal
+                    y={30}
+                    blur={15}
+                    duration={1}
+                    delay={0.1 * idx}
+                    key={idx}
+                    width="100%"
+                  >
+                    <Link to={project.projectLink}>
                       <div className="transition-shadow duration-300 hover:shadow-xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-md border border-gray-100 hover:border-gray-300 cursor-pointer flex flex-col sm:flex-row p-4 sm:p-6 gap-6">
                         <div className="w-full sm:w-32 h-40 sm:h-32 rounded-xl overflow-hidden shrink-0 border border-gray-200 shadow-lg flex items-center justify-center bg-gray-50">
                           <img
@@ -124,10 +127,11 @@ export default function ProjectPage() {
                           </div>
                         </div>
                       </div>
-                        </Link>
-                    </AnimatedContent>
-                  ))}
-                </div>
+                    </Link>
+                  </Reveal>
+
+                ))}
+              </div>
             </>
           );
         })()}

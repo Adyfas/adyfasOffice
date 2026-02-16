@@ -1,8 +1,9 @@
 import { Code2, Database, Zap, Puzzle } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
-import AnimatedContent from "../AnimatedContent";
+import Reveal from "../Reveal";
 
-const skillsData = [
+const skillsData: { Icon: any; title: string; description: string }[] = [
+
   {
     Icon: Code2,
     title: "Full-Stack Web Development",
@@ -29,17 +30,19 @@ const skillsData = [
   },
 ];
 
+
 const cardVariants: Variants = {
-  offscreen: { opacity: 0, scale: 0.96, y: 30 },
+  offscreen: { opacity: 0, scale: 0.9, y: 30, filter: "blur(10px)" },
   onscreen: (custom: number) => ({
     opacity: 1,
     scale: 1,
     y: 0,
+    filter: "blur(0px)",
     transition: {
-      type: "spring" as const,
-      bounce: 0.3,
-      duration: 0.7,
-      delay: 0.15 * custom,
+      type: "spring",
+      bounce: 0.2,
+      duration: 0.8,
+      delay: 0.1 * custom,
     },
   }),
 };
@@ -47,22 +50,18 @@ const cardVariants: Variants = {
 export default function Snapshot() {
   return (
     <section className="py-16">
-      <AnimatedContent
-        distance={50}
-        direction="vertical"
-        reverse={false}
-        duration={1.2}
-        ease="power3.out"
-        initialOpacity={0}
-        animateOpacity
-        threshold={0.2}
-        delay={0}
+      <Reveal
+        y={30}
+        blur={10}
+        duration={1}
+        width="100%"
       >
         <h2 className="text-xl sm:text-2xl font-bold">What I Can Do</h2>
         <p className="mt-2 mb-10 text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl">
-          Skills and expertise I bring to every project—focused on solving real problems and delivering measurable results.
+          Skills and expertise I bring to every project focused on solving real problems and delivering measurable results.
         </p>
-      </AnimatedContent>
+      </Reveal>
+
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         {skillsData.map(({ Icon, title, description }, idx) => (
