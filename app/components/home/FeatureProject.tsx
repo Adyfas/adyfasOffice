@@ -1,18 +1,19 @@
 import { Link } from "react-router";
 import { ProjectList } from "~/data/DataProject";
-import ScrollReveal from "../ScrollReveal";
+import Reveal from "../Reveal";
 
-export default function () {
+export default function FeatureProject() {
   return (
     <>
-      <ScrollReveal animation="fadeUp">
+      <Reveal
+        y={20}
+        blur={10}
+        duration={0.8}
+        width="100%"
+      >
         <h2 className="text-xl sm:text-2xl font-bold">Featured Projects</h2>
-      </ScrollReveal>
-      {/* <p className="text-md">
-                Here are some projects that showcase my work and creativity.
-                While there are many more, I've chosen a few to keep this
-                portfolio concise and focused.
-              </p> */}
+      </Reveal>
+
       {(() => {
         const featured = [...ProjectList]
           .sort((a, b) => (b.tech?.length || 0) - (a.tech?.length || 0))
@@ -21,10 +22,13 @@ export default function () {
           <>
             <div className="my-4 grid gap-6 grid-cols-1 w-full max-w-4xl">
               {featured.map((project, idx) => (
-                <ScrollReveal
-                  animation="fadeUp"
+                <Reveal
+                  y={30}
+                  blur={15}
+                  duration={1}
                   delay={0.1 * idx}
                   key={idx}
+                  width="100%"
                 >
                   <div className="transition-shadow duration-300 hover:shadow-xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-md border border-gray-100 hover:border-gray-300 cursor-pointer flex flex-col sm:flex-row p-4 sm:p-6 gap-6">
                     <div className="w-full sm:w-32 h-40 sm:h-32 rounded-xl overflow-hidden shrink-0 border border-gray-200 shadow-lg flex items-center justify-center bg-gray-50">
@@ -105,7 +109,7 @@ export default function () {
                       </div>
                     </div>
                   </div>
-                </ScrollReveal>
+                </Reveal>
               ))}
             </div>
             <div className="flex justify-center w-full mt-2">
@@ -119,5 +123,5 @@ export default function () {
         );
       })()}
     </>
-  )
+  );
 }

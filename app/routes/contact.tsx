@@ -1,6 +1,6 @@
 import React from "react";
 import type { Route } from "./+types/contact";
-import ScrollReveal from "~/components/ScrollReveal";
+import Reveal from "~/components/Reveal";
 import {
   setExpiredLocalstorage,
   setRemoveLocalstorage,
@@ -78,10 +78,12 @@ export default function ContactPage() {
 
   return (
     <>
-      <ScrollReveal
-        animation="fadeUp"
-        viewportAmount={0.2}
-        delay={0.2}
+      <Reveal
+        y={40}
+        blur={15}
+        duration={1.2}
+        delay={0.1}
+        width="100%"
       >
         <section className="min-h-[70vh] flex items-center justify-center">
           <div className="w-full max-w-xl rounded-2xl bg-white px-6 py-8 sm:px-8 sm:py-10">
@@ -168,7 +170,7 @@ export default function ContactPage() {
             </form>
           </div>
         </section>
-      </ScrollReveal>
+      </Reveal>
     </>
   );
 }

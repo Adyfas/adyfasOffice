@@ -4,7 +4,6 @@ import MdxLayoutPage from "~/components/MdxLayout";
 import { projectMdxMap, type ProjectSlug } from "~/data/SlugProject";
 import { MoveLeft } from "lucide-react";
 import { Link } from "react-router";
-import ScrollReveal from "~/components/ScrollReveal";
 
 type MdxModule = {
   default: React.ComponentType;
@@ -66,58 +65,61 @@ export default function ProjectDetail({ params }: Route.ComponentProps) {
 
   const Post = mod.default;
   const meta = mod.meta ?? {};
-
+  document.title = meta.title ?? "";
   return (
+    
     <MdxLayoutPage>
       <section className="relative">
-        <ScrollReveal animation="fadeUp">
-          <header className="py-4 text-start">
-            {meta.title && (
-              <h1 className="text-5xl font-bold my-2">{meta.title}</h1>
-            )}
+        <header className="py-4 text-start">
+          {meta.title && (
+            <h1 className="text-5xl font-bold my-2">{meta.title}</h1>
+          )}
 
-            {meta.description && (
-              <p className="text-gray-600 text-xl">{meta.description}</p>
-            )}
+          {meta.description && (
+            <p className="text-gray-600 text-xl">{meta.description}</p>
+          )}
 
-            <div className="flex items-center gap-3 py-4 border-b border-gray-400">
-              <p className="font-bold">Adyfas</p>
-              {meta.date && <p>{meta.date}</p>}
-              {meta.role && <p>{meta.role}</p>}
+          <div className="flex items-center gap-3 py-4 border-b border-gray-400">
+            <p className="font-bold">Adyfas</p>
+            {meta.date && <p>{meta.date}</p>}
+            {meta.role && <p>{meta.role}</p>}
+          </div>
+          {/* {(meta.date || meta.role || meta.description) && (
+          <div className="text-sm text-slate-400 mb-6 space-y-1">
+            {meta.date && <p>{meta.date}</p>}
+            {meta.role && <p>Role: {meta.role}</p>}
+            {meta.description && <p>{meta.description}</p>}
+          </div>
+        )} */}
+        </header>
+        <article>
+          <Post />
+
+          {(meta.link || meta.git) && (
+            <div className="my-10 flex flex-wrap gap-4 text-sm">
+              {meta.link && (
+                <a
+                  href={meta.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-gray-900 p-2 rounded-2xl text-white font-bold hover:-translate-y-1 transition-all duration-700"
+                >
+                  Live Demo
+                </a>
+              )}
+              {meta.git && (
+                <a
+                  href={meta.git}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-gray-400 border p-2 rounded-2xl text-black hover:-translate-y-1 transition-all duration-700"
+                >
+                  Github Repo
+                </a>
+              )}
             </div>
-          </header>
-        </ScrollReveal>
-
-        <ScrollReveal animation="fadeIn" delay={0.2}>
-          <article>
-            <Post />
-
-            {(meta.link || meta.git) && (
-              <div className="my-10 flex flex-wrap gap-4 text-sm">
-                {meta.link && (
-                  <a
-                    href={meta.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-gray-900 p-2 rounded-2xl text-white font-bold hover:-translate-y-1 transition-all duration-700"
-                  >
-                    Live Demo
-                  </a>
-                )}
-                {meta.git && (
-                  <a
-                    href={meta.git}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="border-gray-400 border p-2 rounded-2xl text-black hover:-translate-y-1 transition-all duration-700"
-                  >
-                    Github Repo
-                  </a>
-                )}
-              </div>
-            )}
-          </article>
-        </ScrollReveal>
+          )}
+        </article>
 
         <Link to={"/project"}>
           <button className="fixed text-black p-2 bottom-5 right-5 cursor-pointer border rounded-full bg-black z-50">

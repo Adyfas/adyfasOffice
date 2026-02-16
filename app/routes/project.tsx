@@ -1,6 +1,6 @@
 import { ProjectList } from "~/data/DataProject";
 import type { Route } from "../+types/root";
-import ScrollReveal from "~/components/ScrollReveal";
+import Reveal from "~/components/Reveal";
 import { Link } from "react-router";
 
 export function meta({ }: Route.MetaArgs) {
@@ -18,14 +18,21 @@ export default function ProjectPage() {
   return (
     <>
       <section>
-        <h1 className="text-xl sm:text-2xl font-bold text-start my-2">
-          Project
-        </h1>
-        <p>
-          Below are a selection of projects that showcase my process,
-          creativity, and work. These projects have been concisely selected to
-          keep the portfolio focused and easy to understand.
-        </p>
+        <Reveal
+          y={20}
+          blur={10}
+          duration={0.8}
+          width="100%"
+        >
+          <h1 className="text-xl sm:text-2xl font-bold text-start my-2">
+            Project
+          </h1>
+          <p>
+            Below are a selection of projects that showcase my process,
+            creativity, and work. These projects have been concisely selected to
+            keep the portfolio focused and easy to understand.
+          </p>
+        </Reveal>
 
         {(() => {
           const filter = [...ProjectList].sort(
@@ -35,10 +42,13 @@ export default function ProjectPage() {
             <>
               <div className="my-4 grid gap-6 grid-cols-1 w-full max-w-4xl">
                 {filter.map((project, idx) => (
-                  <ScrollReveal
-                    animation="fadeUp"
+                  <Reveal
+                    y={30}
+                    blur={15}
+                    duration={1}
                     delay={0.1 * idx}
                     key={idx}
+                    width="100%"
                   >
                     <Link to={project.projectLink}>
                       <div className="transition-shadow duration-300 hover:shadow-xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-md border border-gray-100 hover:border-gray-300 cursor-pointer flex flex-col sm:flex-row p-4 sm:p-6 gap-6">
@@ -118,7 +128,8 @@ export default function ProjectPage() {
                         </div>
                       </div>
                     </Link>
-                  </ScrollReveal>
+                  </Reveal>
+
                 ))}
               </div>
             </>

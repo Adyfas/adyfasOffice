@@ -1,8 +1,6 @@
 import type { Route } from "./+types/playground";
-import ScrollReveal from "~/components/ScrollReveal";
+import Reveal from "~/components/Reveal";
 
-import { Link } from "react-router";
-import MinecraftSkinViewer from "~/components/playground/MinecraftSkinViewer";
 import MinecraftTierCard from "~/components/playground/MinecraftTierCard";
 import PopupPassword from "~/components/playground/PopupPassword";
 
@@ -22,9 +20,12 @@ export default function PlaygroundPage() {
     <>
       <PopupPassword />
       <section className="relative">
-        <ScrollReveal
-          animation="fadeUp"
-          delay={0.3}
+        <Reveal
+          y={20}
+          blur={10}
+          duration={0.8}
+          delay={0.1}
+          width="100%"
         >
           <section className="mb-8">
             <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
@@ -35,14 +36,17 @@ export default function PlaygroundPage() {
               especially Minecraft.
             </p>
           </section>
-        </ScrollReveal>
+        </Reveal>
         <div className="flex items-center justify-center mx-2 flex-col">
-          <ScrollReveal
-            animation="fadeUp"
-            delay={0.3}
+          <Reveal
+            y={30}
+            blur={15}
+            duration={1}
+            delay={0.2}
+            width="100%"
           >
             <MinecraftTierCard />
-          </ScrollReveal>
+          </Reveal>
 
           <div className="border-2 border-black/80 rounded-xl text-white p-3 my-2 bg-gray-900">
             Just For Fun 😅

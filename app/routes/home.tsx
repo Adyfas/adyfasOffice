@@ -1,5 +1,6 @@
 import type { Route } from "./+types/home";
-import ScrollReveal from "~/components/ScrollReveal";
+import Reveal from "~/components/Reveal";
+
 import Introduction from "~/components/home/Introduction";
 import CanIdo from "~/components/home/CanIdo";
 import FeatureProject from "~/components/home/FeatureProject";
@@ -24,9 +25,16 @@ export default function Home() {
 
   return (
     <>
-      <ScrollReveal animation="fadeUp" delay={0.2}>
+      <Reveal
+        y={40}
+        blur={15}
+        duration={1.2}
+        delay={0.1}
+        width="100%"
+      >
         <Introduction />
-      </ScrollReveal>
+      </Reveal>
+
 
       <div className="my-10 flex flex-col items-start justify-start gap-5">
         <CanIdo />

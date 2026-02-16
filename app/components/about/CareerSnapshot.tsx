@@ -1,25 +1,37 @@
 import { Careers } from "~/data/Career";
-import ScrollReveal from "../ScrollReveal";
+import Reveal from "../Reveal";
+
+const titleDelay = 0;
+const itemDelay = 0.12;
 
 export default function CareerSnapshot() {
   return (
     <section className="py-16">
-      <ScrollReveal animation="fadeUp">
-        <h2 className="text-xl sm:text-2xl font-bold">Career Highlights</h2>
+      <Reveal
+        y={30}
+        blur={12}
+        duration={1}
+        delay={titleDelay}
+        width="100%"
+      >
+        <h2 className="text-xl sm:text-2xl font-bold">Career Snapshot</h2>
         <p className="mt-2 mb-10 text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl">
-          Skill progression and milestones from first code to shipping production systems.
+          Skill progression and milestones—from first code to shipping production systems.
         </p>
-      </ScrollReveal>
+      </Reveal>
 
       <div className="relative">
         <div className="absolute left-[11px] sm:left-[15px] top-2 bottom-2 w-px bg-gray-200" />
 
         <div className="space-y-4">
           {Careers.map((item, index) => (
-            <ScrollReveal
+            <Reveal
               key={item.year}
-              animation="fadeUp"
-              delay={0.1 * index}
+              y={20}
+              blur={8}
+              duration={0.8}
+              delay={itemDelay * (index + 1)}
+              width="100%"
             >
               <div className="relative flex gap-4 sm:gap-6 pl-8 sm:pl-10">
                 <div className="absolute left-0 top-1.5 h-6 w-6 rounded-full border-2 border-gray-900 bg-white shrink-0 ring-4 ring-white" />
@@ -38,10 +50,11 @@ export default function CareerSnapshot() {
                   </p>
                 </div>
               </div>
-            </ScrollReveal>
+            </Reveal>
           ))}
         </div>
       </div>
+
     </section>
   );
 }

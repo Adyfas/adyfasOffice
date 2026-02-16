@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { premiumEase } from '~/lib/framer-utils';
+import { useEffect, useRef, useState } from 'react';
 
 type BlurTextProps = {
   text?: string;
@@ -11,52 +11,55 @@ type BlurTextProps = {
 
 const BlurText: React.FC<BlurTextProps> = ({
   text = '',
-  delay = 50,
+  delay = 200,
   className = '',
   animateBy = 'words',
   direction = 'top',
 }) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
+  const [inView, setInView] = useState(false);
+  const ref = useRef<HTMLParagraphElement>(null);
 
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: delay / 1000,
+  useEffect(() => {
+    // Hanya jalankan di client-side
+    if (typeof window === 'undefined' || !ref.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.unobserve(ref.current as Element);
+        }
       },
-    },
+      { threshold: 0.1 }
+    );
+    observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const initial = {
+    filter: 'blur(10px)',
+    opacity: 0,
+    y: direction === 'top' ? -20 : 20,
   };
 
-  const item = {
-    hidden: {
-      filter: 'blur(10px)',
-      opacity: 0,
-      y: direction === 'top' ? -20 : 20,
-    },
-    visible: {
-      filter: 'blur(0px)',
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: premiumEase,
-      }
-    },
+  const animate = {
+    filter: 'blur(0px)',
+    opacity: 1,
+    y: 0,
   };
 
   return (
-    <motion.p
-      variants={container}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      className={`blur-text ${className} flex flex-wrap`}
-    >
+    <p ref={ref} className={`blur-text ${className} flex flex-wrap`}>
       {elements.map((segment, index) => (
         <motion.span
           key={index}
-          variants={item}
+          initial={initial}
+          animate={inView ? animate : initial}
+          transition={{
+            duration: 0.5,
+            delay: (index * delay) / 1000,
+            ease: [0.25, 0.46, 0.45, 0.94],
+          }}
           style={{
             display: 'inline-block',
             willChange: 'transform, filter, opacity',
@@ -66,7 +69,7 @@ const BlurText: React.FC<BlurTextProps> = ({
           {animateBy === 'words' && index < elements.length - 1 && '\u00A0'}
         </motion.span>
       ))}
-    </motion.p>
+    </p>
   );
 };
 

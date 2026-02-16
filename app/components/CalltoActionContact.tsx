@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import ScrollReveal from "./ScrollReveal";
+import Reveal from "./Reveal";
 import { UsestateMessage } from "~/store/contact";
 
 export default function CalltoActionContact() {
@@ -8,9 +8,12 @@ export default function CalltoActionContact() {
   const router = useNavigate();
   return (
     <>
-      <ScrollReveal
-        animation="fadeUp"
+      <Reveal
+        y={40}
+        blur={15}
+        duration={1.2}
         delay={0.2}
+        width="100%"
       >
         <section className="mt-32 rounded-2xl bg-white px-8 py-10">
           <div className="flex items-center justify-center flex-col">
@@ -43,7 +46,7 @@ export default function CalltoActionContact() {
             </button>
           </form>
         </section>
-      </ScrollReveal>
+      </Reveal>
     </>
   );
 }

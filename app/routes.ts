@@ -13,6 +13,7 @@ export default [
     route("contact", "routes/contact.tsx"),
     route("playground", "routes/playground.tsx"),
     ...prefix("project", [
+
       index("routes/project.tsx"),
       route(":slug", "routes/projectDetails.tsx"),
     ]),
