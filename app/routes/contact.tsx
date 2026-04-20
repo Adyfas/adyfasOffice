@@ -86,12 +86,12 @@ export default function ContactPage() {
         width="100%"
       >
         <section className="min-h-[70vh] flex items-center justify-center">
-          <div className="w-full max-w-xl rounded-2xl bg-white px-6 py-8 sm:px-8 sm:py-10">
+          <div className="w-full max-w-xl rounded-2xl bg-white dark:bg-slate-900/50 dark:border dark:border-white/10 px-6 py-8 sm:px-8 sm:py-10 shadow-sm dark:shadow-none">
             <div className="text-center mb-6">
-              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                 Have a project in mind?
               </h1>
-              <p className="mt-2 text-sm text-gray-600">
+              <p className="mt-2 text-sm text-gray-600 dark:text-slate-300">
                 Tell me what you're building, and I’ll see how I can help.
               </p>
             </div>
@@ -100,7 +100,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="name"
-                  className="block text-xs font-medium text-gray-700 mb-1"
+                  className="block text-xs font-medium text-gray-700 dark:text-slate-300 mb-1"
                 >
                   Name
                 </label>
@@ -110,7 +110,7 @@ export default function ContactPage() {
                   name="name"
                   type="text"
                   required
-                  className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-900 focus:outline-none"
+                  className="w-full rounded-xl border border-gray-300 dark:border-white/20 bg-white dark:bg-black/20 px-3 py-2 text-sm text-gray-900 dark:text-white shadow-sm focus:border-gray-900 dark:focus:border-white focus:outline-none"
                   placeholder="Your name"
                 />
               </div>
@@ -118,7 +118,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-xs font-medium text-gray-700 mb-1"
+                  className="block text-xs font-medium text-gray-700 dark:text-slate-300 mb-1"
                 >
                   Email
                 </label>
@@ -130,7 +130,7 @@ export default function ContactPage() {
                   value={message !== "" || message.length > 0 ? message : ""}
                   onChange={(e) => setMessage(e.currentTarget.value)}
                   required
-                  className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-900 focus:outline-none"
+                  className="w-full rounded-xl border border-gray-300 dark:border-white/20 bg-white dark:bg-black/20 px-3 py-2 text-sm text-gray-900 dark:text-white shadow-sm focus:border-gray-900 dark:focus:border-white focus:outline-none"
                   placeholder="you@example.com"
                 />
               </div>
@@ -138,7 +138,7 @@ export default function ContactPage() {
               <div>
                 <label
                   htmlFor="message"
-                  className="block text-xs font-medium text-gray-700 mb-1"
+                  className="block text-xs font-medium text-gray-700 dark:text-slate-300 mb-1"
                 >
                   Your Message For Me?
                 </label>
@@ -148,7 +148,7 @@ export default function ContactPage() {
                   name="message"
                   required
                   rows={4}
-                  className="w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 shadow-sm focus:border-gray-900 focus:outline-none resize-none"
+                  className="w-full rounded-xl border border-gray-300 dark:border-white/20 bg-white dark:bg-black/20 px-3 py-2 text-sm text-gray-900 dark:text-white shadow-sm focus:border-gray-900 dark:focus:border-white focus:outline-none resize-none"
                   placeholder="Tell me about your idea, project, or question..."
                 />
               </div>
@@ -156,7 +156,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={loading || submitted}
-                className={`mt-2 w-full rounded-xl bg-gray-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-800 disabled:opacity-70 disabled:cursor-not-allowed transition-colors ${(loading && "cursor-wait") || (submitted && "cursor-wait")}`}
+                className={`mt-2 w-full rounded-xl bg-gray-900 dark:bg-white px-4 py-2.5 text-sm font-semibold text-white dark:text-black shadow-sm hover:bg-gray-800 dark:hover:bg-gray-200 disabled:opacity-70 disabled:cursor-not-allowed transition-colors ${(loading && "cursor-wait") || (submitted && "cursor-wait")}`}
               >
                 {submitted || emailsend
                   ? "Thanks For Submit"
@@ -164,7 +164,7 @@ export default function ContactPage() {
                     ? "Sending..."
                     : "Send Message"}
               </button>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-gray-600 dark:text-slate-400">
                 I usually reply within 24–48 hours.
               </p>
             </form>

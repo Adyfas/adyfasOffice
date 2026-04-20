@@ -28,10 +28,10 @@ export default function PlaygroundPage() {
           width="100%"
         >
           <section className="mb-8">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
               Playground
             </h1>
-            <p className="mt-3 text-sm sm:text-base text-gray-700">
+            <p className="mt-3 text-sm sm:text-base text-gray-700 dark:text-slate-300">
               This is my little playground where I share that I also love games,
               especially Minecraft.
             </p>
@@ -48,7 +48,7 @@ export default function PlaygroundPage() {
             <MinecraftTierCard />
           </Reveal>
 
-          <div className="border-2 border-black/80 rounded-xl text-white p-3 my-2 bg-gray-900">
+          <div className="border-2 border-black/80 dark:border-white/20 rounded-xl text-white p-3 my-2 bg-gray-900 dark:bg-white/10">
             Just For Fun 😅
           </div>
         </div>

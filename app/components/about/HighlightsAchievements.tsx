@@ -17,8 +17,8 @@ export default function HighlightsAchievements() {
         duration={1}
         width="100%"
       >
-        <h2 className="text-xl sm:text-2xl font-bold">Highlights & Achievements</h2>
-        <p className="mt-2 mb-10 text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl">
+        <h2 className="text-xl sm:text-2xl font-bold dark:text-white">Highlights & Achievements</h2>
+        <p className="mt-2 mb-10 text-sm sm:text-base text-gray-600 dark:text-slate-300 leading-relaxed max-w-2xl">
           Competition wins, project milestones, and proof of what I can deliver.
         </p>
       </Reveal>

@@ -17,7 +17,7 @@ export function BottomNav() {
           stiffness: 260,
           damping: 20,
         }}
-        className="flex gap-2 rounded-2xl bg-white/70 px-3 py-2 shadow-xl backdrop-blur-xl"
+        className="flex gap-2 rounded-2xl bg-white/70 dark:bg-[#0a0a0a]/70 px-3 py-2 shadow-xl dark:shadow-none backdrop-blur-xl border border-transparent dark:border-white/10"
       >
         {dataIconSidebar.map((item, idx) => {
           const Icon = icons[item.icon as keyof typeof icons] as LucideIcon;
@@ -31,8 +31,8 @@ export function BottomNav() {
                 whileHover="hover"
                 className={`
                   relative flex h-11 w-11 items-center justify-center
-                  rounded-xl group
-                  ${isActive ? "bg-black/10" : "hover:bg-black/10"}
+                  rounded-xl group text-black dark:text-slate-300 dark:hover:text-white
+                  ${isActive ? "bg-black/10 dark:bg-white/10 dark:text-white" : "hover:bg-black/10 dark:hover:bg-white/10"}
                 `}
               >
                 <Icon size={22} />
@@ -44,10 +44,10 @@ export function BottomNav() {
                     hidden
                     -top-8
                     rounded-xl px-2 py-1
-                    text-xs text-white
+                    text-xs text-white dark:text-slate-900
                     whitespace-nowrap
                     group-hover:block
-                    bg-gray-900
+                    bg-gray-900 dark:bg-white
                     transition-all
                     duration-700
                   "

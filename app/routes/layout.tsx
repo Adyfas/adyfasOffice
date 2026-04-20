@@ -81,7 +81,7 @@ export default function LayoutPage(): JSX.Element {
                   {[1, 2, 3, 4, 5, 6].map((item) => (
                     <div
                       key={item}
-                      className="fixed left-0 w-full bottom-0 h-10 bg-white/60 rounded-t-3xl filter blur-3xl pointer-events-none"
+                      className="fixed left-0 w-full bottom-0 h-10 dark:bg-black bg-white/60 rounded-t-3xl filter blur-3xl pointer-events-none"
                     ></div>
                   ))}
                 </div>

@@ -25,10 +25,10 @@ export default function ProjectPage() {
           duration={0.8}
           width="100%"
         >
-          <h1 className="text-xl sm:text-2xl font-bold text-start my-2">
+          <h1 className="text-xl sm:text-2xl font-bold text-start my-2 dark:text-white">
             Project
           </h1>
-          <p>
+          <p className="dark:text-slate-300">
             Below are a selection of projects that showcase my process,
             creativity, and work. These projects have been concisely selected to
             keep the portfolio focused and easy to understand.
@@ -52,8 +52,8 @@ export default function ProjectPage() {
                     width="100%"
                   >
                     <Link to={project.projectLink}>
-                      <div className="transition-shadow duration-300 hover:shadow-xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-md border border-gray-100 hover:border-gray-300 cursor-pointer flex flex-col sm:flex-row p-4 sm:p-6 gap-6">
-                        <div className="w-full sm:w-32 h-40 sm:h-32 rounded-xl overflow-hidden shrink-0 border border-gray-200 shadow-lg flex items-center justify-center bg-gray-50">
+                      <div className="transition-shadow duration-300 hover:shadow-xl bg-white/80 dark:bg-white/5 backdrop-blur-lg rounded-2xl shadow-md dark:shadow-none border border-gray-100 dark:border-white/10 hover:border-gray-300 dark:hover:border-white/20 cursor-pointer flex flex-col sm:flex-row p-4 sm:p-6 gap-6">
+                        <div className="w-full sm:w-32 h-40 sm:h-32 rounded-xl overflow-hidden shrink-0 border border-gray-200 dark:border-white/10 shadow-lg dark:shadow-none flex items-center justify-center bg-gray-50 dark:bg-white/5">
                           <img
                             src={project.img}
                             alt={project.title}
@@ -62,13 +62,13 @@ export default function ProjectPage() {
                         </div>
                         <div className="flex-1 flex flex-col items-start justify-between">
                           <div>
-                            <h2 className="font-bold text-lg sm:text-2xl text-gray-900 mb-1 tracking-tight">
+                            <h2 className="font-bold text-lg sm:text-2xl text-gray-900 dark:text-white mb-1 tracking-tight">
                               {project.title}
                             </h2>
-                            <span className="inline-block bg-gray-900/80 text-white text-xs px-2 py-0.5 rounded mb-2">
+                            <span className="inline-block bg-gray-900/80 dark:bg-white/80 text-white dark:text-black text-xs px-2 py-0.5 rounded mb-2">
                               {project.role}
                             </span>
-                            <p className="text-sm sm:text-base text-gray-600 mt-1 line-clamp-3">
+                            <p className="text-sm sm:text-base text-gray-600 dark:text-slate-300 mt-1 line-clamp-3">
                               {project.desc}
                             </p>
                             {project.tech && (
@@ -77,7 +77,7 @@ export default function ProjectPage() {
                                   return (
                                     <span
                                       key={idx}
-                                      className="bg-gray-100 px-2 py-0.5 rounded text-xs text-gray-700 border border-gray-200"
+                                      className="bg-gray-100 dark:bg-zinc-800 px-2 py-0.5 rounded text-xs text-gray-700 dark:text-slate-300 border border-gray-200 dark:border-white/10"
                                     >
                                       {item}
                                     </span>
@@ -99,7 +99,7 @@ export default function ProjectPage() {
                             </span>
                             {project.projectLink && (
                               <Link
-                                className="hover:underline text-blue-700 font-medium text-xs"
+                                className="hover:underline text-blue-700 dark:text-blue-400 font-medium text-xs"
                                 to={project.projectLink}
                               >
                                 View Project
@@ -107,7 +107,7 @@ export default function ProjectPage() {
                             )}
                             {project.git && (
                               <a
-                                className="hover:underline text-gray-800 font-medium text-xs"
+                                className="hover:underline text-gray-800 dark:text-slate-300 font-medium text-xs"
                                 href={project.git}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -117,7 +117,7 @@ export default function ProjectPage() {
                             )}
                             {project.link && (
                               <a
-                                className="hover:underline text-green-700 font-medium text-xs"
+                                className="hover:underline text-green-700 dark:text-green-400 font-medium text-xs"
                                 href={project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"

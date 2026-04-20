@@ -113,9 +113,9 @@ export default function AboutPage() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6">
       {/* intro */}
       <section className="pt-8 pb-12">
-        <ClientOnly
+          <ClientOnly
           fallback={
-            <h1 className="text-3xl font-bold text-left sm:text-5xl mb-8">
+            <h1 className="text-3xl font-bold text-left sm:text-5xl mb-8 dark:text-white">
               {greetingText}
             </h1>
           }
@@ -130,7 +130,7 @@ export default function AboutPage() {
               >
                 <BlurText
                   direction="bottom"
-                  className="text-3xl font-bold text-right sm:text-5xl mb-8"
+                  className="text-3xl font-bold text-right sm:text-5xl mb-8 dark:text-white"
                   text={greetingText}
                 />
               </motion.div>
@@ -140,7 +140,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
                 animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                 transition={{ duration: 0.5 }}
-                className="text-3xl font-bold text-left sm:text-5xl mb-8"
+                className="text-3xl font-bold text-left sm:text-5xl mb-8 dark:text-white"
                 style={{ display: "block" }}
               >
                 <AnimatePresence mode="wait">
@@ -167,7 +167,7 @@ export default function AboutPage() {
             duration={0.5}
             width="100%"
           >
-            <p className="text-base sm:text-lg text-gray-600 leading-relaxed mt-4">
+            <p className="text-base sm:text-lg text-gray-600 dark:text-slate-300 leading-relaxed mt-4">
               Web developer & problem solver. I build web applications, automation systems, and APIs that streamline workflows. Full-stack capable, backend focused I deliver solutions that perform in production. 1st Runner-Up in national web competitions, shipping real projects for real clients.
             </p>
           </Reveal>

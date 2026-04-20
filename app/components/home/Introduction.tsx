@@ -14,11 +14,11 @@ export default function Introduction() {
         />
         {/* <PopupHandsome /> */}
       </div>
-      <h1 className="font-bold text-xl sm:text-2xl text-start">
+      <h1 className="font-bold text-xl sm:text-2xl text-start dark:text-white">
         Hey, Adyfas Here!
       </h1>
-      <p className="pb-2">Nice to meet you🙌</p>
-      <p className="text-sm sm:text-base">
+      <p className="pb-2 dark:text-slate-300">Nice to meet you🙌</p>
+      <p className="text-sm sm:text-base dark:text-slate-300">
         {/* Web Developer & Automation Enthusiast, I help individuals and small
           businesses build fast, modern websites and simple automation systems
           that solve real problems. */}
@@ -31,7 +31,7 @@ export default function Introduction() {
         </p>
       </div> */}
       <Link to="/contact">
-        <button className="bg-gray-900 p-2 text-white font-bold rounded-xl px-5 cursor-pointer hover:bg-gray-800 transition-all duration-500 text-lg sm:text-xl hover:scale-101 my-2">
+        <button className="bg-gray-900 dark:bg-white p-2 text-white dark:text-black font-bold rounded-xl px-5 cursor-pointer hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-500 text-lg sm:text-xl hover:scale-101 my-2">
           Contact
         </button>
       </Link>

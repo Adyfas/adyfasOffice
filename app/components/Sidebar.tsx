@@ -20,9 +20,10 @@ export default function Sidebar() {
         transition={{ duration: 0.4, ease: "easeInOut" }}
         className="
           flex flex-col gap-2
-          bg-white/60 backdrop-blur-xl
+          bg-white/60 dark:bg-white/5 backdrop-blur-xl
           rounded-3xl p-2
-          shadow-xl
+          shadow-xl dark:shadow-none
+          border border-transparent dark:border-white/10
           overflow-hidden
           group
         "
@@ -32,7 +33,7 @@ export default function Sidebar() {
           if (!Icon) return null;
 
           const activeRoute =
-            route.pathname === item.route ? "bg-black/10" : "";
+            route.pathname === item.route ? "bg-black/10 dark:bg-white/10 dark:text-white" : "";
 
           return (
             <Link to={item.route} key={idx}>
@@ -42,7 +43,8 @@ export default function Sidebar() {
                 px-2 py-2
                 rounded-xl
                 cursor-pointer
-                hover:bg-black/10
+                hover:bg-black/10 dark:hover:bg-white/10
+                text-black dark:text-slate-300 dark:hover:text-white
               ${activeRoute}
               `}
                 whileHover={{ scale: 1.05 }}

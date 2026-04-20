@@ -12,7 +12,7 @@ export default function TechStacks() {
         delay={0.1}
         width="100%"
       >
-        <h2 className="font-bold text-xl sm:text-2xl">Tech Stack</h2>
+        <h2 className="font-bold text-xl sm:text-2xl dark:text-white">Tech Stack</h2>
       </Reveal>
       <div className="my-2 grid grid-cols-3 sm:grid-cols-5 justify-start gap-2">
         {TechStack.map((item, idx) => (
@@ -25,7 +25,7 @@ export default function TechStacks() {
             width="100%"
           >
             <div
-              className="flex items-center gap-2 bg-white bg-opacity-80 rounded-lg shadow-sm border border-gray-200 px-2 py-1"
+              className="flex items-center gap-2 bg-white dark:bg-white/5 bg-opacity-80 dark:bg-opacity-100 rounded-lg shadow-sm dark:shadow-none border border-gray-200 dark:border-white/10 px-2 py-1"
               style={{ fontSize: "0.85rem", minHeight: "32px" }}
             >
               <span
@@ -38,7 +38,7 @@ export default function TechStacks() {
                 }}
                 dangerouslySetInnerHTML={{ __html: item.logo }}
               />
-              <span className="text-xs font-medium text-gray-700">
+              <span className="text-xs font-medium text-gray-700 dark:text-slate-300">
                 {item.name}
               </span>
             </div>

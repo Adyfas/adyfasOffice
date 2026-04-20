@@ -72,15 +72,15 @@ export default function ProjectDetail({ params }: Route.ComponentProps) {
       <section className="relative">
         <header className="py-4 text-start">
           {meta.title && (
-            <h1 className="text-5xl font-bold my-2">{meta.title}</h1>
+            <h1 className="text-5xl font-bold my-2 dark:text-white">{meta.title}</h1>
           )}
 
           {meta.description && (
-            <p className="text-gray-600 text-xl">{meta.description}</p>
+            <p className="text-gray-600 dark:text-slate-300 text-xl">{meta.description}</p>
           )}
 
-          <div className="flex items-center gap-3 py-4 border-b border-gray-400">
-            <p className="font-bold">Adyfas</p>
+          <div className="flex items-center gap-3 py-4 border-b border-gray-400 dark:border-white/20 dark:text-slate-300">
+            <p className="font-bold dark:text-white">Adyfas</p>
             {meta.date && <p>{meta.date}</p>}
             {meta.role && <p>{meta.role}</p>}
           </div>
@@ -102,7 +102,7 @@ export default function ProjectDetail({ params }: Route.ComponentProps) {
                   href={meta.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-900 p-2 rounded-2xl text-white font-bold hover:-translate-y-1 transition-all duration-700"
+                  className="bg-gray-900 dark:bg-white p-2 rounded-2xl text-white dark:text-black font-bold hover:-translate-y-1 transition-all duration-700"
                 >
                   Live Demo
                 </a>
@@ -112,7 +112,7 @@ export default function ProjectDetail({ params }: Route.ComponentProps) {
                   href={meta.git}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-gray-400 border p-2 rounded-2xl text-black hover:-translate-y-1 transition-all duration-700"
+                  className="border-gray-400 dark:border-white/20 border p-2 rounded-2xl text-black dark:text-white hover:-translate-y-1 hover:bg-gray-100 dark:hover:bg-white/10 transition-all duration-700"
                 >
                   Github Repo
                 </a>
@@ -122,7 +122,7 @@ export default function ProjectDetail({ params }: Route.ComponentProps) {
         </article>
 
         <Link to={"/project"}>
-          <button className="fixed text-black p-2 bottom-5 right-5 cursor-pointer border rounded-full bg-black z-50">
+          <button className="fixed p-2 bottom-5 right-5 cursor-pointer border dark:border-white/20 rounded-full bg-black dark:bg-slate-800 z-50">
             <MoveLeft className="text-white rotate-45" />
           </button>
         </Link>

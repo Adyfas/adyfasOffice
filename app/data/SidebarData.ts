@@ -29,9 +29,9 @@ export const dataIconSidebar: routeSidebar[] = [
         icon: "Contact",
     },
 
-    {
-        name: "Playground",
-        route: '/playground',
-        icon: "Gamepad",
-    },
+    // {
+    //     name: "Playground",
+    //     route: '/playground',
+    //     icon: "Gamepad",
+    // },
 ]

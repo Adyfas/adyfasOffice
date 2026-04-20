@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 // Helper: dapatkan ucapan berdasarkan jam
 const getGreetingByHour = (
-  hour: number
+  hour: number,
 ): "morning" | "afternoon" | "evening" | "night" => {
   if (hour >= 5 && hour < 10) return "morning";
   if (hour >= 10 && hour < 14) return "afternoon";
@@ -19,29 +19,11 @@ const greetingsMap = {
     evening: "Selamat Sore",
     night: "Selamat Malam",
   },
-  jv: {
-    morning: "Sugeng Enjang",
-    afternoon: "Sugeng Sonten",
-    evening: "Sugeng Sonten",
-    night: "Sugeng ndalu",
-  },
-  su: {
-    morning: "Wilujeng énjing",
-    afternoon: "Wilujeng Sonten",
-    evening: "Wilujeng Sonten",
-    night: "Wilujeng Wengi",
-  },
   en: {
     morning: "Good morning",
     afternoon: "Good Afternoon",
     evening: "Good Evening",
     night: "Good Night",
-  },
-  de: {
-    morning: "Guten Morgen",
-    afternoon: "Guten Tag",
-    evening: "Guten Abend",
-    night: "Gute Nacht",
   },
   ja: {
     morning: "おはようございます",
@@ -50,6 +32,25 @@ const greetingsMap = {
     night: "おやすみなさい",
   },
 };
+
+// de: {
+//   morning: "Guten Morgen",
+//   afternoon: "Guten Tag",
+//   evening: "Guten Abend",
+//   night: "Gute Nacht",
+// },
+// jv: {
+//   morning: "Sugeng Enjang",
+//   afternoon: "Sugeng Sonten",
+//   evening: "Sugeng Sonten",
+//   night: "Sugeng ndalu",
+// },
+// su: {
+//   morning: "Wilujeng énjing",
+//   afternoon: "Wilujeng Sonten",
+//   evening: "Wilujeng Sonten",
+//   night: "Wilujeng Wengi",
+// },
 
 interface LoadingPageProps {
   onComplete: () => void;
@@ -62,10 +63,10 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onComplete }) => {
 
   const greetings = [
     greetingsMap.id[timeKey],
-    greetingsMap.jv[timeKey],
-    greetingsMap.su[timeKey],
+    // greetingsMap.jv[timeKey],
+    // greetingsMap.su[timeKey],
     greetingsMap.en[timeKey],
-    greetingsMap.de[timeKey],
+    // greetingsMap.de[timeKey],
     greetingsMap.ja[timeKey],
   ];
 
@@ -86,7 +87,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onComplete }) => {
 
   return (
     <div className="fixed inset-0 z-500 flex flex-col items-center justify-center bg-white overflow-hidden w-full">
-
       <div className="relative h-screen flex items-center justify-center w-full">
         <AnimatePresence mode="wait">
           {currentIndex < greetings.length && (
@@ -131,7 +131,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onComplete }) => {
       </div>
 
       {/* Final message — hanya muncul setelah SEMUA selesai */}
-      {currentIndex >= greetings.length && (
+      {/* {currentIndex >= greetings.length && (
         <motion.p
           className="mt-12 text-xl text-gray-600 px-4 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -140,7 +140,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onComplete }) => {
         >
           we fix issues faster than your government
         </motion.p>
-      )}
+      )} */}
     </div>
   );
 };

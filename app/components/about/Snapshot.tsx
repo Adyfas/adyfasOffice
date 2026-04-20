@@ -56,8 +56,8 @@ export default function Snapshot() {
         duration={1}
         width="100%"
       >
-        <h2 className="text-xl sm:text-2xl font-bold">What I Can Do</h2>
-        <p className="mt-2 mb-10 text-sm sm:text-base text-gray-600 leading-relaxed max-w-2xl">
+        <h2 className="text-xl sm:text-2xl font-bold dark:text-white">What I Can Do</h2>
+        <p className="mt-2 mb-10 text-sm sm:text-base text-gray-600 dark:text-slate-300 leading-relaxed max-w-2xl">
           Skills and expertise I bring to every project focused on solving real problems and delivering measurable results.
         </p>
       </Reveal>
@@ -72,13 +72,13 @@ export default function Snapshot() {
             viewport={{ once: true, amount: 0.3 }}
             variants={cardVariants}
             custom={idx}
-            className="group relative rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-300 hover:border-gray-900 hover:shadow-md"
+            className="group relative rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 p-5 shadow-sm dark:shadow-none transition-all duration-300 hover:border-gray-900 dark:hover:border-white/30 hover:shadow-md"
           >
-            <Icon className="absolute bottom-4 right-4 h-7 w-7 text-gray-300 transition-colors duration-300 group-hover:text-gray-900" />
-            <h3 className="text-lg sm:text-xl font-bold text-gray-900 pr-10">
+            <Icon className="absolute bottom-4 right-4 h-7 w-7 text-gray-300 dark:text-slate-500/50 transition-colors duration-300 group-hover:text-gray-900 dark:group-hover:text-white" />
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white pr-10">
               {title}
             </h3>
-            <p className="mt-3 text-sm text-gray-600 leading-relaxed">
+            <p className="mt-3 text-sm text-gray-600 dark:text-slate-300 leading-relaxed">
               {description}
             </p>
           </motion.div>
