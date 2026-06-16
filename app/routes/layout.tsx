@@ -58,9 +58,9 @@ export default function LayoutPage(): JSX.Element {
 
   return (
     <>
-      {showInitialLoading ? (
+      {/* {showInitialLoading ? (
         <LoadingPage onComplete={handleLoadingComplete} />
-      ) : (
+      ) : ( */}
         <div className="w-full max-w-3xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 relative">
           <div className="w-full max-w-3xl mx-auto px-0 sm:px-4">
             <div className="flex flex-col items-center justify-center">
@@ -89,7 +89,7 @@ export default function LayoutPage(): JSX.Element {
             </div>
           </div>
         </div>
-      )}
+      {/* )} */}
     </>
   );
 }

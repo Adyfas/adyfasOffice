@@ -8,13 +8,21 @@ import {
 import { UsestateMessage } from "~/store/contact";
 
 export function meta({ }: Route.MetaArgs) {
+  const title = "Contact Adyfas | Let's Build Something Together";
+  const description = "Have a project in mind? Contact Adyfas for collaboration, freelance projects, or questions about full-stack web development.";
+  const url = "https://adyfas-page.web.app/contact";
+
   return [
-    { title: "Adyfas - Contact" },
-    {
-      name: "description",
-      content: "Contact Adyfas for collaboration, projects, or questions.",
-    },
-  ] as const;
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:url", content: url },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+  ];
 }
 
 export default function ContactPage() {

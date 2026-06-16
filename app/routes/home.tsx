@@ -9,13 +9,20 @@ import Learning from "~/components/home/Learning";
 import CalltoActionContact from "~/components/CalltoActionContact";
 import { UsetateHandsome } from "~/store/handsome";
 export function meta({ }: Route.MetaArgs) {
+  const title = "Adyfas | Full Stack Web Developer & Software Engineer";
+  const description = "Welcome to Adyfas's portfolio. I'm a passionate Full Stack Developer specializing in modern web technologies, React, and creating stunning digital experiences.";
+  const url = "https://adyfas-page.web.app/";
+  
   return [
-    { title: "Adyfas" },
-    {
-      name: "description",
-      content:
-        "Wellcome in my website adyfas and i'm a developer i'm have experience in web development",
-    },
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:url", content: url },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
   ];
 }
 

@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "react-router build",
-    "build:firebase": "FIREBASE_BUILD=true react-router build",
+    "build:firebase": "node generate-sitemap.js && FIREBASE_BUILD=true react-router build",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",

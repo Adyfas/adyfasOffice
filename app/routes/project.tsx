@@ -5,13 +5,20 @@ import { Link } from "react-router";
 import CalltoActionContact from "~/components/CalltoActionContact";
 
 export function meta({ }: Route.MetaArgs) {
+  const title = "Adyfas Projects | Full Stack Web Portfolios";
+  const description = "Explore a selection of my latest web development projects, including React apps, automation systems, and REST APIs.";
+  const url = "https://adyfas-page.web.app/project";
+
   return [
-    { title: "Adyfas - Project" },
-    {
-      name: "description",
-      content:
-        "Wellcome in my website adyfas and i'm a developer i'm have experience in web development",
-    },
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:url", content: url },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
   ];
 }
 

@@ -20,6 +20,14 @@ type Pages = {
   "/contact": {
     params: {};
   };
+  "/blog": {
+    params: {};
+  };
+  "/blog/:id": {
+    params: {
+      "id": string;
+    };
+  };
   "/project": {
     params: {};
   };
@@ -33,11 +41,11 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/about" | "/contact" | "/project" | "/project/:slug";
+    page: "/" | "/about" | "/contact" | "/blog" | "/blog/:id" | "/project" | "/project/:slug";
   };
   "routes/layout.tsx": {
     id: "routes/layout";
-    page: "/" | "/about" | "/contact" | "/project" | "/project/:slug";
+    page: "/" | "/about" | "/contact" | "/blog" | "/blog/:id" | "/project" | "/project/:slug";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -50,6 +58,14 @@ type RouteFiles = {
   "routes/contact.tsx": {
     id: "routes/contact";
     page: "/contact";
+  };
+  "routes/blog.tsx": {
+    id: "routes/blog";
+    page: "/blog";
+  };
+  "routes/blogDetails.tsx": {
+    id: "routes/blogDetails";
+    page: "/blog/:id";
   };
   "routes/project.tsx": {
     id: "routes/project";
@@ -67,6 +83,8 @@ type RouteModules = {
   "routes/home": typeof import("./app/routes/home.tsx");
   "routes/about": typeof import("./app/routes/about.tsx");
   "routes/contact": typeof import("./app/routes/contact.tsx");
+  "routes/blog": typeof import("./app/routes/blog.tsx");
+  "routes/blogDetails": typeof import("./app/routes/blogDetails.tsx");
   "routes/project": typeof import("./app/routes/project.tsx");
   "routes/projectDetails": typeof import("./app/routes/projectDetails.tsx");
 };

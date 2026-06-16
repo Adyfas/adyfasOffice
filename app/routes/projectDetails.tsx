@@ -19,6 +19,39 @@ type MdxModule = {
   };
 };
 
+import { ProjectList } from "~/data/DataProject";
+
+export function meta({ params }: Route.MetaArgs) {
+  const slug = params.slug;
+  const project = ProjectList.find((p) => p.projectLink === `/project/${slug}`);
+  
+  if (!project) {
+    return [
+      { title: "Project Not Found | Adyfas" },
+      { name: "description", content: "The project you are looking for does not exist." }
+    ];
+  }
+
+  const title = `${project.title} | Adyfas Project`;
+  const description = project.desc;
+  const url = `https://adyfas-page.web.app${project.projectLink}`;
+  const imageUrl = `https://adyfas-page.web.app${project.img}`;
+
+  return [
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:image", content: imageUrl },
+    { property: "og:url", content: url },
+    { property: "og:type", content: "article" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: imageUrl },
+  ];
+}
+
 export default function ProjectDetail({ params }: Route.ComponentProps) {
   const slug = params.slug as ProjectSlug;
   const [mod, setMod] = useState<MdxModule | null>(null);
@@ -65,7 +98,6 @@ export default function ProjectDetail({ params }: Route.ComponentProps) {
 
   const Post = mod.default;
   const meta = mod.meta ?? {};
-  document.title = meta.title ?? "";
   return (
 
     <MdxLayoutPage>

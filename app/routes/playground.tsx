@@ -1,4 +1,4 @@
-import type { Route } from "./+types/playground";
+import type { Route } from "../+types/root";
 import Reveal from "~/components/Reveal";
 
 import MinecraftTierCard from "~/components/playground/MinecraftTierCard";

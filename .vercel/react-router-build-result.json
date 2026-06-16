@@ -12,7 +12,12 @@
     "routeIdToServerBundleId": {
       "root": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
-      "routes/about": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+      "routes/about": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/contact": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/blog": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/blogDetails": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/project": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/projectDetails": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
     },
     "routes": {
       "root": {
@@ -42,13 +47,49 @@
         "file": "app/routes/about.tsx",
         "path": "about",
         "config": {}
+      },
+      "routes/contact": {
+        "id": "routes/contact",
+        "parentId": "routes/layout",
+        "file": "app/routes/contact.tsx",
+        "path": "contact",
+        "config": {}
+      },
+      "routes/blog": {
+        "id": "routes/blog",
+        "parentId": "routes/layout",
+        "file": "app/routes/blog.tsx",
+        "path": "blog",
+        "config": {}
+      },
+      "routes/blogDetails": {
+        "id": "routes/blogDetails",
+        "parentId": "routes/layout",
+        "file": "app/routes/blogDetails.tsx",
+        "path": "blog/:id",
+        "config": {}
+      },
+      "routes/project": {
+        "id": "routes/project",
+        "parentId": "routes/layout",
+        "file": "app/routes/project.tsx",
+        "path": "project",
+        "index": true,
+        "config": {}
+      },
+      "routes/projectDetails": {
+        "id": "routes/projectDetails",
+        "parentId": "routes/layout",
+        "file": "app/routes/projectDetails.tsx",
+        "path": "project/:slug",
+        "config": {}
       }
     }
   },
   "reactRouterConfig": {
-    "appDirectory": "/Volumes/DATA/Learn Anything/Projek Besar/Adyfas-Portofolio/adyfas/app",
+    "appDirectory": "/Volumes/Adyfas/Project/adyfas/adyfasOffice/app",
     "basename": "/",
-    "buildDirectory": "/Volumes/DATA/Learn Anything/Projek Besar/Adyfas-Portofolio/adyfas/build",
+    "buildDirectory": "/Volumes/Adyfas/Project/adyfas/adyfasOffice/build",
     "future": {
       "unstable_optimizeDeps": false,
       "unstable_subResourceIntegrity": false,
@@ -79,6 +120,37 @@
         "parentId": "routes/layout",
         "file": "routes/about.tsx",
         "path": "about"
+      },
+      "routes/contact": {
+        "id": "routes/contact",
+        "parentId": "routes/layout",
+        "file": "routes/contact.tsx",
+        "path": "contact"
+      },
+      "routes/blog": {
+        "id": "routes/blog",
+        "parentId": "routes/layout",
+        "file": "routes/blog.tsx",
+        "path": "blog"
+      },
+      "routes/blogDetails": {
+        "id": "routes/blogDetails",
+        "parentId": "routes/layout",
+        "file": "routes/blogDetails.tsx",
+        "path": "blog/:id"
+      },
+      "routes/project": {
+        "id": "routes/project",
+        "parentId": "routes/layout",
+        "file": "routes/project.tsx",
+        "path": "project",
+        "index": true
+      },
+      "routes/projectDetails": {
+        "id": "routes/projectDetails",
+        "parentId": "routes/layout",
+        "file": "routes/projectDetails.tsx",
+        "path": "project/:slug"
       }
     },
     "routeDiscovery": {
@@ -105,6 +177,27 @@
               {
                 "file": "routes/about.tsx",
                 "path": "about"
+              },
+              {
+                "file": "routes/contact.tsx",
+                "path": "contact"
+              },
+              {
+                "file": "routes/blog.tsx",
+                "path": "blog"
+              },
+              {
+                "file": "routes/blogDetails.tsx",
+                "path": "blog/:id"
+              },
+              {
+                "file": "routes/project.tsx",
+                "index": true,
+                "path": "project"
+              },
+              {
+                "file": "routes/projectDetails.tsx",
+                "path": "project/:slug"
               }
             ]
           }

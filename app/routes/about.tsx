@@ -60,15 +60,20 @@ const greetingsMap = {
 };
 
 export function meta({ }: Route.MetaArgs) {
+  const title = "About Adyfas | Full Stack Developer & Problem Solver";
+  const description = "Adyfas (Ferdi Iskandar) — Web developer & problem solver. Full-stack, backend-focused. Builds web apps, automation systems, REST APIs. 1st Runner-Up national web competitions. Shipping real projects.";
+  const url = "https://adyfas-page.web.app/about";
+  
   return [
-    {
-      title: "Adyfas - About",
-    },
-    {
-      name: "description",
-      content:
-        "Adyfas (Ferdi Iskandar) — Web developer & problem solver. Full-stack, backend-focused. Builds web apps, automation systems, REST APIs. 1st Runner-Up national web competitions. Shipping real projects.",
-    },
+    { title },
+    { name: "description", content: description },
+    { property: "og:title", content: title },
+    { property: "og:description", content: description },
+    { property: "og:url", content: url },
+    { property: "og:type", content: "profile" },
+    { name: "twitter:card", content: "summary" },
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
   ];
 }
 
