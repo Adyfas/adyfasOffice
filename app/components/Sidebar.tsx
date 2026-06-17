@@ -52,10 +52,7 @@ export default function Sidebar() {
                 <Icon size={24} className="min-w-6" />
 
                 <motion.span
-                  initial={{ opacity: 1, x: -10 }}
-                  whileHover={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="whitespace-nowrap text-sm font-medium hidden group-hover:block"
+                  className="whitespace-nowrap text-sm font-medium hidden group-hover:block relative left-2"
                 >
                   {item.name}
                 </motion.span>

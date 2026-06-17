@@ -7,6 +7,8 @@ import Lenis from "@studio-freight/lenis";
 import type { JSX } from "react/jsx-runtime";
 import LoadingPage from "~/components/LoadingPage";
 import ClientOnly from "~/components/ClientOnly";
+import ShapeGrid from "~/components/ShapeGrid";
+import { LoadingOverlay } from "~/components/LoadingOverlay";
 
 type LenisInstance = InstanceType<typeof Lenis> | null;
 
@@ -46,7 +48,7 @@ export default function LayoutPage(): JSX.Element {
     return () => {
       lenis.current?.destroy();
     };
-  }, []);
+  }, [])
 
   const scrollToSection = (id: string) => {
     if (typeof window === "undefined") return;
@@ -58,10 +60,24 @@ export default function LayoutPage(): JSX.Element {
 
   return (
     <>
-      {/* {showInitialLoading ? (
-        <LoadingPage onComplete={handleLoadingComplete} />
-      ) : ( */}
-        <div className="w-full max-w-3xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 relative">
+      {showInitialLoading ? (
+        // <LoadingPage onComplete={handleLoadingComplete} />
+        <LoadingOverlay onComplete={handleLoadingComplete}/>
+      ) : (
+      <div className="w-full max-w-3xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 relative">
+        {/* <ShapeGrid
+          speed={0.25}
+          squareSize={40}
+          direction="diagonal" // up, down, left, right, diagonal
+          borderColor="#ffffff"
+          hoverFillColor="#222"
+          shape="square" // square, hexagon, circle, triangle
+          hoverTrailAmount={8} // number of trailing hovered shapes (0 = no trail)
+          // direction="diagonal"
+          hoverColor="#ffffff"
+          size={50}
+          // shape="square"
+        > */}
           <div className="w-full max-w-3xl mx-auto px-0 sm:px-4">
             <div className="flex flex-col items-center justify-center">
               <div className="flex flex-col items-start justify-start py-8 sm:py-16 md:py-20 lg:py-24 w-full">
@@ -78,18 +94,19 @@ export default function LayoutPage(): JSX.Element {
                   <div className="w-full">
                     <Footer />
                   </div>
-                  {[1, 2, 3, 4, 5, 6].map((item) => (
+                  {/* {[1, 2, 3, 4, 5, 6].map((item) => (
                     <div
                       key={item}
                       className="fixed left-0 w-full bottom-0 h-10 dark:bg-black bg-white/60 rounded-t-3xl filter blur-3xl pointer-events-none"
                     ></div>
-                  ))}
+                  ))} */}
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      {/* )} */}
+        {/* </ShapeGrid> */}
+      </div>
+      )}
     </>
   );
 }

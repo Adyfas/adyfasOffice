@@ -170,6 +170,7 @@ export default function AboutPage() {
             y={20}
             blur={10}
             duration={0.5}
+            delay={1.4}
             width="100%"
           >
             <p className="text-base sm:text-lg text-gray-600 dark:text-slate-300 leading-relaxed mt-4">

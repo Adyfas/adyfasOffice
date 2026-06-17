@@ -6,14 +6,14 @@ export default function Footer() {
     <footer className="mb-24 border-t border-gray-200 dark:border-white/5 py-12">
       <div className="mb-6 flex justify-center gap-4">
         {[
-          { label: "Instagram", href: "#" },
-          { label: "LinkedIn", href: "#" },
-          { label: "GitHub", href: "#" },
-        //   { label: "YouTube", href: "#" },
+          { label: "Instagram", href: "https://www.instagram.com/adyfas.ver/" },
+          { label: "LinkedIn", href: "https://www.linkedin.com/in/ferdi-iskandar-1a0a95385/" },
+          { label: "GitHub", href: "https://github.com/Adyfas" },
         ].map((item) => (
           <a
             key={item.label}
             href={item.href}
+            target="_blank"
             className="rounded-full border border-gray-300 dark:border-white/10 px-4 py-2 text-sm text-gray-700 dark:text-slate-300 transition hover:border-gray-900 hover:text-gray-900 dark:hover:border-white/50 dark:hover:text-white"
           >
             {item.label}

@@ -34,7 +34,7 @@ export default function Home() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 itmes-start">
       <Reveal
         y={40}
-        blur={15}
+        blur={0}
         duration={1.2}
         delay={0.1}
         width="100%"

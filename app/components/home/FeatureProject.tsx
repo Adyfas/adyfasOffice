@@ -10,6 +10,7 @@ export default function FeatureProject() {
         blur={10}
         duration={0.8}
         width="100%"
+        delay={0.7}
       >
         <h2 className="text-xl sm:text-2xl font-bold dark:text-white">Featured Projects</h2>
       </Reveal>

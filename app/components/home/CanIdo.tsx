@@ -6,9 +6,10 @@ export default function CanIdo() {
   return (
     <>
       <Reveal
-        y={20}
-        blur={10}
-        duration={0.8}
+        y={40}
+        blur={0}
+        duration={1.2}
+        delay={0.4}
         width="100%"
       >
         <h2 className="text-xl sm:text-2xl font-bold dark:text-white">What I Can Do?</h2>
@@ -19,10 +20,10 @@ export default function CanIdo() {
         if (!Icon) return null;
         return (
           <Reveal
-            y={20}
-            blur={8}
-            duration={0.8}
-            delay={0.1 * idx}
+            y={40}
+            blur={0}
+            duration={1.2}
+            delay={0.4}
             key={idx}
             width="100%"
           >
