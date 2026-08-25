@@ -14,9 +14,6 @@ type Pages = {
   "/": {
     params: {};
   };
-  "/api/hashnode": {
-    params: {};
-  };
   "/about": {
     params: {};
   };
@@ -44,11 +41,7 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/api/hashnode" | "/about" | "/contact" | "/blog" | "/blog/:slug" | "/project" | "/project/:slug";
-  };
-  "routes/api.hashnode.ts": {
-    id: "routes/api.hashnode";
-    page: "/api/hashnode";
+    page: "/" | "/about" | "/contact" | "/blog" | "/blog/:slug" | "/project" | "/project/:slug";
   };
   "routes/layout.tsx": {
     id: "routes/layout";
@@ -86,7 +79,6 @@ type RouteFiles = {
 
 type RouteModules = {
   "root": typeof import("./app/root.tsx");
-  "routes/api.hashnode": typeof import("./app/routes/api.hashnode.ts");
   "routes/layout": typeof import("./app/routes/layout.tsx");
   "routes/home": typeof import("./app/routes/home.tsx");
   "routes/about": typeof import("./app/routes/about.tsx");
