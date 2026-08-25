@@ -14,6 +14,15 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./app"),
     },
   },
+  server: {
+    proxy: {
+      "/hashnode-rss": {
+        target: "https://adyfas-blog.hashnode.dev",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/hashnode-rss/, "/rss.xml"),
+      },
+    },
+  },
   build: {
     sourcemap: false, // Disable sourcemap untuk menghindari error saat build
     chunkSizeWarningLimit: 1000, // Increase limit untuk menghindari warning

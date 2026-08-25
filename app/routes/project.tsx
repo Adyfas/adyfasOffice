@@ -26,7 +26,6 @@ export function meta({ }: Route.MetaArgs) {
 
 export default function ProjectPage() {
   const [hashnodeProjects, setHashnodeProjects] = useState<HashnodePost[]>([]);
-  console.log(hashnodeProjects)
   useEffect(() => {
     getProjectPosts().then((data) => {
       setHashnodeProjects(data);

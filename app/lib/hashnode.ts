@@ -12,17 +12,56 @@ export interface HashnodePost {
   categories: string[];
 }
 
+async function fetchRssXml(rssUrl: string): Promise<string> {
+  // Method 1: Local Vite Dev Proxy (Instant, 100% reliable on localhost)
+  if (typeof window !== "undefined" && window.location.hostname === "localhost") {
+    try {
+      const res = await fetch(`/hashnode-rss?v=${Date.now()}`, { cache: "no-store" });
+      if (res.ok) {
+        return await res.text();
+      }
+    } catch (e) {
+      console.warn("Vite dev proxy failed, trying fallback...", e);
+    }
+  }
+
+  // Method 2: allorigins.win /get JSON endpoint
+  try {
+    const res = await fetch(
+      `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`,
+      { cache: "no-store" }
+    );
+    if (res.ok) {
+      const data = await res.json();
+      if (data && data.contents) {
+        return data.contents;
+      }
+    }
+  } catch (e) {
+    console.warn("Allorigins get failed, trying fallback...", e);
+  }
+
+  // Method 3: corsproxy.io
+  try {
+    const res = await fetch(
+      `https://corsproxy.io/?${encodeURIComponent(rssUrl)}`,
+      { cache: "no-store" }
+    );
+    if (res.ok) {
+      return await res.text();
+    }
+  } catch (e) {
+    console.warn("Corsproxy.io failed...", e);
+  }
+
+  throw new Error("All RSS CORS proxies failed.");
+}
+
 export async function getHashnodePosts(): Promise<HashnodePost[]> {
   const rssUrl = `https://adyfas-blog.hashnode.dev/rss.xml?v=${Date.now()}`;
-  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
 
   try {
-    const response = await fetch(proxyUrl, { cache: "no-store" });
-    if (!response.ok) {
-      throw new Error(`Failed to fetch RSS: ${response.status}`);
-    }
-
-    const xml = await response.text();
+    const xml = await fetchRssXml(rssUrl);
     const items = xml.split(/<item>/i).slice(1);
 
     return items.map((item, idx) => {

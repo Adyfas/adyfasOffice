@@ -33,8 +33,6 @@ export function meta({}: Route.MetaArgs) {
 export default function BlogPage() {
   const [posts, setPosts] = useState<HashnodePost[]>([]);
   const [loading, setLoading] = useState(true);
-  console.log('post ', posts)
-
   useEffect(() => {
     getBlogOnlyPosts().then((data) => {
       setPosts(data);
