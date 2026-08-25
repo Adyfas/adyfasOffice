@@ -27,17 +27,17 @@ async function generateSitemap() {
     "/project/sipbos"
   ];
 
-  // Dynamic blog routes (fetching from Medium RSS)
+  // Dynamic blog routes (fetching from Hashnode RSS)
   let blogRoutes = [];
   try {
-    const rssUrl = "https://medium.com/feed/@adyfasofice";
-    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
+    const rssUrl = "https://adyfas-blog.hashnode.dev/rss.xml";
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
     const res = await fetch(apiUrl);
     const data = await res.json();
     if (data.items) {
       blogRoutes = data.items.map((item) => {
-        const id = item.guid.split("/").pop();
-        return `/blog/${id}`;
+        const slug = item.link ? item.link.split("/").pop() : item.guid;
+        return `/blog/${slug}`;
       });
     }
   } catch (e) {

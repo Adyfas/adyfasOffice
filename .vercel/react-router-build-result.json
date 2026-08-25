@@ -11,6 +11,7 @@
     },
     "routeIdToServerBundleId": {
       "root": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/api.hashnode": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/about": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/contact": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
@@ -27,6 +28,13 @@
         "config": {
           "runtime": "nodejs"
         }
+      },
+      "routes/api.hashnode": {
+        "id": "routes/api.hashnode",
+        "parentId": "root",
+        "file": "app/routes/api.hashnode.ts",
+        "path": "api/hashnode",
+        "config": {}
       },
       "routes/layout": {
         "id": "routes/layout",
@@ -66,7 +74,7 @@
         "id": "routes/blogDetails",
         "parentId": "routes/layout",
         "file": "app/routes/blogDetails.tsx",
-        "path": "blog/:id",
+        "path": "blog/:slug",
         "config": {}
       },
       "routes/project": {
@@ -104,6 +112,12 @@
         "file": "root.tsx",
         "path": ""
       },
+      "routes/api.hashnode": {
+        "id": "routes/api.hashnode",
+        "parentId": "root",
+        "file": "routes/api.hashnode.ts",
+        "path": "api/hashnode"
+      },
       "routes/layout": {
         "id": "routes/layout",
         "parentId": "root",
@@ -137,7 +151,7 @@
         "id": "routes/blogDetails",
         "parentId": "routes/layout",
         "file": "routes/blogDetails.tsx",
-        "path": "blog/:id"
+        "path": "blog/:slug"
       },
       "routes/project": {
         "id": "routes/project",
@@ -168,6 +182,10 @@
         "file": "root.tsx",
         "children": [
           {
+            "file": "routes/api.hashnode.ts",
+            "path": "api/hashnode"
+          },
+          {
             "file": "routes/layout.tsx",
             "children": [
               {
@@ -188,7 +206,7 @@
               },
               {
                 "file": "routes/blogDetails.tsx",
-                "path": "blog/:id"
+                "path": "blog/:slug"
               },
               {
                 "file": "routes/project.tsx",

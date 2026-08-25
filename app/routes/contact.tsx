@@ -6,6 +6,7 @@ import {
   setRemoveLocalstorage,
 } from "@/lib/setLocalstorage";
 import { UsestateMessage } from "~/store/contact";
+import { useSearchParams } from "react-router";
 
 export function meta({ }: Route.MetaArgs) {
   const title = "Contact Adyfas | Let's Build Something Together";
@@ -26,12 +27,27 @@ export function meta({ }: Route.MetaArgs) {
 }
 
 export default function ContactPage() {
+  const [searchParams] = useSearchParams();
   const formRef = React.useRef<HTMLFormElement | null>(null);
   const [submitted, setSubmitted] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [emailsend, setEmailsend] = React.useState(false);
-  const message = UsestateMessage((state) => state.message);
-  const setMessage = UsestateMessage((state) => state.setMessage);
+  const [name, setName] = React.useState("");
+  const [messageText, setMessageText] = React.useState("");
+  const email = UsestateMessage((state) => state.message);
+  const setEmail = UsestateMessage((state) => state.setMessage);
+
+  // Auto-fill form from URL query params
+  // Example: /contact?name=adyfas&email=adyfas@gmail.com&mess=hallo
+  React.useEffect(() => {
+    const paramName = searchParams.get("name");
+    const paramEmail = searchParams.get("email");
+    const paramMess = searchParams.get("mess");
+
+    if (paramName) setName(paramName);
+    if (paramEmail) setEmail(paramEmail);
+    if (paramMess) setMessageText(paramMess);
+  }, [searchParams, setEmail]);
 
   React.useEffect(() => {
     if (setRemoveLocalstorage({ key: "emailsend" })) {
@@ -52,13 +68,6 @@ export default function ContactPage() {
       return;
     }
     setLoading(true);
-    const form = formRef.current;
-    if (!form) return;
-
-    const formData = new FormData(form);
-    const name = (formData.get("name") || "").toString();
-    const email = (formData.get("email") || "").toString();
-    const message = (formData.get("message") || "").toString();
 
     try {
       const responses = await fetch(`${import.meta.env.VITE_API}/send/email`, {
@@ -66,7 +75,7 @@ export default function ContactPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, name, message }),
+        body: JSON.stringify({ email, name, message: messageText }),
       });
       if (!responses.ok) {
         throw new Error("Failed to send email: " + responses.statusText);
@@ -74,8 +83,9 @@ export default function ContactPage() {
       setSubmitted(true);
       setLoading(false);
       setExpiredLocalstorage({ key: "emailsend", value: "true" });
-      setMessage("");
-      form.reset();
+      setEmail("");
+      setName("");
+      setMessageText("");
     } catch (error) {
       console.error("Unexpected Error: ", error);
       setLoading(false);
@@ -100,7 +110,7 @@ export default function ContactPage() {
                 Have a project in mind?
               </h1>
               <p className="mt-2 text-sm text-gray-600 dark:text-slate-300">
-                Tell me what you're building, and I’ll see how I can help.
+                Tell me what you're building, and I'll see how I can help.
               </p>
             </div>
 
@@ -117,6 +127,8 @@ export default function ContactPage() {
                   id="name"
                   name="name"
                   type="text"
+                  value={name}
+                  onChange={(e) => setName(e.currentTarget.value)}
                   required
                   className="w-full rounded-xl border border-gray-300 dark:border-white/20 bg-white dark:bg-black/20 px-3 py-2 text-sm text-gray-900 dark:text-white shadow-sm focus:border-gray-900 dark:focus:border-white focus:outline-none"
                   placeholder="Your name"
@@ -135,8 +147,8 @@ export default function ContactPage() {
                   id="email"
                   name="email"
                   type="email"
-                  value={message !== "" || message.length > 0 ? message : ""}
-                  onChange={(e) => setMessage(e.currentTarget.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.currentTarget.value)}
                   required
                   className="w-full rounded-xl border border-gray-300 dark:border-white/20 bg-white dark:bg-black/20 px-3 py-2 text-sm text-gray-900 dark:text-white shadow-sm focus:border-gray-900 dark:focus:border-white focus:outline-none"
                   placeholder="you@example.com"
@@ -154,6 +166,8 @@ export default function ContactPage() {
                   readOnly={loading || submitted}
                   id="message"
                   name="message"
+                  value={messageText}
+                  onChange={(e) => setMessageText(e.currentTarget.value)}
                   required
                   rows={4}
                   className="w-full rounded-xl border border-gray-300 dark:border-white/20 bg-white dark:bg-black/20 px-3 py-2 text-sm text-gray-900 dark:text-white shadow-sm focus:border-gray-900 dark:focus:border-white focus:outline-none resize-none"

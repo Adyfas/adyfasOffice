@@ -7,12 +7,13 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
+  route("api/hashnode", "routes/api.hashnode.ts"),
   layout("routes/layout.tsx", [
     index("routes/home.tsx"),
     route("about", "routes/about.tsx"),
     route("contact", "routes/contact.tsx"),
     route("blog", "routes/blog.tsx"),
-    route("blog/:id", "routes/blogDetails.tsx"),
+    route("blog/:slug", "routes/blogDetails.tsx"),
     // route("playground", "routes/playground.tsx"),
     ...prefix("project", [
       index("routes/project.tsx"),

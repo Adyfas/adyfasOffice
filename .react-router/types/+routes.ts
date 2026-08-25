@@ -14,6 +14,9 @@ type Pages = {
   "/": {
     params: {};
   };
+  "/api/hashnode": {
+    params: {};
+  };
   "/about": {
     params: {};
   };
@@ -23,9 +26,9 @@ type Pages = {
   "/blog": {
     params: {};
   };
-  "/blog/:id": {
+  "/blog/:slug": {
     params: {
-      "id": string;
+      "slug": string;
     };
   };
   "/project": {
@@ -41,11 +44,15 @@ type Pages = {
 type RouteFiles = {
   "root.tsx": {
     id: "root";
-    page: "/" | "/about" | "/contact" | "/blog" | "/blog/:id" | "/project" | "/project/:slug";
+    page: "/" | "/api/hashnode" | "/about" | "/contact" | "/blog" | "/blog/:slug" | "/project" | "/project/:slug";
+  };
+  "routes/api.hashnode.ts": {
+    id: "routes/api.hashnode";
+    page: "/api/hashnode";
   };
   "routes/layout.tsx": {
     id: "routes/layout";
-    page: "/" | "/about" | "/contact" | "/blog" | "/blog/:id" | "/project" | "/project/:slug";
+    page: "/" | "/about" | "/contact" | "/blog" | "/blog/:slug" | "/project" | "/project/:slug";
   };
   "routes/home.tsx": {
     id: "routes/home";
@@ -65,7 +72,7 @@ type RouteFiles = {
   };
   "routes/blogDetails.tsx": {
     id: "routes/blogDetails";
-    page: "/blog/:id";
+    page: "/blog/:slug";
   };
   "routes/project.tsx": {
     id: "routes/project";
@@ -79,6 +86,7 @@ type RouteFiles = {
 
 type RouteModules = {
   "root": typeof import("./app/root.tsx");
+  "routes/api.hashnode": typeof import("./app/routes/api.hashnode.ts");
   "routes/layout": typeof import("./app/routes/layout.tsx");
   "routes/home": typeof import("./app/routes/home.tsx");
   "routes/about": typeof import("./app/routes/about.tsx");
