@@ -7,22 +7,27 @@ import {
 } from "@/lib/setLocalstorage";
 import { UsestateMessage } from "~/store/contact";
 import { useSearchParams } from "react-router";
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 
 export function meta({ }: Route.MetaArgs) {
   const title = "Contact Adyfas | Let's Build Something Together";
   const description = "Have a project in mind? Contact Adyfas for collaboration, freelance projects, or questions about full-stack web development.";
-  const url = "https://adyfas-page.web.app/contact";
+  const url = `${SITE_URL}/contact`;
 
   return [
     { title },
     { name: "description", content: description },
+    { property: "og:site_name", content: SITE_NAME },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
+    { property: "og:image", content: DEFAULT_OG_IMAGE },
     { property: "og:url", content: url },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
+    { name: "twitter:image", content: DEFAULT_OG_IMAGE },
+    { tagName: "link", rel: "canonical", href: url },
   ];
 }
 

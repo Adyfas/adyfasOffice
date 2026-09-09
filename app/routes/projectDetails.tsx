@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import type { Route } from "../+types/root";
+import type { Route } from "./+types/projectDetails";
 import MdxLayoutPage from "~/components/MdxLayout";
 import { projectMdxMap, type ProjectSlug } from "~/data/SlugProject";
 import {
@@ -16,6 +16,7 @@ import { ProjectList } from "~/data/DataProject";
 import Reveal from "~/components/Reveal";
 import { motion } from "framer-motion";
 import { getHashnodePostBySlug, type HashnodePost } from "~/lib/hashnode";
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, absoluteUrl } from "~/lib/site";
 
 type MdxModule = {
   default: React.ComponentType;
@@ -31,40 +32,74 @@ type MdxModule = {
   };
 };
 
-export function meta({ params }: Route.MetaArgs) {
-  const slug = params.slug;
-  const project = ProjectList.find((p) => p.projectLink === `/project/${slug}`);
+// Server loader: jalan saat prerender/SSR (build time) supaya crawler
+// WhatsApp/Twitter/Discord dapat <meta og:image> yang sudah terisi.
+// Saat SPA runtime (Firebase static), component tetap fetch via useEffect.
+export async function loader({ params }: Route.LoaderArgs) {
+  const slug = params.slug ?? "";
+  const local = ProjectList.find((p) => p.projectLink === `/project/${slug}`) ?? null;
 
-  const title = project?.title
-    ? `${project.title} | Adyfas Project`
+  let hashnode: HashnodePost | null = null;
+  if (!local) {
+    try {
+      hashnode = await getHashnodePostBySlug(slug);
+    } catch {
+      hashnode = null;
+    }
+  }
+
+  return {
+    slug,
+    title: hashnode?.title ?? local?.title ?? null,
+    description: hashnode?.brief ?? local?.desc ?? null,
+    image:
+      hashnode?.coverImage?.url ??
+      (local?.img ? absoluteUrl(local.img) : null) ??
+      null,
+    publishedAt: hashnode?.publishedAt ?? null,
+    // Seed agar prerender + navigasi client tidak fetch ulang
+    hashnode,
+  };
+}
+
+export function meta({ data, params }: Route.MetaArgs) {
+  const slug = data?.slug ?? params.slug;
+  const title = data?.title
+    ? `${data.title} | Adyfas Project`
     : `${slug?.replace(/-/g, " ")} | Adyfas Project`;
   const description =
-    project?.desc || "Explore project details on Adyfas Portfolio.";
-  const url = `https://adyfas-page.web.app/project/${slug}`;
-  const imageUrl = project?.img
-    ? `https://adyfas-page.web.app${project.img}`
-    : "https://adyfas-page.web.app/images/faveicon.png";
+    data?.description || "Explore project details on Adyfas Portfolio.";
+  const url = `${SITE_URL}/project/${slug}`;
+  const imageUrl = data?.image || DEFAULT_OG_IMAGE;
 
   return [
     { title },
     { name: "description", content: description },
+    { property: "og:site_name", content: SITE_NAME },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:image", content: imageUrl },
+    { property: "og:image:alt", content: data?.title ?? title },
     { property: "og:url", content: url },
     { property: "og:type", content: "article" },
+    ...(data?.publishedAt
+      ? [{ property: "article:published_time", content: data.publishedAt }]
+      : []),
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
     { name: "twitter:image", content: imageUrl },
+    { tagName: "link", rel: "canonical", href: url },
   ];
 }
 
-export default function ProjectDetail({ params }: Route.ComponentProps) {
+export default function ProjectDetail({ params, loaderData }: Route.ComponentProps) {
   const slug = params.slug as string;
+  const seededPost = (loaderData as { hashnode?: HashnodePost | null } | undefined)?.hashnode ?? null;
   const [mod, setMod] = useState<MdxModule | null>(null);
-  const [hashnodePost, setHashnodePost] = useState<HashnodePost | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [hashnodePost, setHashnodePost] = useState<HashnodePost | null>(seededPost);
+  const [loadedSlug, setLoadedSlug] = useState<string | null>(seededPost ? slug : null);
+  const [loading, setLoading] = useState(!seededPost);
   const [notFound, setNotFound] = useState(false);
 
   const typographyStyles = `
@@ -162,6 +197,15 @@ export default function ProjectDetail({ params }: Route.ComponentProps) {
 `;
 
   useEffect(() => {
+    // Data seed dari loader (prerender) masih valid untuk slug ini
+    if (hashnodePost && loadedSlug === slug) {
+      setLoading(false);
+      return;
+    }
+    setHashnodePost(null);
+    setMod(null);
+    setNotFound(false);
+    setLoading(true);
     const loader = projectMdxMap[slug as ProjectSlug];
     if (loader) {
       loader()
@@ -180,6 +224,7 @@ export default function ProjectDetail({ params }: Route.ComponentProps) {
       getHashnodePostBySlug(slug).then((post) => {
         if (post) {
           setHashnodePost(post);
+          setLoadedSlug(slug);
         } else {
           setNotFound(true);
         }

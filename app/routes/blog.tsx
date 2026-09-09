@@ -3,13 +3,14 @@ import { Link } from "react-router";
 import { getBlogOnlyPosts, type HashnodePost } from "~/lib/hashnode";
 import type { Route } from "./+types/blog";
 import CardBlog from "~/components/blog/CardBlog";
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 
 export function meta({}: Route.MetaArgs) {
   const title = "Blog & Articles | Adyfas - Web Developer & Tech Writing";
   const description =
     "Artikel, catatan pengalaman, tutorial web development, dan cerita seputar pemrograman oleh Adyfas (Ferdi Iskandar).";
-  const url = "https://adyfas-page.web.app/blog";
-  const ogImage = "https://adyfas-page.web.app/images/faveicon.png";
+  const url = `${SITE_URL}/blog`;
+  const ogImage = DEFAULT_OG_IMAGE;
 
   return [
     { title },
@@ -17,6 +18,7 @@ export function meta({}: Route.MetaArgs) {
     { name: "keywords", content: "blog adyfas, ferdi iskandar, web development, tutorial react, php, lks web technology, frontend developer" },
     { name: "author", content: "Adyfas (Ferdi Iskandar)" },
     { name: "robots", content: "index, follow" },
+    { property: "og:site_name", content: SITE_NAME },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:url", content: url },
@@ -45,17 +47,17 @@ export default function BlogPage() {
     "@type": "Blog",
     name: "Adyfas Blog",
     description: "Tulisan, tutorial, dan catatan pengalaman seputar teknologi web dan pemrograman.",
-    url: "https://adyfas-page.web.app/blog",
+    url: `${SITE_URL}/blog`,
     author: {
       "@type": "Person",
       name: "Adyfas (Ferdi Iskandar)",
-      url: "https://adyfas-page.web.app",
+      url: SITE_URL,
     },
     blogPost: posts.map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
       description: post.brief,
-      url: `https://adyfas-page.web.app/blog/${post.slug}`,
+      url: `${SITE_URL}/blog/${post.slug}`,
       datePublished: post.publishedAt,
       image: post.coverImage?.url,
     })),

@@ -1,6 +1,5 @@
 import type { Route } from "./+types/home";
 import Reveal from "~/components/Reveal";
-
 import Introduction from "~/components/home/Introduction";
 import CanIdo from "~/components/home/CanIdo";
 import FeatureProject from "~/components/home/FeatureProject";
@@ -8,21 +7,26 @@ import TechStacks from "~/components/home/TechStack";
 import Learning from "~/components/home/Learning";
 import CalltoActionContact from "~/components/CalltoActionContact";
 import { UsetateHandsome } from "~/store/handsome";
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 export function meta({ }: Route.MetaArgs) {
   const title = "Adyfas | Full Stack Web Developer & Software Engineer";
   const description = "Welcome to Adyfas's portfolio. I'm a passionate Full Stack Developer specializing in modern web technologies, React, and creating stunning digital experiences.";
-  const url = "https://adyfas-page.web.app/";
+  const url = `${SITE_URL}/`;
   
   return [
     { title },
     { name: "description", content: description },
+    { property: "og:site_name", content: SITE_NAME },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
+    { property: "og:image", content: DEFAULT_OG_IMAGE },
     { property: "og:url", content: url },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
+    { name: "twitter:image", content: DEFAULT_OG_IMAGE },
+    { tagName: "link", rel: "canonical", href: url },
   ];
 }
 

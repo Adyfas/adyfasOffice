@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function generateSitemap() {
-  const domain = "https://adyfas-page.web.app";
+  const domain = "https://adyfas.com";
   
   // Base routes
   const routes = [

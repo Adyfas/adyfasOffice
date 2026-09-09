@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://adyfas-page.web.app/sitemap.xml
+Sitemap: https://adyfas.com/sitemap.xml

@@ -5,22 +5,27 @@ import Reveal from "~/components/Reveal";
 import { Link } from "react-router";
 import CalltoActionContact from "~/components/CalltoActionContact";
 import { getProjectPosts, type HashnodePost } from "~/lib/hashnode";
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 
 export function meta({ }: Route.MetaArgs) {
   const title = "Adyfas Projects | Full Stack Web Portfolios";
   const description = "Explore a selection of my latest web development projects, including React apps, automation systems, and REST APIs.";
-  const url = "https://adyfas-page.web.app/project";
+  const url = `${SITE_URL}/project`;
 
   return [
     { title },
     { name: "description", content: description },
+    { property: "og:site_name", content: SITE_NAME },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
+    { property: "og:image", content: DEFAULT_OG_IMAGE },
     { property: "og:url", content: url },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: description },
+    { name: "twitter:image", content: DEFAULT_OG_IMAGE },
+    { tagName: "link", rel: "canonical", href: url },
   ];
 }
 

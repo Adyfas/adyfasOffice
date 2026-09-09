@@ -4,7 +4,21 @@ import { ArrowLeft, Calendar, User } from "lucide-react";
 import Reveal from "~/components/Reveal";
 import CalltoActionContact from "~/components/CalltoActionContact";
 import { getHashnodePostBySlug, type HashnodePost } from "~/lib/hashnode";
+import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 import type { Route } from "./+types/blogDetails";
+
+// Server loader: jalan saat prerender/SSR (build time) supaya meta
+// og:image terisi cover artikel untuk crawler. clientLoader di bawah
+// tetap dipakai untuk navigasi runtime di Firebase static hosting.
+export async function loader({ params }: Route.LoaderArgs) {
+  const slug = params.slug;
+  try {
+    const post = slug ? await getHashnodePostBySlug(slug) : null;
+    return { post };
+  } catch {
+    return { post: null };
+  }
+}
 
 export async function clientLoader({ params }: Route.LoaderArgs) {
   const slug = params.slug;
@@ -16,17 +30,19 @@ export function meta({ data }: Route.MetaArgs) {
   const post = data?.post as HashnodePost | undefined;
   const title = post?.title ? `${post.title} | Adyfas Blog` : "Blog Article | Adyfas";
   const description = post?.brief || "Baca artikel lengkap di Adyfas Blog.";
-  const imageUrl = post?.coverImage?.url || "https://adyfas-page.web.app/images/faveicon.png";
-  const url = `https://adyfas-page.web.app/blog/${post?.slug || ""}`;
+  const imageUrl = post?.coverImage?.url || DEFAULT_OG_IMAGE;
+  const url = `${SITE_URL}/blog/${post?.slug || ""}`;
 
   return [
     { title },
     { name: "description", content: description },
     { name: "author", content: "Adyfas (Ferdi Iskandar)" },
     { name: "robots", content: "index, follow" },
+    { property: "og:site_name", content: SITE_NAME },
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:image", content: imageUrl },
+    { property: "og:image:alt", content: post?.title ?? title },
     { property: "og:url", content: url },
     { property: "og:type", content: "article" },
     { property: "article:published_time", content: post?.publishedAt },
@@ -181,7 +197,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
     author: {
       "@type": "Person",
       name: "Adyfas (Ferdi Iskandar)",
-      url: "https://adyfas-page.web.app",
+      url: SITE_URL,
     },
     publisher: {
       "@type": "Person",
@@ -189,7 +205,7 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://adyfas-page.web.app/blog/${post.slug}`,
+      "@id": `${SITE_URL}/blog/${post.slug}`,
     },
   };
 
