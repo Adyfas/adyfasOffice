@@ -12,10 +12,10 @@ export default function CanIdo() {
         delay={0.4}
         width="100%"
       >
-        <h2 className="text-xl sm:text-2xl font-bold dark:text-white">What I Can Do?</h2>
-        <p className="dark:text-slate-300">I help turn ideas and business needs into reliable, scalable web solutions.</p>
+        <h2 className="text-xl sm:text-2xl font-bold dark:text-white">A software engineer living in Cirebon, Indonesia.</h2>
+        <p className="dark:text-slate-300">Developing modern web applications and reliable automation systems.</p>
       </Reveal>
-      {iDoSomething?.map((item, idx) => {
+      {/* {iDoSomething?.map((item, idx) => {
         const Icon = icons[item.icon as keyof typeof icons] as icons.LucideIcon;
         if (!Icon) return null;
         return (
@@ -38,7 +38,7 @@ export default function CanIdo() {
             </div>
           </Reveal>
         );
-      })}
+      })} */}
 
     </>
   );

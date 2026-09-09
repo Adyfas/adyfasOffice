@@ -22,19 +22,26 @@ export default function Introduction() {
         {/* Web Developer & Automation Enthusiast, I help individuals and small
           businesses build fast, modern websites and simple automation systems
           that solve real problems. */}
-        Building modern web applications and automation systems that improve
-        efficiency, reliability, and business workflows.
+        A product engineer focused on creating products and autonomous systems.
       </p>
       {/* <div className="flex items-center justify-start gap-5">
         <p className="pb-2 text-sm sm:text-base">
           Open for freelance & collaboration
         </p>
       </div> */}
-      <Link to="/contact">
-        <button className="bg-gray-900 dark:bg-white p-2 text-white dark:text-black font-bold rounded-xl px-5 cursor-pointer hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-500 text-lg sm:text-xl hover:scale-101 my-2">
-          Contact
-        </button>
-      </Link>
+      <div className="flex items-center justify-start gap-5">
+        <Link to="/contact">
+          <button className="bg-black text-white dark:bg-white dark:text-black border border-black dark:border-white p-2 rounded-xl px-5 cursor-pointer hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-500 text-md hover:scale-101 my-2">
+            Talk With Me
+          </button>
+        </Link>
+
+        {/* <Link to="/project">
+          <button className="bg-white text-black dark:bg-black dark:text-white border border-black dark:border-white p-2 rounded-xl px-5 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 transition-all duration-500 text-md hover:scale-101 my-2">
+            See My Project
+          </button>
+        </Link> */}
+      </div>
     </>
   );
 }

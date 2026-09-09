@@ -71,7 +71,7 @@ export default function FeatureProject() {
                           <p className="text-sm sm:text-base text-gray-600 dark:text-slate-300 mt-1 line-clamp-3">
                             {project.brief}
                           </p>
-                          {techTags.length > 0 && (
+                          {/* {techTags.length > 0 && (
                             <div className="flex flex-wrap gap-2 mt-2">
                               {techTags.map((tech, i) => (
                                 <span
@@ -82,7 +82,7 @@ export default function FeatureProject() {
                                 </span>
                               ))}
                             </div>
-                          )}
+                          )} */}
                         </div>
                         <div className="flex items-center gap-4 flex-wrap mt-4">
                           {dateStr && (
@@ -90,12 +90,12 @@ export default function FeatureProject() {
                               {dateStr}
                             </span>
                           )}
-                          <Link
+                          {/* <Link
                             className="hover:underline text-blue-700 dark:text-blue-400 font-medium text-xs"
                             to={`/project/${project.slug}`}
                           >
                             View Project
-                          </Link>
+                          </Link> */}
                         </div>
                       </div>
                     </div>

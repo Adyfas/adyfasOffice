@@ -174,7 +174,7 @@ export default function AboutPage() {
             width="100%"
           >
             <p className="text-base sm:text-lg text-gray-600 dark:text-slate-300 leading-relaxed mt-4">
-              Web developer & problem solver. I build web applications, automation systems, and APIs that streamline workflows. Full-stack capable, backend focused I deliver solutions that perform in production. 1st Runner-Up in national web competitions, shipping real projects for real clients.
+             A Product Engineer build Software, automation systems, and APIs that streamline workflows.
             </p>
           </Reveal>
 

@@ -24,9 +24,15 @@ export const Careers: CareerItem[] = [
       "1st Runner-Up in national web competitions. Proved problem-solving and technical skills under pressure.",
   },
   {
-    year: "2024–Now",
+    year: "2024",
     title: "Real Projects",
     description:
       "Shipping production systems: dashboards, automation tools, RESTful e-commerce API—powering real workflows.",
+  },
+  {
+    year: "2026-Now",
+    title: "Product Engineer",
+    description:
+      "Focusing on product creation with the help of AI agents yields much faster results.",
   },
 ];

@@ -42,10 +42,10 @@ export default function Home() {
         <Introduction />
       </Reveal>
 
-
+{/* 
       <div className="my-10 flex flex-col items-start justify-start gap-5">
         <CanIdo />
-      </div>
+      </div> */}
 
       <div className="my-10 flex flex-col items-start justify-start">
         <FeatureProject />

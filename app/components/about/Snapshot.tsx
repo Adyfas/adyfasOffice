@@ -5,27 +5,27 @@ import Reveal from "../Reveal";
 const skillsData: { Icon: any; title: string; description: string }[] = [
   {
     Icon: Code2,
-    title: "Full-Stack Web Development",
+    title: "End-to-End Product Engineering",
     description:
-      "Build responsive web apps from frontend to backend. React, Node.js, REST APIs—solutions that scale and perform.",
+      "Transforming product requirements into scalable, full-stack web applications using modern frameworks like React, Next.js, and Node.js.",
   },
   {
     Icon: Puzzle,
-    title: "Problem Solving",
+    title: "Product-Minded Problem Solving",
     description:
-      "Break down complex requirements into clear solutions. Debug, optimize, and deliver systems that actually work.",
+      "Bridging the gap between user needs and technical constraints. Focused on building intuitive features, optimizing performance, and delivering real value.",
   },
   {
     Icon: Database,
-    title: "Backend & Automation",
+    title: "Backend Architecture & Automation",
     description:
-      "Design APIs, automate workflows, and streamline business processes. Less manual work, more efficiency.",
+      "Designing robust APIs, efficient database models, and workflow automations to reduce operational friction and streamline business operations.",
   },
   {
     Icon: Zap,
-    title: "Real-World Delivery",
+    title: "Continuous Delivery & Execution",
     description:
-      "Ship production-ready apps: dashboards, e-commerce APIs, management tools—used by real clients every day.",
+      "Shipping production-grade features quickly and iteratively—from client dashboards to e-commerce APIs—ensuring high reliability and user satisfaction.",
   },
 ];
 
@@ -70,7 +70,7 @@ export default function Snapshot() {
           //   className="group relative rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 p-5 shadow-sm dark:shadow-none transition-all duration-300 hover:border-gray-900 dark:hover:border-white/30 hover:shadow-md"
           // >
           <Reveal y={30} blur={10} duration={1} delay={1.4} width="100%">
-            <div className="group relative rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 p-5 shadow-sm dark:shadow-none transition-all duration-300 hover:border-gray-900 dark:hover:border-white/30 hover:shadow-md">
+            <div className="group relative rounded-xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 p-5 shadow-sm dark:shadow-none transition-all duration-300 hover:border-gray-900 dark:hover:border-white/30 hover:shadow-md h-[230px]">
               <Icon className="absolute bottom-4 right-4 h-7 w-7 text-gray-300 dark:text-slate-500/50 transition-colors duration-300 group-hover:text-gray-900 dark:group-hover:text-white" />
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white pr-10">
                 {title}
