@@ -32,4 +32,12 @@ export const Highlights: HighlightItem[] = [
     year: "2025",
     aspectClass: "square",
   },
+  {
+    id: "Healtech",
+    src: "/images/about/win-harapan-2-Healtech.jpeg",
+    alt: "Ferdidifest",
+    title: "Ferdidifest",
+    year: "2025",
+    aspectClass: "square",
+  },
 ];
