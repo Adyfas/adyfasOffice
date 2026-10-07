@@ -428,7 +428,7 @@ export default function ProjectDetail({ params, loaderData }: Route.ComponentPro
 
           {hashnodePost.coverImage?.url && (
             <Reveal y={20} blur={10} duration={0.6} width="100%">
-              <div className="w-full aspect-[2/1] rounded-xl overflow-hidden mb-8 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-white/10">
+              <div className="w-full max-h-md h-full shadow-none rounded-xl overflow-hidden mb-8 ">
                 <img
                   src={hashnodePost.coverImage.url}
                   alt={hashnodePost.title}

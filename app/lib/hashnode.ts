@@ -34,7 +34,7 @@ export async function getHashnodePosts(): Promise<HashnodePost[]> {
   }
 }
 
-const PROJECT_TAGS = ["project", "blog-project"];
+const PROJECT_TAGS:string[] = ["project", "blog-project"];
 
 export async function getBlogOnlyPosts(): Promise<HashnodePost[]> {
   const posts = await getHashnodePosts();
@@ -45,18 +45,28 @@ export async function getBlogOnlyPosts(): Promise<HashnodePost[]> {
 }
 
 export async function getProjectPosts(): Promise<HashnodePost[]> {
-  const posts = await getHashnodePosts();
+  const posts: HashnodePost[] = await getHashnodePosts();
   //  console.log("data: ", posts)
-  return posts.filter((post) =>
-    post.categories.some((cat) => PROJECT_TAGS.includes(cat)),
+  const BigProject = posts.filter((post)=> post.categories.some((cat)=> cat === "big-project-adyfas"))
+
+  const RegularProject = posts.filter((post) =>
+    post.categories.some((cat: string) => PROJECT_TAGS.includes(cat)) &&
+    !post.categories.some((cat: string) => cat === "big-project-adyfas")
   );
+
+  console.log([...BigProject, ...RegularProject])
+  return [...BigProject, ...RegularProject]
+  
 }
+
 
 export async function getBigProjects(): Promise<HashnodePost[]> {
   const posts = await getHashnodePosts();
   //  console.log("data: ", posts)
   return posts
-    .filter((post) => post.categories.some((cat) => cat === "big-project-adyfas"))
+    .filter((post) =>
+      post.categories.some((cat) => cat === "big-project-adyfas"),
+    )
     .slice(0, 3);
 }
 
