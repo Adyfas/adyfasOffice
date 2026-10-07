@@ -10,8 +10,11 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import AnalyticsRouteTracker from "./components/AnalyticsRouteTracker";
+import ClientOnly from "./components/ClientOnly";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { GA_MEASUREMENT_ID } from "./lib/site";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -35,10 +38,27 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <link rel="icon" type="image/png" href="/images/faveicon.png"/>
         <Meta />
         <Links />
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_MEASUREMENT_ID}');
+            `,
+          }}
+        />
       </head>
       <body>
         <ThemeProvider>
           {children}
+          <ClientOnly>
+            <AnalyticsRouteTracker />
+          </ClientOnly>
           <ThemeToggle />
           <ScrollRestoration />
           <Scripts />
