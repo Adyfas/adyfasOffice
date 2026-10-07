@@ -54,7 +54,7 @@ export async function getProjectPosts(): Promise<HashnodePost[]> {
     !post.categories.some((cat: string) => cat === "big-project-adyfas")
   );
 
-  console.log([...BigProject, ...RegularProject])
+  // console.log([...BigProject, ...RegularProject])
   return [...BigProject, ...RegularProject]
   
 }
