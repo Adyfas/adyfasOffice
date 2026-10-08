@@ -14,10 +14,11 @@
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# env - jangan push file sensitif
+.env
+.env.*
+!.env.example
+!.env.sample
 
 npm-debug.log*
 yarn-debug.log*
@@ -27,6 +28,16 @@ yarn-error.log*
 .firebase/
 firebase-debug.log
 firebase-debug.*.log
+
+# sensitive - jangan push kredensial / kunci
+*.pem
+*.key
+*.p12
+*.pfx
+*serviceAccount*.json
+*credentials*.json
+.secrets/
+secrets.json
 
 # IDE
 .vscode/
