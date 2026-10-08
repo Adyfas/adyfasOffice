@@ -45,3 +45,6 @@ secrets.json
 *.swp
 *.swo
 *~
+
+# react
+.react-router  
