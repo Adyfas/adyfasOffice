@@ -4,6 +4,7 @@ import { getBlogOnlyPosts, type HashnodePost } from "~/lib/hashnode";
 import type { Route } from "./+types/blog";
 import CardBlog from "~/components/blog/CardBlog";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
+import Reveal from "~/components/Reveal";
 
 export function meta({}: Route.MetaArgs) {
   const title = "Blog & Articles | Adyfas - Web Developer & Tech Writing";
@@ -15,7 +16,11 @@ export function meta({}: Route.MetaArgs) {
   return [
     { title },
     { name: "description", content: description },
-    { name: "keywords", content: "blog adyfas, ferdi iskandar, web development, tutorial react, php, lks web technology, frontend developer" },
+    {
+      name: "keywords",
+      content:
+        "blog adyfas, ferdi iskandar, web development, tutorial react, php, lks web technology, frontend developer",
+    },
     { name: "author", content: "Adyfas (Ferdi Iskandar)" },
     { name: "robots", content: "index, follow" },
     { property: "og:site_name", content: SITE_NAME },
@@ -46,7 +51,8 @@ export default function BlogPage() {
     "@context": "https://schema.org",
     "@type": "Blog",
     name: "Adyfas Blog",
-    description: "Tulisan, tutorial, dan catatan pengalaman seputar teknologi web dan pemrograman.",
+    description:
+      "Tulisan, tutorial, dan catatan pengalaman seputar teknologi web dan pemrograman.",
     url: `${SITE_URL}/blog`,
     author: {
       "@type": "Person",
@@ -70,38 +76,42 @@ export default function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="flex items-start flex-col mb-6">
-      <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white my-2">
-        Blog
-      </h1>
-      <p>I write about my personal experiences here, so you might find something inspiring! But sometimes, I just talk about random things too (;</p>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white my-2">
+          Blog
+        </h1>
+        <p>
+          I write about my personal experiences here, so you might find
+          something inspiring! But sometimes, I just talk about random things
+          too (;
+        </p>
       </div>
 
       {loading ? (
         <div className="py-12 text-center text-gray-500">Loading posts...</div>
       ) : posts.length === 0 ? (
-        <div className="py-12 text-center text-gray-500">Belum ada postingan blog.</div>
+        <div className="py-12 text-center text-gray-500">
+          Belum ada postingan blog.
+        </div>
       ) : (
-        posts.map((post) => (
-          <Link
-            key={post.id}
-            to={`/blog/${post.slug}`}
-            className="block"
-          >
-            <CardBlog
-              title={post.title}
-              description={post.brief}
-              createTime={
-                post.publishedAt
-                  ? new Date(post.publishedAt).toLocaleDateString("id-ID", {
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric",
-                    })
-                  : ""
-              }
-              image={post.coverImage?.url}
-            />
-          </Link>
+        posts.map((post, index) => (
+          <Reveal y={40} blur={15} duration={1.5} delay={0.1*index} width="100%">
+            <Link key={post.id} to={`/blog/${post.slug}`} className="block">
+              <CardBlog
+                title={post.title}
+                description={post.brief}
+                createTime={
+                  post.publishedAt
+                    ? new Date(post.publishedAt).toLocaleDateString("id-ID", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })
+                    : ""
+                }
+                image={post.coverImage?.url}
+              />
+            </Link>
+          </Reveal>
         ))
       )}
     </div>
