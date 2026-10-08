@@ -20,8 +20,11 @@ export default function TechStacks() {
   return (
     <>
       {popup && (
-        <div
-          className="inset-0 fixed flex items-center justify-center z-50 m-4"
+        <motion.div
+          initial={{ opacity: 0}}
+          animate={{opacity: 1}}
+            transition={{duration:0.2}}
+          className="inset-0 fixed flex items-center justify-center z-50 p-4 bg-white/50 dark:bg-black/0.5 backdrop-blur-xl overflow-hidden"
           onClick={() => setPopup(!popup)}
         >
           <AnimatePresence>
@@ -77,7 +80,7 @@ export default function TechStacks() {
               );
             })}{" "}
           </AnimatePresence>
-        </div>
+        </motion.div>
       )}
 
       <Reveal y={20} blur={8} duration={0.6} delay={0.1} width="100%">
