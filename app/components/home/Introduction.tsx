@@ -17,9 +17,9 @@ export default function Introduction() {
       <h1 className="font-bold text-xl sm:text-2xl text-start dark:text-white">
         Hey, I&apos;m Ferdi Iskandar
       </h1>
-      <p className="pb-2 dark:text-slate-300">
+      {/* <p className="pb-2 dark:text-slate-300">
         Full Stack Web Developer &amp; Software Engineer 🙌
-      </p>
+      </p> */}
       <p className="text-sm sm:text-base dark:text-slate-300">
         {/* Web Developer & Automation Enthusiast, I help individuals and small
           businesses build fast, modern websites and simple automation systems
