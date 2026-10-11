@@ -65,8 +65,8 @@ export async function loader({ params }: Route.LoaderArgs) {
 export function meta({ data, params }: Route.MetaArgs) {
   const slug = data?.slug ?? params.slug;
   const title = data?.title
-    ? `${data.title} | Adyfas Project`
-    : `${slug?.replace(/-/g, " ")} | Adyfas Project`;
+    ? `${data.title} | Ferdi Iskandar`
+    : `${slug?.replace(/-/g, " ")} | Ferdi Iskandar (Adyfas)`;
   const description =
     data?.description || "Explore project details on Adyfas Portfolio.";
   const url = `${SITE_URL}/project/${slug}`;

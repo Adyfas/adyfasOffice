@@ -10,7 +10,7 @@ import { useSearchParams } from "react-router";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 
 export function meta({ }: Route.MetaArgs) {
-  const title = "Contact Adyfas | Let's Build Something Together";
+  const title = "Contact Ferdi Iskandar (Adyfas) | Let's Build Something Together";
   const description = "Have a project in mind? Contact Adyfas for collaboration, freelance projects, or questions about full-stack web development.";
   const url = `${SITE_URL}/contact`;
 

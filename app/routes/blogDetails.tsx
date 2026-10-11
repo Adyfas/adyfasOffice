@@ -28,7 +28,7 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
 
 export function meta({ data }: Route.MetaArgs) {
   const post = data?.post as HashnodePost | undefined;
-  const title = post?.title ? `${post.title} | Adyfas Blog` : "Blog Article | Adyfas";
+  const title = post?.title ? `${post.title} | Ferdi Iskandar` : "Blog Article | Ferdi Iskandar (Adyfas)";
   const description = post?.brief || "Baca artikel lengkap di Adyfas Blog.";
   const imageUrl = post?.coverImage?.url || DEFAULT_OG_IMAGE;
   const url = `${SITE_URL}/blog/${post?.slug || ""}`;
@@ -196,7 +196,8 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
     datePublished: post.publishedAt,
     author: {
       "@type": "Person",
-      name: "Adyfas (Ferdi Iskandar)",
+      name: "Ferdi Iskandar",
+      alternateName: "Adyfas",
       url: SITE_URL,
     },
     publisher: {

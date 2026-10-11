@@ -7,9 +7,9 @@ import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 import Reveal from "~/components/Reveal";
 
 export function meta({}: Route.MetaArgs) {
-  const title = "Blog & Articles | Adyfas - Web Developer & Tech Writing";
+  const title = "Blog & Articles | Ferdi Iskandar (Adyfas) - Web Developer & Tech Writing";
   const description =
-    "Artikel, catatan pengalaman, tutorial web development, dan cerita seputar pemrograman oleh Adyfas (Ferdi Iskandar).";
+    "Artikel, catatan pengalaman, tutorial web development, dan cerita seputar pemrograman oleh Ferdi Iskandar, dikenal juga sebagai Adyfas.";
   const url = `${SITE_URL}/blog`;
   const ogImage = DEFAULT_OG_IMAGE;
 
@@ -50,13 +50,14 @@ export default function BlogPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    name: "Adyfas Blog",
+    name: "Ferdi Iskandar Blog",
     description:
       "Tulisan, tutorial, dan catatan pengalaman seputar teknologi web dan pemrograman.",
     url: `${SITE_URL}/blog`,
     author: {
       "@type": "Person",
-      name: "Adyfas (Ferdi Iskandar)",
+      name: "Ferdi Iskandar",
+      alternateName: "Adyfas",
       url: SITE_URL,
     },
     blogPost: posts.map((post) => ({

@@ -9,8 +9,8 @@ import CalltoActionContact from "~/components/CalltoActionContact";
 import { UsetateHandsome } from "~/store/handsome";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 export function meta({ }: Route.MetaArgs) {
-  const title = "Adyfas | Full Stack Web Developer & Software Engineer";
-  const description = "Welcome to Adyfas's portfolio. I'm a passionate Full Stack Developer specializing in modern web technologies, React, and creating stunning digital experiences.";
+  const title = "Ferdi Iskandar (Adyfas) | Full Stack Web Developer & Software Engineer";
+  const description = "Portfolio of Ferdi Iskandar, also known as Adyfas — Full Stack Web Developer & Software Engineer from Indonesia, specializing in modern web technologies, React, and creating stunning digital experiences.";
   const url = `${SITE_URL}/`;
   
   return [
@@ -34,8 +34,28 @@ export default function Home() {
   const handsome = UsetateHandsome((state) => state.hidden);
   const setHandsome = UsetateHandsome((state) => state.setHidden);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Ferdi Iskandar",
+    alternateName: "Adyfas",
+    url: SITE_URL,
+    jobTitle: "Full Stack Web Developer & Software Engineer",
+    description:
+      "Ferdi Iskandar, also known as Adyfas — Full Stack Web Developer & Software Engineer from Indonesia.",
+    sameAs: [
+      "https://www.instagram.com/adyfas.ver/",
+      "https://www.linkedin.com/in/ferdi-iskandar-1a0a95385/",
+      "https://github.com/Adyfas",
+    ],
+  };
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 itmes-start">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Reveal
         y={40}
         blur={0}

@@ -8,8 +8,8 @@ import { getProjectPosts, type HashnodePost } from "~/lib/hashnode";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 
 export function meta({ }: Route.MetaArgs) {
-  const title = "Adyfas Projects | Full Stack Web Portfolios";
-  const description = "Explore a selection of my latest web development projects, including React apps, automation systems, and REST APIs.";
+  const title = "Projects | Ferdi Iskandar (Adyfas) - Full Stack Web Portfolios";
+  const description = "Explore a selection of Ferdi Iskandar's latest web development projects, including React apps, automation systems, and REST APIs.";
   const url = `${SITE_URL}/project`;
 
   return [

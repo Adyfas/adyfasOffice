@@ -8,21 +8,24 @@ export default function Introduction() {
       <div className="w-36 h-36 sm:w-32 sm:h-32 my-2 flex items-center gap-2">
         <img
           src="/images/CEO.png"
-          alt="adyfas"
+          alt="Ferdi Iskandar"
           className="rounded-full w-full h-full object-cover"
           sizes="62px"
         />
         {/* <PopupHandsome /> */}
       </div>
       <h1 className="font-bold text-xl sm:text-2xl text-start dark:text-white">
-        Hey, Adyfas Here!
+        Hey, I&apos;m Ferdi Iskandar
       </h1>
-      <p className="pb-2 dark:text-slate-300">Nice to meet you🙌</p>
+      <p className="pb-2 dark:text-slate-300">
+        Full Stack Web Developer &amp; Software Engineer 🙌
+      </p>
       <p className="text-sm sm:text-base dark:text-slate-300">
         {/* Web Developer & Automation Enthusiast, I help individuals and small
           businesses build fast, modern websites and simple automation systems
           that solve real problems. */}
         A product engineer focused on creating products and autonomous systems.
+        Also known as Adyfas.
       </p>
       {/* <div className="flex items-center justify-start gap-5">
         <p className="pb-2 text-sm sm:text-base">

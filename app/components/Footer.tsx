@@ -33,7 +33,7 @@ export default function Footer() {
 
 
       <p className="mt-6 text-center text-xs text-gray-400 dark:text-slate-500">
-        © {new Date().getFullYear()} Adyfas — Web Developer
+        © {new Date().getFullYear()} Adyfas (Ferdi Iskandar) — Web Developer
       </p>
     </footer>
   );

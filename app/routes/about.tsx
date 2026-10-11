@@ -61,7 +61,7 @@ const greetingsMap = {
 };
 
 export function meta({ }: Route.MetaArgs) {
-  const title = "About Adyfas | Full Stack Developer & Problem Solver";
+  const title = "About Ferdi Iskandar (Adyfas) | Full Stack Developer & Problem Solver";
   const description = "Adyfas (Ferdi Iskandar) — Web developer & problem solver. Full-stack, backend-focused. Builds web apps, automation systems, REST APIs. 1st Runner-Up national web competitions. Shipping real projects.";
   const url = `${SITE_URL}/about`;
   
@@ -184,6 +184,12 @@ export default function AboutPage() {
           </Reveal>
 
         </ClientOnly>
+      </section>
+
+      <section className="pb-4">
+        <p className="text-sm text-gray-500 dark:text-slate-400">
+          Adyfas adalah nama internet dari Ferdi Iskandar.
+        </p>
       </section>
 
       <Snapshot />
