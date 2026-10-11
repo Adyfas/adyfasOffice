@@ -186,11 +186,11 @@ export default function AboutPage() {
         </ClientOnly>
       </section>
 
-      <section className="pb-4">
+      {/* <section className="pb-4">
         <p className="text-sm text-gray-500 dark:text-slate-400">
           Adyfas adalah nama internet dari Ferdi Iskandar.
         </p>
-      </section>
+      </section> */}
 
       <Snapshot />
       <CareerSnapshot />
