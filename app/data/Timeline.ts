@@ -12,9 +12,9 @@ type TimelineItem = {
 export const timelineData: TimelineItem[] = [
   {
     date: "Oct 2024",
-    title: "First Client Project & Web Development Competition",
+    title: "First Client Project & Competition Achievement",
     description:
-      "Developed a web-based dashboard for client management, including an automated invoice reminder system. In parallel, participated in a web development competition by creating an AI-themed website and achieved 1st Runner-Up 🏆.",
+      "Built a web-based client management dashboard with automated invoice reminders. Also competed in a web development competition, where an AI-themed website project earned 1st Runner-Up.",
     // project: [
     //   { name: "Koncomoto", link: "/project/koncomoto" },
     //   { name: "AI Web Competition", link: "/project/aiindonesia" },
@@ -24,7 +24,7 @@ export const timelineData: TimelineItem[] = [
     date: "Jul & Nov 2025",
     title: "Two-Time Winner – Web Design Competition",
     description:
-      "Won two web design competitions, achieving won 2nd in both events 🏆. The first project focused on promoting Indonesian cultural heritage, while the second addressed environmental awareness through a waste literacy and green sustainability theme.",
+      "Won two web design competitions, achieving won 2nd in both events. The first project focused on promoting Indonesian cultural heritage, while the second addressed environmental awareness through a waste literacy and green sustainability theme.",
     // project: [
     //   {
     //     name: "Inside Tribe",
@@ -45,9 +45,9 @@ export const timelineData: TimelineItem[] = [
   },
   {
     date: "Jan 2026",
-    title: "SaaS & AI Agent",
+    title: "SaaS Product Development & AI-Assisted Workflows",
     description:
-      "Building a SaaS product that solves a problem, and creating an AI agent system to accelerate development.",
+      "Developing a SaaS product around a real business need while exploring AI agent workflows to support and accelerate the development process.",
     // project: [{ name: "SipBos", link: "/project/sipbos" }],
   }
 ];

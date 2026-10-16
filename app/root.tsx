@@ -15,6 +15,9 @@ import ClientOnly from "./components/ClientOnly";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { GA_MEASUREMENT_ID } from "./lib/site";
+import ClickSpark from "./components/ClickSpark";
+import Revealmage from "./components/Revealmage";
+import LightboxListener from "./components/LightboxListener";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -35,7 +38,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" type="image/png" href="/images/faveicon.png"/>
+        <link rel="icon" type="image/png" href="/images/faveicon.png" />
         <Meta />
         <Links />
         <script
@@ -54,15 +57,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
         />
       </head>
       <body>
-        <ThemeProvider>
-          {children}
-          <ClientOnly>
-            <AnalyticsRouteTracker />
-          </ClientOnly>
-          <ThemeToggle />
-          <ScrollRestoration />
-          <Scripts />
-        </ThemeProvider>
+        <ClickSpark
+          shape="line"
+          sparkCount={8}
+          sparkSize={14}
+          sparkRadius={30}
+          duration={500}
+        >
+          <ThemeProvider>
+            {children}
+            <ClientOnly>
+              <AnalyticsRouteTracker />
+            </ClientOnly>
+            <LightboxListener />
+            <Revealmage />
+            <ThemeToggle />
+            <ScrollRestoration />
+            <Scripts />
+          </ThemeProvider>
+        </ClickSpark>
       </body>
     </html>
   );
@@ -93,7 +106,9 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     <main className="pt-16 p-4 container max-w-3xl flex items-center justify-center flex-col mx-auto">
       <h1 className="text-4xl text-grya-900 font-bold p-2">{message}</h1>
       <p className="text-md p-2 text-center">{details}</p>
-      <Link className="text-center hover:underline text-blue-500" to={'/'}>Back to page</Link>
+      <Link className="text-center hover:underline text-blue-500" to={"/"}>
+        Back to page
+      </Link>
       {stack && (
         <pre className="w-full p-4 overflow-x-auto">
           <code>{stack}</code>

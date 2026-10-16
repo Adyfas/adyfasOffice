@@ -54,9 +54,7 @@ export default function ProjectPage() {
             Project
           </h1>
           <p className="dark:text-slate-300">
-            Below are a selection of projects that showcase my process,
-            creativity, and work. These projects have been concisely selected to
-            keep the portfolio focused and easy to understand.
+            A collection of web applications and digital products I've built, exploring practical solutions through design, engineering, and product development.
           </p>
         </Reveal>
 

@@ -17,6 +17,8 @@ import Reveal from "~/components/Reveal";
 import { motion } from "framer-motion";
 import { getHashnodePostBySlug, type HashnodePost } from "~/lib/hashnode";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, absoluteUrl } from "~/lib/site";
+import TechText from "~/components/TechText";
+import { UsestateTheme } from "~/store/theme";
 
 type MdxModule = {
   default: React.ComponentType;
@@ -37,8 +39,9 @@ type MdxModule = {
 // Saat SPA runtime (Firebase static), component tetap fetch via useEffect.
 export async function loader({ params }: Route.LoaderArgs) {
   const slug = params.slug ?? "";
-  const local = ProjectList.find((p) => p.projectLink === `/project/${slug}`) ?? null;
-
+  const local =
+  ProjectList.find((p) => p.projectLink === `/project/${slug}`) ?? null;
+  
   let hashnode: HashnodePost | null = null;
   if (!local) {
     try {
@@ -47,15 +50,15 @@ export async function loader({ params }: Route.LoaderArgs) {
       hashnode = null;
     }
   }
-
+  
   return {
     slug,
     title: hashnode?.title ?? local?.title ?? null,
     description: hashnode?.brief ?? local?.desc ?? null,
     image:
-      hashnode?.coverImage?.url ??
-      (local?.img ? absoluteUrl(local.img) : null) ??
-      null,
+    hashnode?.coverImage?.url ??
+    (local?.img ? absoluteUrl(local.img) : null) ??
+    null,
     publishedAt: hashnode?.publishedAt ?? null,
     // Seed agar prerender + navigasi client tidak fetch ulang
     hashnode,
@@ -65,13 +68,15 @@ export async function loader({ params }: Route.LoaderArgs) {
 export function meta({ data, params }: Route.MetaArgs) {
   const slug = data?.slug ?? params.slug;
   const title = data?.title
-    ? `${data.title} | Ferdi Iskandar`
-    : `${slug?.replace(/-/g, " ")} | Ferdi Iskandar (Adyfas)`;
+  ? `${data.title} | Ferdi Iskandar`
+  : `${slug?.replace(/-/g, " ")} | Ferdi Iskandar (Adyfas)`;
   const description =
-    data?.description || "Explore project details on Adyfas Portfolio.";
+  data?.description || "Explore project details on Adyfas Portfolio.";
   const url = `${SITE_URL}/project/${slug}`;
   const imageUrl = data?.image || DEFAULT_OG_IMAGE;
-
+  
+  
+  
   return [
     { title },
     { name: "description", content: description },
@@ -85,28 +90,38 @@ export function meta({ data, params }: Route.MetaArgs) {
     ...(data?.publishedAt
       ? [{ property: "article:published_time", content: data.publishedAt }]
       : []),
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:title", content: title },
-    { name: "twitter:description", content: description },
-    { name: "twitter:image", content: imageUrl },
-    { tagName: "link", rel: "canonical", href: url },
-  ];
-}
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: title },
+      { name: "twitter:description", content: description },
+      { name: "twitter:image", content: imageUrl },
+      { tagName: "link", rel: "canonical", href: url },
+    ];
+  }
+  
+  export default function ProjectDetail({
+    params,
+    loaderData,
+  }: Route.ComponentProps) {
+    const slug = params.slug as string;
+    const seededPost =
+    (loaderData as { hashnode?: HashnodePost | null } | undefined)?.hashnode ??
+    null;
+    const [mod, setMod] = useState<MdxModule | null>(null);
+    const [hashnodePost, setHashnodePost] = useState<HashnodePost | null>(
+      seededPost,
+    );
+    const [loadedSlug, setLoadedSlug] = useState<string | null>(
+      seededPost ? slug : null,
+    );
+    const [loading, setLoading] = useState(!seededPost);
+    const [notFound, setNotFound] = useState(false);
+    const isLight = UsestateTheme((s) => s.isLight);
 
-export default function ProjectDetail({ params, loaderData }: Route.ComponentProps) {
-  const slug = params.slug as string;
-  const seededPost = (loaderData as { hashnode?: HashnodePost | null } | undefined)?.hashnode ?? null;
-  const [mod, setMod] = useState<MdxModule | null>(null);
-  const [hashnodePost, setHashnodePost] = useState<HashnodePost | null>(seededPost);
-  const [loadedSlug, setLoadedSlug] = useState<string | null>(seededPost ? slug : null);
-  const [loading, setLoading] = useState(!seededPost);
-  const [notFound, setNotFound] = useState(false);
-
-  const typographyStyles = `
-  .blog-content {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.8;
+    const typographyStyles = `
+    .blog-content {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
     color: #4b5563; /* text-gray-600 */
   }
   .dark .blog-content {
@@ -388,7 +403,6 @@ export default function ProjectDetail({ params, loaderData }: Route.ComponentPro
     const techTags = hashnodePost.categories.filter(
       (c) => c !== "project" && c !== "blog-project",
     );
-
     return (
       <MdxLayoutPage>
         <style>{typographyStyles}</style>
@@ -402,14 +416,39 @@ export default function ProjectDetail({ params, loaderData }: Route.ComponentPro
             </Link>
             <Reveal y={30} blur={10} duration={1} width="100%">
               <div className="space-y-3">
-                <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
+                <div className="relative h-40 right-5">
+                  <TechText
+                    text={hashnodePost.title}
+                    fontWeight={600}
+                    fontSize={150}
+                    reveal="letter"
+                    dashLength={4}
+                    dashGap={2}
+                    specks={15}
+                    fontFamily=""
+                    color={isLight ? '#00000' : '#ffffff'}
+                    accentColor={isLight ? '#00000' : '#ffffff'}
+                    letterSpacing={-0.05}
+                    reach={200}
+                    softness={0.7}
+                    strokeWidth={1.5}
+                    speed={1}
+                    lineStyle="dashed"
+                    selection
+                    labels
+                    draggable
+                    sweep
+                  />
+                </div>
+
+                {/* <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
                   {hashnodePost.title}
-                </h1>
-                {hashnodePost.brief && (
+                </h1> */}
+                {/* {hashnodePost.brief && (
                   <p className="text-lg sm:text-xl text-gray-500 dark:text-gray-400 leading-relaxed font-light">
                     {hashnodePost.brief}
                   </p>
-                )}
+                )} */}
                 <div className="flex items-center justify-start gap-2 w-full text-gray-500 text-md">
                   <span className="text-black dark:text-white font-medium">
                     Adyfas

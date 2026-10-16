@@ -15,7 +15,7 @@ export const Careers: CareerItem[] = [
     year: "2021",
     title: "Learning Phase",
     description:
-      "Mastered web design, coding fundamentals, and backend logic. Built projects that solved real problems.",
+      "Built a strong foundation in web design, programming fundamentals, and backend development.",
   },
   {
     year: "2023",
@@ -33,6 +33,6 @@ export const Careers: CareerItem[] = [
     year: "2026-Now",
     title: "Product Engineer",
     description:
-      "Focusing on product creation with the help of AI agents yields much faster results.",
+      "Exploring AI-assisted development to improve product iteration and development workflows.",
   },
 ];

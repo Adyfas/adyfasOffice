@@ -1,20 +1,28 @@
 import { useNavigate } from "react-router";
 import Reveal from "./Reveal";
 import { UsestateMessage } from "~/store/contact";
+import { useState } from "react";
+import Tooltips from "./Tooltips";
 
 export default function CalltoActionContact() {
   const message = UsestateMessage((state) => state.message);
+  const [showEmptyTip, setShowEmptyTip] = useState(false);
   const setMessage = UsestateMessage((state) => state.setMessage);
+
   const router = useNavigate();
+  const handleEmptyMessage = () => {
+    if (!message.trim()) {
+      // Pesan kosong: tampilkan tooltip peringatan 3 detik.
+      // Reset dulu supaya timer mulai dari awal kalau tombol diklik berulang.
+      setShowEmptyTip(false);
+      setTimeout(() => setShowEmptyTip(true), 0);
+      return;
+    }
+    router("/contact");
+  };
   return (
     <>
-      <Reveal
-        y={40}
-        blur={15}
-        duration={1.2}
-        delay={0.2}
-        width="100%"
-      >
+      <Reveal y={40} blur={15} duration={1.2} delay={0.2} width="100%">
         <section className="mt-32 rounded-2xl bg-white dark:bg-white/5 dark:border dark:border-white/10 px-8 py-10 shadow-sm dark:shadow-none">
           <div className="flex items-center justify-center flex-col">
             <h3 className="text-xl sm:text-2xl font-bold text-center dark:text-white">
@@ -28,21 +36,33 @@ export default function CalltoActionContact() {
           </div>
 
           <form className="mt-6 flex max-w-2xl gap-3">
-            <input
-              type="email"
-              placeholder="contact.adyfas@gmail.com"
-              value={message}
-              onChange={(e) => setMessage(e.currentTarget.value)}
-              className="flex-1 rounded-full border border-gray-300 dark:border-white/20 dark:bg-black/20 dark:text-white px-4 py-2 text-sm focus:border-gray-900 dark:focus:border-white focus:outline-none"
-            />
-            <button
-              onClick={() => {
-                message !== "" || message.length > 0 ? router("/contact") : "";
+            <Tooltips
+              text={
+                showEmptyTip
+                  ? "Please enter your message in the input field!"
+                  : "Enter your email to get in touch"
+              }
+              open={showEmptyTip ? true : undefined}
+              openDuration={3000}
+              onOpenChange={(v) => {
+                if (!v) setShowEmptyTip(false);
               }}
+              className="flex-1"
+            >
+              <input
+                type="email"
+                placeholder="contact.adyfas@gmail.com"
+                value={message}
+                onChange={(e) => setMessage(e.currentTarget.value)}
+                className="w-full flex-1 rounded-full border border-gray-300 dark:border-white/20 dark:bg-black/20 dark:text-white px-4 py-2 text-sm focus:border-gray-900 dark:focus:border-white focus:outline-none"
+              />
+            </Tooltips>
+            <button
+              onClick={handleEmptyMessage}
               type="button"
               className="rounded-full bg-gray-900 dark:bg-white px-5 py-2 text-sm font-medium text-white dark:text-black transition hover:bg-gray-800 dark:hover:bg-gray-200"
             >
-              Contact
+              Send
             </button>
           </form>
         </section>

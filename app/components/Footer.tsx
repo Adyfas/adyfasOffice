@@ -27,13 +27,13 @@ export default function Footer() {
           Thanks for visiting.
         </p>
         <p className="mt-1 text-sm text-gray-500 dark:text-slate-400">
-          Explore around. Until next time.
+         have a nice day
         </p>
       </div>
 
 
       <p className="mt-6 text-center text-xs text-gray-400 dark:text-slate-500">
-        © {new Date().getFullYear()} Adyfas (Ferdi Iskandar) — Web Developer
+        © {new Date().getFullYear()} Adyfas (Ferdi Iskandar) Software Engineer
       </p>
     </footer>
   );

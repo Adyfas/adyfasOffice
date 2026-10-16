@@ -5,27 +5,27 @@ import Reveal from "../Reveal";
 const skillsData: { Icon: any; title: string; description: string }[] = [
   {
     Icon: Code2,
-    title: "End-to-End Product Engineering",
+    title: "Full-Stack Product Development",
     description:
-      "Transforming product requirements into scalable, full-stack web applications using modern frameworks like React, Next.js, and Node.js.",
+      "Building web applications from interface to backend, translating product requirements into working features with React, Next.js, Node.js, and other suitable technologies.",
   },
   {
     Icon: Puzzle,
-    title: "Product-Minded Problem Solving",
+    title: "Problem-Solving Through Software",
     description:
-      "Bridging the gap between user needs and technical constraints. Focused on building intuitive features, optimizing performance, and delivering real value.",
+      "Understanding user needs and turning them into practical features, with attention to usability, performance, and the value each feature provides.",
   },
   {
     Icon: Database,
-    title: "Backend Architecture & Automation",
+    title: "Backend Systems & Automation",
     description:
-      "Designing robust APIs, efficient database models, and workflow automations to reduce operational friction and streamline business operations.",
+      "Designing APIs, structuring databases, and automating repetitive workflows to support reliable and efficient business operations.",
   },
   {
     Icon: Zap,
-    title: "Continuous Delivery & Execution",
+    title: "Iterative Development & Delivery",
     description:
-      "Shipping production-grade features quickly and iteratively—from client dashboards to e-commerce APIs—ensuring high reliability and user satisfaction.",
+      "Breaking down requirements into manageable features, testing implementations, and refining products through continuous iteration.",
   },
 ];
 

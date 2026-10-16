@@ -8,10 +8,14 @@ import {
 import { UsestateMessage } from "~/store/contact";
 import { useSearchParams } from "react-router";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
+import LightRays from "~/components/LightRays";
+import { UsestateTheme } from "~/store/theme";
 
-export function meta({ }: Route.MetaArgs) {
-  const title = "Contact Ferdi Iskandar (Adyfas) | Let's Build Something Together";
-  const description = "Have a project in mind? Contact Adyfas for collaboration, freelance projects, or questions about full-stack web development.";
+export function meta({}: Route.MetaArgs) {
+  const title =
+    "Contact Ferdi Iskandar (Adyfas) | Let's Build Something Together";
+  const description =
+    "Have a project in mind? Contact Adyfas for collaboration, freelance projects, or questions about full-stack web development.";
   const url = `${SITE_URL}/contact`;
 
   return [
@@ -63,6 +67,10 @@ export default function ContactPage() {
     }
   }, []);
 
+  // LightRays adalah canvas WebGL — warnanya tidak bisa diatur lewat CSS,
+  // jadi baca tema yang sedang aktif dari zustand global.
+  const isLight = UsestateTheme((s) => s.isLight);
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (setRemoveLocalstorage({ key: "emailsend" })) {
@@ -100,15 +108,26 @@ export default function ContactPage() {
   }
 
   return (
-    <>
-      <Reveal
-        y={40}
-        blur={15}
-        duration={1.2}
-        delay={0.1}
-        width="100%"
-      >
-        <section className="min-h-[70vh] flex items-center justify-center">
+    <div className="w-full h-full relative">
+      <Reveal y={40} blur={15} duration={1.2} delay={0.1} width="100%">
+        <section className="min-h-[70vh] flex items-center justify-center flex-col">
+          {!isLight && (
+            <LightRays
+              raysOrigin="top-center"
+              raysColor={isLight ? "#1d4ed8" : "#ffffff"}
+              raysSpeed={0.5}
+              lightSpread={0.5}
+              rayLength={10}
+              followMouse={true}
+              mouseInfluence={0.1}
+              noiseAmount={1}
+              distortion={0}
+              className="absolute top-0"
+              pulsating={false}
+              fadeDistance={10}
+              saturation={isLight ? 1 : 0.5}
+            />
+          )}
           <div className="w-full max-w-xl rounded-2xl bg-white dark:bg-slate-900/50 dark:border dark:border-white/10 px-6 py-8 sm:px-8 sm:py-10 shadow-sm dark:shadow-none">
             <div className="text-center mb-6">
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
@@ -198,6 +217,6 @@ export default function ContactPage() {
           </div>
         </section>
       </Reveal>
-    </>
+    </div>
   );
 }

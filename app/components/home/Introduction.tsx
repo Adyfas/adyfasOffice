@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import PopupHandsome from "./PopupHandsome";
 import { UsetateHandsome } from "~/store/handsome";
+import TechText from "../TechText";
 
 export default function Introduction() {
   return (
@@ -15,8 +16,11 @@ export default function Introduction() {
         {/* <PopupHandsome /> */}
       </div>
       <h1 className="font-bold text-xl sm:text-2xl text-start dark:text-white">
-        Hey, I&apos;m Ferdi Iskandar
+        Hey, I'm Ferdi Iskandar
       </h1>
+      <h2 className="font-bold text-md text-start dark:text-white">
+       I Build Web Applications and Digital Products That Solve Real Problems.
+      </h2>
       {/* <p className="pb-2 dark:text-slate-300">
         Full Stack Web Developer &amp; Software Engineer 🙌
       </p> */}
@@ -24,8 +28,7 @@ export default function Introduction() {
         {/* Web Developer & Automation Enthusiast, I help individuals and small
           businesses build fast, modern websites and simple automation systems
           that solve real problems. */}
-        A product engineer focused on creating products and autonomous systems.
-        Also known as Adyfas.
+       Software Engineer focused on building useful web applications, business systems, and digital products from idea to implementation.
       </p>
       {/* <div className="flex items-center justify-start gap-5">
         <p className="pb-2 text-sm sm:text-base">
@@ -33,9 +36,9 @@ export default function Introduction() {
         </p>
       </div> */}
       <div className="flex items-center justify-start gap-5">
-        <Link to="/contact">
+        <Link to="/project">
           <button className="bg-black text-white dark:bg-white dark:text-black border border-black dark:border-white p-2 rounded-xl px-5 cursor-pointer hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-500 text-md hover:scale-101 my-2">
-            Talk With Me
+            Explore My Work
           </button>
         </Link>
 

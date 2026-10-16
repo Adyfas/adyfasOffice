@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { UsestateTheme } from "~/store/theme";
 
 type Theme = "light" | "dark" | "system";
 
@@ -33,6 +34,10 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
       } else {
         root.classList.add(currentTheme);
       }
+
+      // Satu-satunya penulis class light/dark adalah fungsi ini,
+      // jadi sinkronisasi zustand cukup di sini (tanpa observer tambahan).
+      UsestateTheme.getState().setIsLight(root.classList.contains("light"));
     };
 
     applyTheme(theme);

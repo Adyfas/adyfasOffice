@@ -9,10 +9,11 @@ import Snapshot from "~/components/about/Snapshot";
 import HighlightsAchievements from "~/components/about/HighlightsAchievements";
 import Reveal from "~/components/Reveal";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
+import MyJourney from "~/components/about/MyJourney";
 
 // Helper: dapatkan ucapan berdasarkan jam
 const getGreetingByHour = (
-  hour: number
+  hour: number,
 ): "morning" | "afternoon" | "evening" | "night" => {
   if (hour >= 5 && hour < 10) return "morning";
   if (hour >= 10 && hour < 14) return "afternoon";
@@ -21,50 +22,53 @@ const getGreetingByHour = (
 };
 
 // Mapping per bahasa
+
 const greetingsMap = {
   id: {
     morning: "Selamat pagi",
-    afternoon: "Selamat Siang",
-    evening: "Selamat Sore",
-    night: "Selamat Malam",
+    afternoon: "Selamat siang",
+    evening: "Selamat sore",
+    night: "Selamat malam",
   },
   jv: {
-    morning: "Sugeng Enjang",
-    afternoon: "Sugeng Sonten",
-    evening: "Sugeng Sonten",
-    night: "Sugeng ndalu",
+    morning: "Sugeng enjing",
+    afternoon: "Sugeng siang",
+    evening: "Sugeng sonten",
+    night: "Sugeng dalu",
   },
   su: {
     morning: "Wilujeng énjing",
-    afternoon: "Wilujeng Sonten",
-    evening: "Wilujeng Sonten",
-    night: "Wilujeng Wengi",
+    afternoon: "Wilujeng siang",
+    evening: "Wilujeng sonten",
+    night: "Wilujeng wengi",
   },
   en: {
     morning: "Good morning",
-    afternoon: "Good Afternoon",
-    evening: "Good Evening",
-    night: "Good Night",
+    afternoon: "Good afternoon",
+    evening: "Good evening",
+    night: "Good evening",
   },
   de: {
     morning: "Guten Morgen",
     afternoon: "Guten Tag",
     evening: "Guten Abend",
-    night: "Gute Nacht",
+    night: "Guten Abend",
   },
   ja: {
     morning: "おはようございます",
     afternoon: "こんにちは",
     evening: "こんばんは",
-    night: "おやすみなさい",
+    night: "こんばんは",
   },
 };
 
-export function meta({ }: Route.MetaArgs) {
-  const title = "About Ferdi Iskandar (Adyfas) | Full Stack Developer & Problem Solver";
-  const description = "Adyfas (Ferdi Iskandar) — Web developer & problem solver. Full-stack, backend-focused. Builds web apps, automation systems, REST APIs. 1st Runner-Up national web competitions. Shipping real projects.";
+export function meta({}: Route.MetaArgs) {
+  const title =
+    "About Ferdi Iskandar (Adyfas) | Full Stack Developer & Problem Solver";
+  const description =
+    "Adyfas (Ferdi Iskandar) — Web developer & problem solver. Full-stack, backend-focused. Builds web apps, automation systems, REST APIs. 1st Runner-Up national web competitions. Shipping real projects.";
   const url = `${SITE_URL}/about`;
-  
+
   return [
     { title },
     { name: "description", content: description },
@@ -117,13 +121,13 @@ export default function AboutPage() {
     return () => clearInterval(timer);
   }, [showBlurText, greetings.length]);
 
-  const greetingText = `${greetingsMap.en[timeKey]}🙌, Hi, I’m Adyfas (Ferdi Iskandar)`;
+  const greetingText = `${greetingsMap.en[timeKey]}🙌, Hi, I'm Ferdi Iskandar also known as Adyfas.`;
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6">
       {/* intro */}
       <section className="pt-8 pb-12">
-          <ClientOnly
+        <ClientOnly
           fallback={
             <h1 className="text-3xl font-bold text-left sm:text-5xl mb-8 dark:text-white">
               {greetingText}
@@ -170,19 +174,22 @@ export default function AboutPage() {
             )}
           </AnimatePresence>
 
-
-          <Reveal
-            y={20}
-            blur={10}
-            duration={0.5}
-            delay={1.4}
-            width="100%"
-          >
+          <Reveal y={20} blur={10} duration={0.5} delay={1.4} width="100%">
+            <h2 className="font-bold text-gray-900 dark:text-white text-xl sm:text-2xl">
+              A Little About Me
+            </h2>
             <p className="text-base sm:text-lg text-gray-600 dark:text-slate-300 leading-relaxed mt-4">
-             A Product Engineer build Software, automation systems, and APIs that streamline workflows.
+              I'm a full-stack developer with an interest in building web
+              applications, digital products, and software systems. My journey
+              began with curiosity about games and technology, which gradually
+              led me to explore how software works and how I could create things
+              of my own. Over time, that curiosity grew into a deeper interest
+              in web development, problem-solving, and product engineering.
+              Today, I'm continuing to explore how thoughtful design, reliable
+              systems, and emerging technologies can come together to create
+              useful digital experiences.
             </p>
           </Reveal>
-
         </ClientOnly>
       </section>
 
@@ -192,8 +199,9 @@ export default function AboutPage() {
         </p>
       </section> */}
 
-      <Snapshot />
-      <CareerSnapshot />
+      {/* <Snapshot />
+      <CareerSnapshot /> */}
+      <MyJourney />
       <HighlightsAchievements />
 
       <CalltoActionContact />
