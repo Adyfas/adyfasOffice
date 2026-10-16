@@ -12,7 +12,7 @@ export interface HashnodePost {
   categories: string[];
 }
 
-const BACKEND_URL = import.meta.env.VITE_API_DEV;
+const BACKEND_URL = import.meta.env.VITE_API;
 // || import.meta.env.VITE_API;
 
 export async function getHashnodePosts(): Promise<HashnodePost[]> {
