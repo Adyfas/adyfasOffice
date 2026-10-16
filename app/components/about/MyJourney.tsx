@@ -9,7 +9,7 @@ const MyJourney = () => {
   };
 
   return (
-    <Reveal y={20} blur={10} duration={0.5} delay={1.0} width="100%">
+    <Reveal y={20} blur={10} duration={0.5} delay={1.4} width="100%">
       <section className="relative flex items-start justify-start flex-col">
         {dataJourney.map((item, index) => (
           <Reveal

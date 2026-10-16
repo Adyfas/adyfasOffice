@@ -7,19 +7,13 @@ import { getHashnodePostBySlug, type HashnodePost } from "~/lib/hashnode";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 import type { Route } from "./+types/blogDetails";
 
-// Server loader: jalan saat prerender/SSR (build time) supaya meta
-// og:image terisi cover artikel untuk crawler. clientLoader di bawah
-// tetap dipakai untuk navigasi runtime di Firebase static hosting.
-export async function loader({ params }: Route.LoaderArgs) {
-  const slug = params.slug;
-  try {
-    const post = slug ? await getHashnodePostBySlug(slug) : null;
-    return { post };
-  } catch {
-    return { post: null };
-  }
-}
-
+// CATATAN: route ini dulu punya `loader` + `clientLoader`.
+// `loader` dihapus karena build Firebase pakai `ssr:false`, dan React Router
+// menolak route ber-`loader` yang tidak ikut prerender. Daftar halaman
+// /blog/:slug ikut prerender hanya kalau fetch RSS Hashnode saat build
+// berhasil — kalau RSS 403/down, build ikut meledak. Dengan hanya
+// `clientLoader`, prerender tetap mengisi meta og:image saat RSS hidup
+// (clientLoader jalan saat prerender), dan build tetap lolos saat RSS mati.
 export async function clientLoader({ params }: Route.LoaderArgs) {
   const slug = params.slug;
   const post = slug ? await getHashnodePostBySlug(slug) : null;
