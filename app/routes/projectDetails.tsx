@@ -15,7 +15,7 @@ import { Link } from "react-router";
 import { ProjectList } from "~/data/DataProject";
 import Reveal from "~/components/Reveal";
 import { motion } from "framer-motion";
-import { getHashnodePostBySlug, type HashnodePost } from "~/lib/hashnode";
+import { getPostBySlug, type Post } from "~/lib/content";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, absoluteUrl } from "~/lib/site";
 import TechText from "~/components/TechText";
 import { UsestateTheme } from "~/store/theme";
@@ -42,10 +42,10 @@ export async function loader({ params }: Route.LoaderArgs) {
   const local =
   ProjectList.find((p) => p.projectLink === `/project/${slug}`) ?? null;
   
-  let hashnode: HashnodePost | null = null;
+  let hashnode: Post | null = null;
   if (!local) {
     try {
-      hashnode = await getHashnodePostBySlug(slug);
+      hashnode = await getPostBySlug(slug);
     } catch {
       hashnode = null;
     }
@@ -104,10 +104,10 @@ export function meta({ data, params }: Route.MetaArgs) {
   }: Route.ComponentProps) {
     const slug = params.slug as string;
     const seededPost =
-    (loaderData as { hashnode?: HashnodePost | null } | undefined)?.hashnode ??
+    (loaderData as { hashnode?: Post | null } | undefined)?.hashnode ??
     null;
     const [mod, setMod] = useState<MdxModule | null>(null);
-    const [hashnodePost, setHashnodePost] = useState<HashnodePost | null>(
+    const [hashnodePost, setPost] = useState<Post | null>(
       seededPost,
     );
     const [loadedSlug, setLoadedSlug] = useState<string | null>(
@@ -217,7 +217,7 @@ export function meta({ data, params }: Route.MetaArgs) {
       setLoading(false);
       return;
     }
-    setHashnodePost(null);
+    setPost(null);
     setMod(null);
     setNotFound(false);
     setLoading(true);
@@ -236,9 +236,9 @@ export function meta({ data, params }: Route.MetaArgs) {
     }
 
     function fetchHashnode() {
-      getHashnodePostBySlug(slug).then((post) => {
+      getPostBySlug(slug).then((post) => {
         if (post) {
-          setHashnodePost(post);
+          setPost(post);
           setLoadedSlug(slug);
         } else {
           setNotFound(true);

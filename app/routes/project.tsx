@@ -4,7 +4,7 @@ import type { Route } from "../+types/root";
 import Reveal from "~/components/Reveal";
 import { Link } from "react-router";
 import CalltoActionContact from "~/components/CalltoActionContact";
-import { getProjectPosts, type HashnodePost } from "~/lib/hashnode";
+import { getProjectPosts, type Post } from "~/lib/content";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 
 export function meta({ }: Route.MetaArgs) {
@@ -29,13 +29,27 @@ export function meta({ }: Route.MetaArgs) {
   ];
 }
 
-export default function ProjectPage() {
-  const [hashnodeProjects, setHashnodeProjects] = useState<HashnodePost[]>([]);
+/**
+ * Loader wajib ada: prerender (ssr:false) hanya menjalankan server `loader`.
+ * Tanpa ini halaman /project ter-prerender sebagai cangkang kosong - daftar
+ * project baru muncul setelah JS berjalan, sehingga crawler tidak melihat
+ * tautan ke project mana pun.
+ */
+export async function loader({}: Route.LoaderArgs) {
+  const posts = await getProjectPosts();
+  return { posts };
+}
+
+export default function ProjectPage({ loaderData }: Route.ComponentProps) {
+  const initialPosts = (loaderData as { posts?: Post[] } | undefined)?.posts ?? [];
+  const [hashnodeProjects, setHashnodeProjects] =
+    useState<Post[]>(initialPosts);
   useEffect(() => {
+    if (initialPosts.length > 0) return;
     getProjectPosts().then((data) => {
       setHashnodeProjects(data);
     });
-  }, []);
+  }, [initialPosts.length]);
 
   const filter = [...ProjectList].sort(
     (a, b) => (b.tech?.length ?? 0) - (a.tech?.length ?? 0)

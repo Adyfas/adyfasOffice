@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import { getBlogOnlyPosts, type HashnodePost } from "~/lib/hashnode";
+import { getBlogOnlyPosts, type Post } from "~/lib/content";
 import type { Route } from "./+types/blog";
 import CardBlog from "~/components/blog/CardBlog";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
@@ -37,15 +37,28 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function BlogPage() {
-  const [posts, setPosts] = useState<HashnodePost[]>([]);
-  const [loading, setLoading] = useState(true);
+/**
+ * Loader wajib ada: prerender (ssr:false) hanya menjalankan server `loader`.
+ * Tanpa ini halaman /blog ter-prerender sebagai cangkang kosong - isi daftar
+ * artikel baru muncul setelah JS berjalan, sehingga crawler tidak melihat
+ * tautan ke artikel mana pun.
+ */
+export async function loader({}: Route.LoaderArgs) {
+  const posts = await getBlogOnlyPosts();
+  return { posts };
+}
+
+export default function BlogPage({ loaderData }: Route.ComponentProps) {
+  const initialPosts = (loaderData as { posts?: Post[] } | undefined)?.posts ?? [];
+  const [posts, setPosts] = useState<Post[]>(initialPosts);
+  const [loading, setLoading] = useState(initialPosts.length === 0);
   useEffect(() => {
+    if (initialPosts.length > 0) return;
     getBlogOnlyPosts().then((data) => {
       setPosts(data);
       setLoading(false);
     });
-  }, []);
+  }, [initialPosts.length]);
 
   const jsonLd = {
     "@context": "https://schema.org",

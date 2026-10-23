@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { ProjectList } from "~/data/DataProject";
 import Reveal from "../Reveal";
-import { getBigProjects, type HashnodePost } from "~/lib/hashnode";
+import { getBigProjects, type Post } from "~/lib/content";
 
 export default function FeatureProject() {
   const [hashnodeBigProjects, setHashnodeBigProjects] = useState<
-    HashnodePost[]
+    Post[]
   >([]);
 
   useEffect(() => {

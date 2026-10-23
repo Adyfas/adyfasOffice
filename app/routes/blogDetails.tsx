@@ -1,27 +1,42 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams, Link, useLoaderData } from "react-router";
 import { ArrowLeft, Calendar, User } from "lucide-react";
 import Reveal from "~/components/Reveal";
 import CalltoActionContact from "~/components/CalltoActionContact";
-import { getHashnodePostBySlug, type HashnodePost } from "~/lib/hashnode";
+import LivePostBridge from "~/components/tina/LivePostBridge";
+import {
+  getPostBySlug,
+  getTinaDocument,
+  mapTinaPost,
+  type Post,
+} from "~/lib/content";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 import type { Route } from "./+types/blogDetails";
 
-// CATATAN: route ini dulu punya `loader` + `clientLoader`.
-// `loader` dihapus karena build Firebase pakai `ssr:false`, dan React Router
-// menolak route ber-`loader` yang tidak ikut prerender. Daftar halaman
-// /blog/:slug ikut prerender hanya kalau fetch RSS Hashnode saat build
-// berhasil — kalau RSS 403/down, build ikut meledak. Dengan hanya
-// `clientLoader`, prerender tetap mengisi meta og:image saat RSS hidup
-// (clientLoader jalan saat prerender), dan build tetap lolos saat RSS mati.
+// loader WAJIB ada: prerender (ssr:false) HANYA menjalankan server `loader`,
+// bukan `clientLoader` — tanpa ini halaman blog ter-prerender sebagai cangkang
+// kosong (tanpa konten/meta). `clientLoader` di bawah menangani navigasi
+// runtime di Firebase static hosting. Validasi ssr:false menolak route
+// ber-`loader` yang tidak ikut prerender, jadi daftar slug prerender harus
+// selalu lengkap (lihat fallback di react-router.config.ts).
+export async function loader({ params }: Route.LoaderArgs) {
+  const slug = params.slug;
+  try {
+    const post = slug ? await getPostBySlug(slug) : null;
+    return { post };
+  } catch {
+    return { post: null };
+  }
+}
+
 export async function clientLoader({ params }: Route.LoaderArgs) {
   const slug = params.slug;
-  const post = slug ? await getHashnodePostBySlug(slug) : null;
+  const post = slug ? await getPostBySlug(slug) : null;
   return { post };
 }
 
 export function meta({ data }: Route.MetaArgs) {
-  const post = data?.post as HashnodePost | undefined;
+  const post = data?.post as Post | undefined;
   const title = post?.title ? `${post.title} | Ferdi Iskandar` : "Blog Article | Ferdi Iskandar (Adyfas)";
   const description = post?.brief || "Baca artikel lengkap di Adyfas Blog.";
   const imageUrl = post?.coverImage?.url || DEFAULT_OG_IMAGE;
@@ -141,18 +156,51 @@ const typographyStyles = `
 
 export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
   const { slug } = useParams();
-  const initialPost = (loaderData as any)?.post as HashnodePost | null;
-  const [post, setPost] = useState<HashnodePost | null>(initialPost);
+  const initialPost = (loaderData as any)?.post as Post | null;
+  const [post, setPost] = useState<Post | null>(initialPost);
   const [loading, setLoading] = useState(!initialPost);
+  const [tinaDoc, setTinaDoc] = useState<{
+    query: string;
+    variables: Record<string, unknown>;
+    data: Record<string, unknown>;
+  } | null>(null);
 
   useEffect(() => {
     if (!post && slug) {
-      getHashnodePostBySlug(slug).then((data) => {
+      getPostBySlug(slug).then((data) => {
         setPost(data);
         setLoading(false);
       });
     }
   }, [slug, post]);
+
+  /**
+   * Live preview TinaCMS hanya perlu berjalan saat halaman ini dibuka di
+   * dalam iframe admin Tina. Di luar iframe tidak ada request tambahan,
+   * jadi pengunjung biasa tidak pernah memuat data mentah Tina.
+   */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.self === window.top) return;
+    if (!slug) return;
+
+    let cancelled = false;
+    getTinaDocument(slug).then((doc) => {
+      if (!cancelled && doc) setTinaDoc(doc);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
+  /** Data terbaru dari editor Tina ditulis ke state, article UI ikut berubah. */
+  const handleTinaChange = useCallback((liveData: Record<string, unknown>) => {
+    const next = mapTinaPost(
+      (liveData?.post ?? null) as Parameters<typeof mapTinaPost>[0],
+    );
+    if (next) setPost(next);
+  }, []);
 
   if (loading) {
     return (
@@ -254,6 +302,15 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
           className="blog-content w-full"
           dangerouslySetInnerHTML={{ __html: post.content || post.brief }}
         />
+
+        {tinaDoc && (
+          <LivePostBridge
+            query={tinaDoc.query}
+            variables={tinaDoc.variables}
+            data={tinaDoc.data}
+            onChange={handleTinaChange}
+          />
+        )}
 
         <div className="mt-12 pt-8 border-t border-gray-200 dark:border-white/10">
           <CalltoActionContact />

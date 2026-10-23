@@ -27,6 +27,11 @@ export const dataIconSidebar: routeSidebar[] = [
     route: "/blog",
     icon: "BookOpenText",
   },
+  // {
+  //   name: "AdyLab",
+  //   route: "/blog",
+  //   icon: "FlaskConical",
+  // },
   {
     name: "Contact",
     route: "/contact",
