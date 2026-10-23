@@ -1,4 +1,5 @@
 import { markdownToHtml } from "./markdown";
+import { API_BASE, resolveMediaUrl } from "./api";
 
 /**
  * Lapisan data konten blog.
@@ -29,14 +30,21 @@ export interface Post {
   categories: string[];
 }
 
-const API_BASE = import.meta.env.VITE_API ?? "";
 const TINA_GRAPHQL_URL = `${API_BASE}/tina/graphql`;
 const POSTS_URL = `${API_BASE}/posts`;
 
-/** Host API tanpa suffix /api - dipakai untuk membuat URL media absolut. */
-const API_ORIGIN = API_BASE.replace(/\/api\/?$/, "");
-
-export const PROJECT_TAGS: string[] = ["project", "blog-project"];
+/**
+ * Tag yang menandai sebuah post sebagai "project".
+ * `project-blog` ikut ditoleransi karena itu tag lama dari migrasi Hashnode
+ * (kebalikan dari `blog-project`) - tanpa ini post tersebut salah masuk /blog.
+ */
+export const PROJECT_TAGS: string[] = [
+  "project",
+  "blog-project",
+  "project-blog",
+  "big-project",
+  "big-project-adyfas",
+];
 export const BIG_PROJECT_TAG = "big-project-adyfas";
 
 /**
@@ -102,18 +110,26 @@ export interface TinaPostNode {
   cover?: string | null;
 }
 
-function readCover(cover: TinaPostNode["cover"]): string {
-  if (!cover) return "";
-  return cover;
+/**
+ * TinaCloud mengembalikan media sebagai URL CDN
+ * (https://assets.tina.io/<clientId>/__staging/main/__file/cover.jpg).
+ * Path `__staging` itu tidak stabil, sedangkan file aslinya selalu ikut
+ * ter-commit di `public/uploads/` repo backend. Jadi kita pakai media
+ * milik sendiri saja.
+ */
+function normalizeMedia(value: string): string {
+  const fromTinaCdn = value.match(/\/__file\/([^/?#]+)/);
+  if (fromTinaCdn) return `/uploads/${fromTinaCdn[1]}`;
+  return value;
 }
 
-/** Path relatif seperti /uploads/cover.jpg -> URL absolut. */
-export function resolveMediaUrl(value: string): string {
-  if (!value) return "";
-  if (/^https?:\/\//i.test(value)) return value;
-  if (!API_ORIGIN) return value;
-  return `${API_ORIGIN}${value.startsWith("/") ? "" : "/"}${value}`;
+function readCover(cover: TinaPostNode["cover"]): string {
+  if (!cover) return "";
+  return normalizeMedia(cover);
 }
+
+/** Path relatif seperti /uploads/cover.jpg -> URL absolut (lihat lib/api.ts). */
+export { resolveMediaUrl } from "./api";
 
 function toPost(node: TinaPostNode): Post {
   const cover = readCover(node.cover);

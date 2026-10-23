@@ -102,7 +102,13 @@ async function generateSitemap() {
   // Klasifikasi kategori disamakan dengan react-router.config.ts + app/lib/content.ts:
   // tag project/blog-project/big-project-adyfas -> /project/, sisanya -> /blog/.
   // Salah tag = URL salah di sitemap, jadi jaga tag tetap bersih.
-  const PROJECT_TAGS = ["project", "blog-project", "big-project-adyfas"];
+  const PROJECT_TAGS = [
+    "project",
+    "blog-project",
+    "project-blog",
+    "big-project",
+    "big-project-adyfas",
+  ];
   let contentRoutes = [];
   try {
     const apiBase = buildEnv.VITE_API || "https://api-adyfasoffice.vercel.app/api";

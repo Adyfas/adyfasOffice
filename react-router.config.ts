@@ -7,9 +7,15 @@ import { ProjectList } from "./app/data/DataProject";
 // Untuk Firebase Hosting, kita perlu disable SSR karena Firebase Hosting hanya support static files
 const isFirebaseBuild = process.env.FIREBASE_BUILD === "true";
 
-const PROJECT_TAGS = ["project", "blog-project"];
+const PROJECT_TAGS = [
+  "project",
+  "blog-project",
+  "project-blog",
+  "big-project",
+  "big-project-adyfas",
+];
 
-// Tag yang di `lib/content.ts` juga dihitung sebagai project.
+// Tag "project unggulan" (dipakai juga di lib/content.ts).
 const BIG_PROJECT_TAG = "big-project-adyfas";
 
 function isProjectCategory(cat: string): boolean {

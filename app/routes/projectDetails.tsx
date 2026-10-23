@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import type { Route } from "./+types/projectDetails";
 import MdxLayoutPage from "~/components/MdxLayout";
 import { projectMdxMap, type ProjectSlug } from "~/data/SlugProject";
@@ -16,6 +16,8 @@ import { ProjectList } from "~/data/DataProject";
 import Reveal from "~/components/Reveal";
 import { motion } from "framer-motion";
 import { getPostBySlug, type Post } from "~/lib/content";
+import { getTinaDocument, mapTinaPost } from "~/lib/content";
+import LivePostBridge from "~/components/tina/LivePostBridge";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE, absoluteUrl } from "~/lib/site";
 import TechText from "~/components/TechText";
 import { UsestateTheme } from "~/store/theme";
@@ -115,6 +117,11 @@ export function meta({ data, params }: Route.MetaArgs) {
     );
     const [loading, setLoading] = useState(!seededPost);
     const [notFound, setNotFound] = useState(false);
+    const [tinaDoc, setTinaDoc] = useState<{
+      query: string;
+      variables: Record<string, unknown>;
+      data: Record<string, unknown>;
+    } | null>(null);
     const isLight = UsestateTheme((s) => s.isLight);
 
     const typographyStyles = `
@@ -247,6 +254,33 @@ export function meta({ data, params }: Route.MetaArgs) {
       });
     }
   }, [slug]);
+
+  /**
+   * Live preview TinaCMS. Hanya aktif saat halaman dibuka di iframe admin Tina
+   * (window.self !== window.top), jadi pengunjung biasa tidak menambah request.
+   */
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (window.self === window.top) return;
+    if (!slug) return;
+
+    let cancelled = false;
+    getTinaDocument(slug).then((doc) => {
+      if (!cancelled && doc) setTinaDoc(doc);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [slug]);
+
+  /** Data terbaru dari editor Tina ditulis ke state supaya UI ikut berubah. */
+  const handleTinaChange = useCallback((liveData: Record<string, unknown>) => {
+    const next = mapTinaPost(
+      (liveData?.post ?? null) as Parameters<typeof mapTinaPost>[0],
+    );
+    if (next) setPost(next);
+  }, []);
 
   if (loading) {
     return (
@@ -489,6 +523,15 @@ export function meta({ data, params }: Route.MetaArgs) {
                   __html: hashnodePost.content || hashnodePost.brief,
                 }}
               />
+
+              {tinaDoc && (
+                <LivePostBridge
+                  query={tinaDoc.query}
+                  variables={tinaDoc.variables}
+                  data={tinaDoc.data}
+                  onChange={handleTinaChange}
+                />
+              )}
             </motion.div>
           </article>
 
