@@ -119,96 +119,132 @@ export function meta({ data, params }: Route.MetaArgs) {
 
     const typographyStyles = `
     .blog-content {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.8;
-    color: #4b5563; /* text-gray-600 */
-  }
-  .dark .blog-content {
-    color: #d1d5db; /* text-gray-300 */
-  }
-  .blog-content p {
-    margin-top: 1.25rem;
-    margin-bottom: 1.25rem;
-  }
-  .blog-content h1, .blog-content h2, .blog-content h3 {
-    font-family: "Inter", sans-serif;
-    font-weight: 700;
-    color: #111827;
-    margin-top: 2.25rem;
-    margin-bottom: 0.75rem;
-    letter-spacing: -0.02em;
-  }
-  .dark .blog-content h1, .dark .blog-content h2, .dark .blog-content h3 {
-    color: #f9fafb;
-  }
-  .blog-content h1 { font-size: 1.75rem; line-height: 2.25rem; }
-  .blog-content h2 { font-size: 1.5rem; line-height: 2rem; }
-  .blog-content h3 { font-size: 1.25rem; line-height: 1.75rem; }
-  
-  .blog-content blockquote {
-    border-left: 4px solid #3b82f6;
-    padding-left: 1.25rem;
-    margin: 1.75rem 0;
-    font-style: italic;
-    color: #4b5563;
-  }
-  .dark .blog-content blockquote {
-    color: #9ca3af;
-  }
-  .blog-content img {
-    width: 100%;
-    height: auto;
-    margin: 2rem 0;
-    border-radius: 0.75rem;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05);
-  }
-  .dark .blog-content img {
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
-  }
-
-  .blog-content pre {
-    background: #f3f4f6;
-    padding: 1.25rem;
-    border-radius: 0.75rem;
-    overflow-x: auto;
-    font-size: 0.875rem;
-    line-height: 1.5rem;
-    margin: 1.75rem 0;
-    border: 1px solid #e5e7eb;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  }
-  .dark .blog-content pre {
-    background: #111827;
-    border-color: #1f2937;
-  }
-  .blog-content code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.875rem;
-  }
-  .blog-content p > code {
-    background: #f3f4f6;
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.25rem;
-    color: #ef4444;
-  }
-  .dark .blog-content p > code {
-    background: #1f2937;
-    color: #f87171;
-  }
-  .blog-content ul {
-    list-style-type: disc;
-    margin: 1.25rem 0;
-    padding-left: 1.5rem;
-  }
-  .blog-content ol {
-    list-style-type: decimal;
-    margin: 1.25rem 0;
-    padding-left: 1.5rem;
-  }
-  .blog-content li {
-    margin-top: 0.5rem;
-  }
+      font-family: Georgia, "Times New Roman", "Charter", serif;
+      font-size: 20px;
+      line-height: 1.7;
+      color: #242424;
+      letter-spacing: -0.01em;
+    }
+    .dark .blog-content {
+      color: #e0e0e0;
+    }
+    .blog-content p {
+      margin-top: 28px;
+      margin-bottom: 0;
+    }
+    .blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4 {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      line-height: 1.3;
+    }
+    .dark .blog-content h1, .dark .blog-content h2, .dark .blog-content h3, .dark .blog-content h4 {
+      color: #ffffff;
+    }
+    .blog-content h1 { font-size: 32px; line-height: 1.2; }
+    .blog-content h2 { font-size: 26px; line-height: 1.3; }
+    .blog-content h3 { font-size: 22px; line-height: 1.4; }
+    .blog-content h4 { font-size: 19px; line-height: 1.4; }
+    .blog-content blockquote {
+      border-left: 3px solid #e5e5e5;
+      padding-left: 24px;
+      margin: 32px 0;
+      font-style: italic;
+      color: #6b6b6b;
+      font-size: 18px;
+    }
+    .dark .blog-content blockquote {
+      border-left-color: #333;
+      color: #a0a0a0;
+    }
+    .blog-content img {
+      width: 100%;
+      height: auto;
+      margin: 36px 0;
+      border-radius: 4px;
+    }
+    .blog-content a {
+      text-decoration: underline;
+      color: #1a8917;
+      text-underline-offset: 2px;
+    }
+    .dark .blog-content a {
+      color: #4ade80;
+    }
+    .blog-content pre {
+      background: #f7f7f7;
+      padding: 20px 24px;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 28px 0;
+      font-family: "SF Mono", Monaco, "Cascadia Code", "Consolas", monospace;
+      border: 1px solid #e8e8e8;
+    }
+    .dark .blog-content pre {
+      background: #1e1e1e;
+      border-color: #333;
+      color: #d4d4d4;
+    }
+    .blog-content code {
+      font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+      font-size: 0.85em;
+    }
+    .blog-content p > code {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #d73a49;
+    }
+    .dark .blog-content p > code {
+      background: #2d2d2d;
+      color: #ff7b72;
+    }
+    .blog-content ul, .blog-content ol {
+      margin: 24px 0;
+      padding-left: 28px;
+    }
+    .blog-content ul { list-style-type: disc; }
+    .blog-content ol { list-style-type: decimal; }
+    .blog-content li {
+      margin-top: 8px;
+      line-height: 1.7;
+    }
+    .blog-content hr {
+      border: none;
+      border-top: 1px solid #e5e5e5;
+      margin: 40px 0;
+    }
+    .dark .blog-content hr {
+      border-top-color: #333;
+    }
+    .blog-content strong { font-weight: 700; }
+    .blog-content em { font-style: italic; }
+    .blog-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      font-size: 18px;
+    }
+    .blog-content th, .blog-content td {
+      padding: 12px 16px;
+      border: 1px solid #e5e5e5;
+      text-align: left;
+    }
+    .blog-content th {
+      background: #f7f7f7;
+      font-weight: 600;
+    }
+    .dark .blog-content th, .dark .blog-content td {
+      border-color: #333;
+    }
+    .dark .blog-content th {
+      background: #1e1e1e;
+    }
 `;
 
   useEffect(() => {

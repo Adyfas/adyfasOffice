@@ -51,91 +51,131 @@ export function meta({ data }: Route.MetaArgs) {
 
 const typographyStyles = `
   .blog-content {
-    font-family: Georgia, "Times New Roman", Times, serif;
-    font-size: 18px;
-    line-height: 1.75;
-    color: rgba(55, 55, 55, 1);
+    font-family: Georgia, "Times New Roman", "Charter", serif;
+    font-size: 20px;
+    line-height: 1.7;
+    color: #242424;
+    letter-spacing: -0.01em;
   }
   .dark .blog-content {
-    color: rgba(210, 210, 210, 1);
+    color: #e0e0e0;
   }
   .blog-content p {
-    margin-top: 24px;
-    margin-bottom: 16px;
+    margin-top: 28px;
+    margin-bottom: 0;
   }
   .blog-content h1, .blog-content h2, .blog-content h3, .blog-content h4 {
-    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-weight: 700;
-    color: rgba(30, 30, 30, 1);
-    margin-top: 36px;
+    color: #1a1a1a;
+    margin-top: 48px;
     margin-bottom: 16px;
     letter-spacing: -0.02em;
+    line-height: 1.3;
   }
   .dark .blog-content h1, .dark .blog-content h2, .dark .blog-content h3, .dark .blog-content h4 {
-    color: rgba(255, 255, 255, 1);
+    color: #ffffff;
   }
-  .blog-content h1 { font-size: 28px; line-height: 34px; }
-  .blog-content h2 { font-size: 24px; line-height: 30px; }
-  .blog-content h3 { font-size: 20px; line-height: 26px; }
+  .blog-content h1 { font-size: 32px; line-height: 1.2; }
+  .blog-content h2 { font-size: 26px; line-height: 1.3; }
+  .blog-content h3 { font-size: 22px; line-height: 1.4; }
+  .blog-content h4 { font-size: 19px; line-height: 1.4; }
   .blog-content blockquote {
-    border-left: 3px solid rgba(0, 0, 0, 0.8);
-    padding-left: 20px;
-    margin: 28px 0;
+    border-left: 3px solid #e5e5e5;
+    padding-left: 24px;
+    margin: 32px 0;
     font-style: italic;
-    color: rgba(117, 117, 117, 1);
+    color: #6b6b6b;
+    font-size: 18px;
   }
   .dark .blog-content blockquote {
-    border-left-color: rgba(255, 255, 255, 0.8);
-    color: rgba(168, 168, 168, 1);
+    border-left-color: #333;
+    color: #a0a0a0;
   }
   .blog-content img {
     width: 100%;
     height: auto;
-    margin: 32px 0;
-    border-radius: 8px;
+    margin: 36px 0;
+    border-radius: 4px;
   }
   .blog-content a {
     text-decoration: underline;
-    color: #2563eb;
-    text-underline-offset: 3px;
+    color: #1a8917;
+    text-underline-offset: 2px;
   }
   .dark .blog-content a {
-    color: #60a5fa;
+    color: #4ade80;
   }
   .blog-content pre {
-    background: #f4f4f5;
-    padding: 18px;
-    border-radius: 8px;
+    background: #f7f7f7;
+    padding: 20px 24px;
+    border-radius: 6px;
     overflow-x: auto;
-    font-size: 14px;
-    line-height: 22px;
-    margin-top: 24px;
-    font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 28px 0;
+    font-family: "SF Mono", Monaco, "Cascadia Code", "Consolas", monospace;
+    border: 1px solid #e8e8e8;
   }
   .dark .blog-content pre {
-    background: rgba(255, 255, 255, 0.08);
+    background: #1e1e1e;
+    border-color: #333;
+    color: #d4d4d4;
   }
   .blog-content code {
     font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
-    font-size: 14px;
+    font-size: 0.85em;
   }
   .blog-content p > code {
-    background: #e4e4e7;
+    background: #f0f0f0;
     padding: 2px 6px;
     border-radius: 4px;
+    color: #d73a49;
   }
   .dark .blog-content p > code {
-    background: rgba(255, 255, 255, 0.12);
+    background: #2d2d2d;
+    color: #ff7b72;
   }
   .blog-content ul, .blog-content ol {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-left: 24px;
+    margin: 24px 0;
+    padding-left: 28px;
   }
   .blog-content ul { list-style-type: disc; }
   .blog-content ol { list-style-type: decimal; }
   .blog-content li {
     margin-top: 8px;
+    line-height: 1.7;
+  }
+  .blog-content hr {
+    border: none;
+    border-top: 1px solid #e5e5e5;
+    margin: 40px 0;
+  }
+  .dark .blog-content hr {
+    border-top-color: #333;
+  }
+  .blog-content strong { font-weight: 700; }
+  .blog-content em { font-style: italic; }
+  .blog-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0;
+    font-size: 18px;
+  }
+  .blog-content th, .blog-content td {
+    padding: 12px 16px;
+    border: 1px solid #e5e5e5;
+    text-align: left;
+  }
+  .blog-content th {
+    background: #f7f7f7;
+    font-weight: 600;
+  }
+  .dark .blog-content th, .dark .blog-content td {
+    border-color: #333;
+  }
+  .dark .blog-content th {
+    background: #1e1e1e;
   }
 `;
 
