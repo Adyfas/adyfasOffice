@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link, useLoaderData } from "react-router";
+import { useParams, Link } from "react-router";
 import { ArrowLeft, Calendar, User } from "lucide-react";
 import Reveal from "~/components/Reveal";
 import CalltoActionContact from "~/components/CalltoActionContact";

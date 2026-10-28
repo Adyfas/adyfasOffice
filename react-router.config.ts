@@ -1,47 +1,52 @@
 import type { Config } from "@react-router/dev/config";
 import { vercelPreset } from "@vercel/react-router/vite";
 import { ProjectList } from "./app/data/DataProject";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Untuk Firebase Hosting, kita perlu disable SSR karena Firebase Hosting hanya support static files
 const isFirebaseBuild = process.env.FIREBASE_BUILD === "true";
 
 const PROJECT_TAGS = ["project", "blog-project"];
 
-function stripCdata(value: string): string {
-  return value.replace(/<!\[CDATA\[(.*?)\]\]>/gs, "$1").trim();
-}
+/**
+ * Scan file Markdown di backend repo untuk dapat slug blog/project.
+ * File ada di ../backend-adyfasofice/content/posts/*.md
+ * Ini tidak butuh backend jalan — cukup baca file dari repo.
+ */
+function scanMarkdownSlugs(): { projects: string[]; blogs: string[] } {
+  const postsDir = path.join(__dirname, "..", "backend-adyfasofice", "content", "posts");
+  const projects: string[] = [];
+  const blogs: string[] = [];
 
-// Slug Hashnode diambil dari RSS publik (tidak butuh API key / .env),
-// supaya daftar halaman prerender selalu mengikuti post terbaru.
-// Gagal fetch = fallback ke slug lokal, build tidak boleh gagal.
-async function fetchHashnodeSlugs(): Promise<{ projects: string[]; blogs: string[] }> {
-  const fallback = { projects: [] as string[], blogs: [] as string[] };
-  try {
-    const res = await fetch("https://adyfas-blog.hashnode.dev/rss.xml");
-    if (!res.ok) return fallback;
-    const xml = await res.text();
-    const items = xml.match(/<item>[\s\S]*?<\/item>/g) ?? [];
-    const projects: string[] = [];
-    const blogs: string[] = [];
-    for (const item of items) {
-      const linkMatch = item.match(
-        /<link>\s*https?:\/\/[^<]*?hashnode\.dev\/([A-Za-z0-9-]+)\s*<\/link>/
-      );
-      if (!linkMatch) continue;
-      const slug = linkMatch[1];
-      const categories = [...item.matchAll(/<category[^>]*>([\s\S]*?)<\/category>/g)].map(
-        (m) => stripCdata(m[1]).toLowerCase()
-      );
-      if (categories.some((c) => PROJECT_TAGS.includes(c))) {
-        projects.push(slug);
-      } else {
-        blogs.push(slug);
-      }
-    }
-    return { projects, blogs };
-  } catch {
-    return fallback;
+  if (!fs.existsSync(postsDir)) {
+    console.warn(`[scanMarkdownSlugs] Directory not found: ${postsDir}`);
+    return { projects: [], blogs: [] };
   }
+
+  const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".md"));
+
+  for (const file of files) {
+    const slug = file.replace(".md", "");
+    const content = fs.readFileSync(path.join(postsDir, file), "utf-8");
+    // Extract tags dari frontmatter
+    const tagsMatch = content.match(/^tags:\s*\[([^\]]*)\]/m);
+    const tags = tagsMatch
+      ? tagsMatch[1].split(",").map((t) => t.trim().replace(/"/g, "").toLowerCase())
+      : [];
+
+    if (tags.some((t) => PROJECT_TAGS.includes(t))) {
+      projects.push(slug);
+    } else {
+      blogs.push(slug);
+    }
+  }
+
+  return { projects, blogs };
 }
 
 export default {
@@ -66,7 +71,7 @@ export default {
     for (const p of ProjectList) {
       paths.add(p.projectLink);
     }
-    const { projects, blogs } = await fetchHashnodeSlugs();
+    const { projects, blogs } = scanMarkdownSlugs();
     for (const slug of projects) paths.add(`/project/${slug}`);
     for (const slug of blogs) paths.add(`/blog/${slug}`);
     return [...paths];

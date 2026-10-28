@@ -1,5 +1,4 @@
 import React from "react";
-import { Bookmark, MoreHorizontal } from "lucide-react";
 
 export type Blog = {
   title: string;
