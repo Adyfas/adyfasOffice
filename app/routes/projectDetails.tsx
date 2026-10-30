@@ -10,6 +10,7 @@ import {
   Code2,
   Timer,
   User,
+  ArrowLeft,
 } from "lucide-react";
 import { Link } from "react-router";
 import { ProjectList } from "~/data/DataProject";
@@ -442,14 +443,15 @@ export function meta({ data, params }: Route.MetaArgs) {
     return (
       <MdxLayoutPage>
         <style>{typographyStyles}</style>
-        <section className="relative blog-content max-w-4xl mx-auto px-4 sm:px-6 py-6">
+        <section className="relative  max-w-4xl mx-auto px-4 sm:px-6 py-6">
           <header className="py-6 text-start space-y-6 z-99 relative">
-            <Link to={"/project"}>
-              <button className="relative text-start my-2 flex items-center gap-2">
-                <MoveLeft className="text-gray-800 dark:text-white group-hover:scale-110 transition-transform" />
-                Back{" "}
-              </button>
-            </Link>
+           <Link
+            to="/project"
+            className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white transition-colors mb-8"
+          >
+            <ArrowLeft size={16} />
+            Back to project
+          </Link>
             <Reveal y={30} blur={10} duration={1} width="100%">
               <div className="space-y-3">
                 <div className="relative h-40 right-5">
@@ -565,7 +567,7 @@ export function meta({ data, params }: Route.MetaArgs) {
     <MdxLayoutPage>
       <style>{typographyStyles}</style>
 
-      <section className="relative blog-content max-w-4xl mx-auto px-4 sm:px-6 py-6">
+      <section className="relative max-w-4xl mx-auto px-4 sm:px-6 py-6">
         <header className="py-6 text-start space-y-6 z-99 relative">
           <div className="flex items-center justify-start gap-2">
             Back{" "}
@@ -609,7 +611,7 @@ export function meta({ data, params }: Route.MetaArgs) {
           </Reveal>
         </header>
 
-        <article className="prose dark:prose-invert max-w-none mt-6">
+        <article className="blog-content prose dark:prose-invert max-w-none mt-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
