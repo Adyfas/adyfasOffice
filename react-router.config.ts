@@ -14,6 +14,51 @@ const isFirebaseBuild = process.env.FIREBASE_BUILD === "true";
 const PROJECT_TAGS = ["project", "blog-project"];
 
 /**
+ * Ambil nilai tags dari frontmatter Markdown.
+ * HARUS mendukung dua gaya YAML, karena style block-list dulu tidak terbaca
+ * (regex lama `tags: [ ... ]` saja) sehingga SEMUA post dikira blog dan
+ * halaman /project/<slug>-nya tidak pernah ikut prerender:
+ *
+ *   tags: ["project", "blog"]        <- inline
+ *   tags:                            <- block list
+ *     - "project"
+ *     - "blog-project"
+ */
+function parseFrontmatterTags(content: string): string[] {
+  const frontmatter = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  if (!frontmatter) return [];
+
+  const body = frontmatter[1];
+  const clean = (value: string) =>
+    value.trim().replace(/^["']|["']$/g, "").trim().toLowerCase();
+
+  // inline: tags: ["a", "b"] / tags: a, b
+  const inline = body.match(/^tags:[ \t]*([^\r\n]+)$/m);
+  if (inline) {
+    const value = inline[1].trim();
+    if (value && value !== "[]") {
+      return value
+        .replace(/^\s*\[|\]\s*$/g, "")
+        .split(",")
+        .map(clean)
+        .filter(Boolean);
+    }
+  }
+
+  // block list: tags:\n  - "a"\n  - "b"
+  const block = body.match(/^tags:[ \t]*\r?\n((?:[ \t]*-[^\r\n]*(?:\r?\n|$))+)/m);
+  if (block) {
+    return block[1]
+      .split(/\r?\n/)
+      .map((line) => line.replace(/^[ \t]*-[ \t]*/, ""))
+      .map(clean)
+      .filter(Boolean);
+  }
+
+  return [];
+}
+
+/**
  * Scan file Markdown di backend repo untuk dapat slug blog/project.
  * File ada di ../backend-adyfasofice/content/posts/*.md
  * Ini tidak butuh backend jalan — cukup baca file dari repo.
@@ -31,13 +76,11 @@ function scanMarkdownSlugs(): { projects: string[]; blogs: string[] } {
   const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".md"));
 
   for (const file of files) {
-    const slug = file.replace(".md", "");
+    // Slug mengikuti frontmatter kalau ada, fallback ke nama file.
     const content = fs.readFileSync(path.join(postsDir, file), "utf-8");
-    // Extract tags dari frontmatter
-    const tagsMatch = content.match(/^tags:\s*\[([^\]]*)\]/m);
-    const tags = tagsMatch
-      ? tagsMatch[1].split(",").map((t) => t.trim().replace(/"/g, "").toLowerCase())
-      : [];
+    const slugMatch = content.match(/^slug:[ \t]*["']?([^"'\r\n]+)["']?[ \t]*$/m);
+    const slug = (slugMatch?.[1] || file.replace(/\.md$/, "")).trim();
+    const tags = parseFrontmatterTags(content);
 
     if (tags.some((t) => PROJECT_TAGS.includes(t))) {
       projects.push(slug);
