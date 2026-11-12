@@ -10,6 +10,7 @@ gradient: sunset
 
 ## Abstract
 ![Fispeak Icon](/images/lab/image/FISPEAK.png)
+![Fispeak Intro](/images/lab/video/fispeak.mp4)
 FiSpeak is a desktop application that captures meeting audio and presents translated speech in an always-on-top interface. This case study examines how the system connects native audio capture, audio normalization, voice activity detection (VAD), speech-to-text (STT), machine translation (MT), rendering, and local persistence.
 
 The local inference path uses faster-whisper for STT and NLLB-200 for MT. Electron owns the desktop lifecycle, capture coordination, IPC, and SQLite database. A Python sidecar owns the audio inference pipeline. A Swift helper captures macOS system audio.
@@ -471,3 +472,4 @@ The current design offers a local inference path and a clear separation of proce
 ## Github Opensource
 
 [Fispeak](https://github.com/Adyfas/Fispeak.git)
+
