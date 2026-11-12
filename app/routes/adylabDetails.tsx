@@ -2,7 +2,7 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router";
 import LabMarkdown from "~/components/lab/LabMarkdown";
 import { getLabBySlug, type LabData } from "~/data/Lab";
-import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "~/lib/site";
+import { SITE_NAME, SITE_URL, absoluteUrl } from "~/lib/site";
 import type { Route } from "./+types/adylabDetails";
 
 function findLab(slug: string | undefined): LabData {
@@ -25,7 +25,7 @@ export function meta({ data }: Route.MetaArgs) {
   const description =
     lab?.description ?? "Eksperimen dan prototipe web dari Adyfas.";
   const url = `${SITE_URL}/lab/${lab?.slug ?? ""}`;
-  const image = lab?.cover ? `${SITE_URL}${lab.cover}` : DEFAULT_OG_IMAGE;
+  const image = absoluteUrl(lab?.cover);
 
   return [
     { title },
@@ -55,7 +55,7 @@ export default function AdyfasLabDetails({
     "@type": "Article",
     headline: lab.title,
     description: lab.description,
-    image: `${SITE_URL}${lab.cover}`,
+    image: absoluteUrl(lab.cover),
     author: { "@type": "Person", name: lab.author },
     mainEntityOfPage: `${SITE_URL}/lab/${lab.slug}`,
   }).replace(/</g, "\\u003c");
