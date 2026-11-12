@@ -7,7 +7,7 @@ import mdx from '@mdx-js/rollup';
 
 export default defineConfig({
   plugins: [tailwindcss(), reactRouter(), tsconfigPaths(), {
-    ...mdx(), enforce:'pre'
+    ...mdx({ exclude: /\/app\/data\/lab\// }), enforce:'pre'
   }],
   resolve: {
     alias: {

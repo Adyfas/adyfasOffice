@@ -11,8 +11,9 @@ export default [
     index("routes/home.tsx"),
     route("about", "routes/about.tsx"),
     route("contact", "routes/contact.tsx"),
-    route("blog", "routes/blog.tsx"),
-    route("blog/:slug", "routes/blogDetails.tsx"),
+    // route("lab", "routes/blog.tsx"),
+    route("lab", "routes/adylab.tsx"),
+    route("lab/:slug", "routes/adylabDetails.tsx"),
     // route("playground", "routes/playground.tsx"),
     ...prefix("project", [
       index("routes/project.tsx"),

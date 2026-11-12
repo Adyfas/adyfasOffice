@@ -22,10 +22,15 @@ export const dataIconSidebar: routeSidebar[] = [
     route: "/project",
     icon: "Book",
   },
+  // {
+  //   name: "Blog",
+  //   route: "/blog",
+  //   icon: "BookOpenText",
+  // },
   {
-    name: "Blog",
-    route: "/blog",
-    icon: "BookOpenText",
+    name: "AdyLab",
+    route: "/lab",
+    icon: "FlaskConical",
   },
   {
     name: "Contact",

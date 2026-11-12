@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { getBlogOnlyPosts, type HashnodePost } from "~/lib/hashnode";
-import type { Route } from "./+types/blog";
 import CardBlog from "~/components/blog/CardBlog";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
 import Reveal from "~/components/Reveal";
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
   const title = "Blog & Articles | Ferdi Iskandar (Adyfas) - Web Developer & Tech Writing";
   const description =
     "Artikel, catatan pengalaman, tutorial web development, dan cerita seputar pemrograman oleh Ferdi Iskandar, dikenal juga sebagai Adyfas.";

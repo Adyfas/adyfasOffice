@@ -5,8 +5,6 @@ import Reveal from "~/components/Reveal";
 import CalltoActionContact from "~/components/CalltoActionContact";
 import { getHashnodePostBySlug, type HashnodePost } from "~/lib/hashnode";
 import { SITE_URL, SITE_NAME, DEFAULT_OG_IMAGE } from "~/lib/site";
-import type { Route } from "./+types/blogDetails";
-
 // CATATAN: route ini dulu punya `loader` + `clientLoader`.
 // `loader` dihapus karena build Firebase pakai `ssr:false`, dan React Router
 // menolak route ber-`loader` yang tidak ikut prerender. Daftar halaman
@@ -14,13 +12,21 @@ import type { Route } from "./+types/blogDetails";
 // berhasil — kalau RSS 403/down, build ikut meledak. Dengan hanya
 // `clientLoader`, prerender tetap mengisi meta og:image saat RSS hidup
 // (clientLoader jalan saat prerender), dan build tetap lolos saat RSS mati.
-export async function clientLoader({ params }: Route.LoaderArgs) {
+export async function clientLoader({
+  params,
+}: {
+  params: { slug?: string };
+}) {
   const slug = params.slug;
   const post = slug ? await getHashnodePostBySlug(slug) : null;
   return { post };
 }
 
-export function meta({ data }: Route.MetaArgs) {
+export function meta({
+  data,
+}: {
+  data?: { post?: HashnodePost | null };
+}) {
   const post = data?.post as HashnodePost | undefined;
   const title = post?.title ? `${post.title} | Ferdi Iskandar` : "Blog Article | Ferdi Iskandar (Adyfas)";
   const description = post?.brief || "Baca artikel lengkap di Adyfas Blog.";
@@ -179,7 +185,11 @@ const typographyStyles = `
   }
 `;
 
-export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
+export default function BlogDetailsPage({
+  loaderData,
+}: {
+  loaderData?: unknown;
+}) {
   const { slug } = useParams();
   const initialPost = (loaderData as any)?.post as HashnodePost | null;
   const [post, setPost] = useState<HashnodePost | null>(initialPost);
@@ -302,4 +312,3 @@ export default function BlogDetailsPage({ loaderData }: Route.ComponentProps) {
     </section>
   );
 }
-

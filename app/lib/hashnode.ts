@@ -12,7 +12,7 @@ export interface HashnodePost {
   categories: string[];
 }
 
-const BACKEND_URL = import.meta.env.VITE_API;
+const BACKEND_URL = import.meta.env.VITE_API_DEV;
 // || import.meta.env.VITE_API;
 
 export async function getHashnodePosts(): Promise<HashnodePost[]> {
@@ -24,10 +24,9 @@ export async function getHashnodePosts(): Promise<HashnodePost[]> {
     if (!response.ok) {
       throw new Error(`Backend API error: ${response.status}`);
     }
-
     const data = await response.json();
     // console.log("data: ", data)
-    return Array.isArray(data) ? data : [];
+    return Array.isArray(data) ? data : []; 
   } catch (error) {
     console.error("Error fetching Hashnode posts from backend API:", error);
     return [];

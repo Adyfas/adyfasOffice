@@ -63,14 +63,13 @@ function parseFrontmatterTags(content: string): string[] {
  * File ada di ../backend-adyfasofice/content/posts/*.md
  * Ini tidak butuh backend jalan — cukup baca file dari repo.
  */
-function scanMarkdownSlugs(): { projects: string[]; blogs: string[] } {
+function scanProjectSlugs(): string[] {
   const postsDir = path.join(__dirname, "..", "backend-adyfasofice", "content", "posts");
   const projects: string[] = [];
-  const blogs: string[] = [];
 
   if (!fs.existsSync(postsDir)) {
-    console.warn(`[scanMarkdownSlugs] Directory not found: ${postsDir}`);
-    return { projects: [], blogs: [] };
+    console.warn(`[scanProjectSlugs] Directory not found: ${postsDir}`);
+    return [];
   }
 
   const files = fs.readdirSync(postsDir).filter((f) => f.endsWith(".md"));
@@ -84,12 +83,24 @@ function scanMarkdownSlugs(): { projects: string[]; blogs: string[] } {
 
     if (tags.some((t) => PROJECT_TAGS.includes(t))) {
       projects.push(slug);
-    } else {
-      blogs.push(slug);
     }
   }
 
-  return { projects, blogs };
+  return projects;
+}
+
+function scanLabSlugs(): string[] {
+  const labDir = path.join(__dirname, "app", "data", "lab");
+  if (!fs.existsSync(labDir)) {
+    console.warn(`[scanLabSlugs] Directory not found: ${labDir}`);
+    return [];
+  }
+
+  return fs
+    .readdirSync(labDir)
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => file.replace(/\.md$/, ""))
+    .filter((slug) => /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug));
 }
 
 export default {
@@ -99,8 +110,8 @@ export default {
   ssr: !isFirebaseBuild,
   // Vercel preset untuk deployment (hanya aktif jika bukan Firebase build)
   presets: isFirebaseBuild ? [] : [vercelPreset()],
-  // Prerender tiap halaman ke HTML statis saat build, supaya crawler
-  // WhatsApp/Twitter/Discord/Facebook dapat og:image per project/blog
+  // Prerender halaman project dan Lab agar tersedia saat static hosting
+  // dan crawler dapat membaca metadata halaman.
   // meski hosting Firebase yang statis (tanpa server SSR).
   // NOTE: post Hashnode baru butuh rebuild + redeploy agar slug-nya ke-generate.
   prerender: async () => {
@@ -108,15 +119,14 @@ export default {
       "/",
       "/about",
       "/contact",
+      "/lab",
       "/project",
-      "/blog",
     ]);
     for (const p of ProjectList) {
       paths.add(p.projectLink);
     }
-    const { projects, blogs } = scanMarkdownSlugs();
-    for (const slug of projects) paths.add(`/project/${slug}`);
-    for (const slug of blogs) paths.add(`/blog/${slug}`);
+    for (const slug of scanProjectSlugs()) paths.add(`/project/${slug}`);
+    for (const slug of scanLabSlugs()) paths.add(`/lab/${slug}`);
     return [...paths];
   },
 } satisfies Config;

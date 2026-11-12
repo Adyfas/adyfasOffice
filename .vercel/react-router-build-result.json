@@ -14,8 +14,8 @@
       "routes/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/about": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/contact": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
-      "routes/blog": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
-      "routes/blogDetails": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/adylab": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/adylabDetails": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/project": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
       "routes/projectDetails": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
     },
@@ -55,18 +55,18 @@
         "path": "contact",
         "config": {}
       },
-      "routes/blog": {
-        "id": "routes/blog",
+      "routes/adylab": {
+        "id": "routes/adylab",
         "parentId": "routes/layout",
-        "file": "app/routes/blog.tsx",
-        "path": "blog",
+        "file": "app/routes/adylab.tsx",
+        "path": "lab",
         "config": {}
       },
-      "routes/blogDetails": {
-        "id": "routes/blogDetails",
+      "routes/adylabDetails": {
+        "id": "routes/adylabDetails",
         "parentId": "routes/layout",
-        "file": "app/routes/blogDetails.tsx",
-        "path": "blog/:slug",
+        "file": "app/routes/adylabDetails.tsx",
+        "path": "lab/:slug",
         "config": {}
       },
       "routes/project": {
@@ -127,17 +127,17 @@
         "file": "routes/contact.tsx",
         "path": "contact"
       },
-      "routes/blog": {
-        "id": "routes/blog",
+      "routes/adylab": {
+        "id": "routes/adylab",
         "parentId": "routes/layout",
-        "file": "routes/blog.tsx",
-        "path": "blog"
+        "file": "routes/adylab.tsx",
+        "path": "lab"
       },
-      "routes/blogDetails": {
-        "id": "routes/blogDetails",
+      "routes/adylabDetails": {
+        "id": "routes/adylabDetails",
         "parentId": "routes/layout",
-        "file": "routes/blogDetails.tsx",
-        "path": "blog/:slug"
+        "file": "routes/adylabDetails.tsx",
+        "path": "lab/:slug"
       },
       "routes/project": {
         "id": "routes/project",
@@ -183,12 +183,12 @@
                 "path": "contact"
               },
               {
-                "file": "routes/blog.tsx",
-                "path": "blog"
+                "file": "routes/adylab.tsx",
+                "path": "lab"
               },
               {
-                "file": "routes/blogDetails.tsx",
-                "path": "blog/:slug"
+                "file": "routes/adylabDetails.tsx",
+                "path": "lab/:slug"
               },
               {
                 "file": "routes/project.tsx",
