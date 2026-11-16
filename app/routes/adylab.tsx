@@ -96,7 +96,9 @@ export default function AdyfasLab() {
           </div>
           <div className="flex flex-col">
             <div className="w-full max-w-2xl">
-              <CardLab {...latestLab} />
+              <Reveal y={40} blur={15} duration={1.5} delay={0.1} width="100%">
+                <CardLab {...latestLab} />
+              </Reveal>
             </div>
           </div>
         </section>
@@ -108,14 +110,16 @@ export default function AdyfasLab() {
             id="more-labs-heading"
             className="mb-5 text-xl font-semibold tracking-tight text-gray-950 dark:text-white"
           >
-           Other experiments
+            Other experiments
           </h2>
           <div
             className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3"
             aria-label="Eksperimen Adyfas"
           >
-            {otherLabs.map((lab) => (
-              <CardLab key={lab.slug} {...lab} />
+            {otherLabs.map((lab, index) => (
+              <Reveal y={40} blur={15} duration={1.5} delay={0.1 * index} width="100%">
+                <CardLab key={lab.slug} {...lab} />
+              </Reveal>
             ))}
           </div>
         </section>
